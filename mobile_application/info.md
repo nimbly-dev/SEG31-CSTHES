@@ -1,0 +1,1 @@
+# Project Folder for Fall Detection Mobile Application
