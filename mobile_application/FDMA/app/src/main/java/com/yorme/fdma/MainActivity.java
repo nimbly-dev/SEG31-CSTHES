@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.yorme.fdma.changepin.ChangePin;
-import com.yorme.fdma.gpstracking.GPSTracking;
 import com.yorme.fdma.viewlogs.ViewLogs;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,17 +23,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-
-        ImageView btn_gps = (ImageView) findViewById(R.id.btn_gps_tracking);
         ImageView btn_change_pin = (ImageView) findViewById(R.id.btn_change_pin);
         ImageView btn_view_logs = (ImageView) findViewById(R.id.btn_view_logs);
 
-        btn_gps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToGpsTracking();
-            }
-        });
 
         btn_view_logs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickMessage(View view){
         Toast.makeText(getApplicationContext(),"Hello There",Toast.LENGTH_SHORT).show();
-    }
-
-    private void goToGpsTracking() {
-        Intent switchActivityIntent = new Intent(this, GPSTracking.class);
-        startActivity(switchActivityIntent);
     }
 
     private void goToViewLogs() {
