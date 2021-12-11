@@ -3,7 +3,6 @@ package com.yorme.fdma;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -11,7 +10,9 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.yorme.fdma.changepin.ChangePin;
+import com.yorme.fdma.gpstracking.GPSTracking;
+import com.yorme.fdma.viewlogs.ViewLogs;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToGpsTracking() {
-        Intent switchActivityIntent = new Intent(this, Gps_Tracking.class);
+        Intent switchActivityIntent = new Intent(this, GPSTracking.class);
         startActivity(switchActivityIntent);
     }
 
     private void goToViewLogs() {
-        Intent switchActivityIntent = new Intent(this, view_logs.class);
+        Intent switchActivityIntent = new Intent(this, ViewLogs.class);
         startActivity(switchActivityIntent);
     }
 
     private void goToChangePin() {
-        Intent switchActivityIntent = new Intent(this, change_pin.class);
+        Intent switchActivityIntent = new Intent(this, ChangePin.class);
         startActivity(switchActivityIntent);
     }
 }

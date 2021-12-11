@@ -1,4 +1,4 @@
-package com.yorme.fdma;
+package com.yorme.fdma.viewlogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class gps_tracking_help extends AppCompatActivity {
+import com.yorme.fdma.MainActivity;
+import com.yorme.fdma.R;
+
+public class ViewLogs extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,19 +21,20 @@ public class gps_tracking_help extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_gps_tracking_help);
+        setContentView(R.layout.activity_view_logs);
 
-        Button btn_back = (Button) findViewById(R.id.btn_change_pin_back);
+        Button btn_back = (Button) findViewById(R.id.btn_view_logs_back);
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                backToGpsScreen();
+                goBack();
+
             }
         });
     }
 
-    private void backToGpsScreen() {
-        Intent switchActivityIntent = new Intent(this, Gps_Tracking.class);
+    private void goBack() {
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
 }

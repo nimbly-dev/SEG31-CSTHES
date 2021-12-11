@@ -10,11 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FDMA">
         <activity
-            android:name=".view_logs"
+            android:name=".viewlogs.ViewLogs"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".change_pin" />
-        <activity android:name=".gps_tracking_help" />
-        <activity android:name=".Gps_Tracking" />
+        <activity android:name=".changepin.ChangePin" />
+        <activity android:name=".gpstracking.GPSTrackingHelp" />
+        <activity android:name=".gpstracking.GPSTracking" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
