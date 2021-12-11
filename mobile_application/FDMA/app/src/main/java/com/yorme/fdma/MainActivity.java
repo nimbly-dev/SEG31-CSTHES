@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.yorme.fdma.changepin.ChangePin;
 import com.yorme.fdma.viewlogs.ViewLogs;
+import com.yorme.fdma.model.*;
 
 public class MainActivity extends AppCompatActivity {
 
