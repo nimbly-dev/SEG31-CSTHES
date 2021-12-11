@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FDMA</string>
+    <string name="connected_with_arduino">Connected</string>
+    <string name="not_connected_with_arduino">Not Connected</string>
+    <string name="gps_tracking">GPS Tracking</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="view_logs">View Logs</string>
+    <string name="gps_title">Wheelchair Longitude and Latitude</string>
+    <string name="longitude">Current Longitude:</string>
+    <string name="latitude">Current Latitude:</string>
+    <string name="back">Back</string>
+    <string name="help">Help</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_txt">If you are going to search the Longitude and Latitude of a Location in Google Maps, use the format: Longitude, Latitude</string>
+    <string name="example">Example:</string>
+    <string name="example_txt">14.559913, 121.007955</string>
+    <string name="enter_old_pin">Enter old PIN: </string>
+    <string name="enter_new_pin">Enter new PIN: </string>
+    <string name="confirm_pin">Confirm PIN: </string>
+    <string name="proceed">Proceed</string>
+</resources>
