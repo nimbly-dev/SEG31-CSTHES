@@ -1,7 +1,5 @@
 package com.yorme.fdma.changepin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.yorme.fdma.MainActivity;
 import com.yorme.fdma.R;
 
@@ -18,6 +18,7 @@ public class ChangePin extends AppCompatActivity {
 
     String old_pin, new_pin, confirm_pin;
     EditText et_oldPin, et_newPin, et_confirmPin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
