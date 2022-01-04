@@ -10,11 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FDMA">
         <activity
-            android:name=".viewlogs.ViewLogs"
-            android:screenOrientation="landscape"></activity>
+            android:name=".usermanual.UserManualFilipino"
+            android:exported="false" />
+        <activity android:name=".usermanual.UserManualEnglish" />
+        <activity android:name=".changephonenumber.ChangePhoneNumber" />
         <activity android:name=".changepin.ChangePin" />
-        <activity android:name=".gpstracking.GPSTrackingHelp" />
-        <activity android:name=".gpstracking.GPSTracking" />
+        <activity
+            android:name=".viewlogs.ViewLogs"
+            android:screenOrientation="landscape" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

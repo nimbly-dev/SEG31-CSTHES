@@ -10,8 +10,10 @@
     <string name="latitude">Current Latitude:</string>
     <string name="back">Back</string>
     <string name="help">Help</string>
-    <string name="instructions">Instructions</string>
-    <string name="instructions_txt">If you are going to search the Longitude and Latitude of a Location in Google Maps, use the format: Longitude, Latitude</string>
+    <string name="pairingEnglishGuide">Pairing the smartphone \nto the Arduino: \n1.Make sure the Arduino chipset is powered on. \n2.Find the "FDMA" in the Bluetooth available. \n3.Connect with Arduino chipset using the 6 digit pairing key.</string>
+    <string name="settingEnglishGuide">Setting up the FDMA: \n1.Make sure that the wheelchair user is seated. \n2. Hanapin ang "FDMA" sa magagamit na Bluetooth. \n3.Make sure the wheelchair users is seating comfortably and put on the adjustable external seatbelt.</string>
+    <string name="pairingFilipinoGuide">Pagpapares sa smartphone \nsa Arduino: \n1. Siguraduhin na ang Arduino chipset ay pinapagana. \n2.Find the "FDMA" in the Bluetooth available. \n3.Kumonekta sa Arduino chipset gamit ang 6 digit na key ng pagpapares.</string>
+    <string name="settingFilipinoGuide">Pagse-set up ng FDMA: \n1.Tiyaking nakaupo ang gumagamit ng wheelchair. \n2.I-on ang system ng Arduino na naka-plugin sa power bank o gumagamit ng power cord. \n3.Tiyaking nakaupo ang gumagamit ng wheelchair komportable at isusuot ang naaayos na panlabas seatbelt.</string>
     <string name="example">Example:</string>
     <string name="example_txt">14.559913, 121.007955</string>
     <string name="enter_old_pin">Enter old PIN: </string>

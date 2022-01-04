@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.yorme.fdma.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.changepin.ChangePin;
+import com.yorme.fdma.usermanual.UserManualEnglish;
 import com.yorme.fdma.viewlogs.ViewLogs;
-import com.yorme.fdma.model.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,9 +24,24 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        ImageView btn_change_phone_number = (ImageView) findViewById(R.id.btn_change_phone_number);
+        ImageView btn_user_manual = (ImageView) findViewById(R.id.btn_user_manual);
         ImageView btn_change_pin = (ImageView) findViewById(R.id.btn_change_pin);
         ImageView btn_view_logs = (ImageView) findViewById(R.id.btn_view_logs);
 
+        btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToChangePhoneNumber();
+            }
+        });
+
+        btn_user_manual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToUserManual();
+            }
+        });
 
         btn_view_logs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,8 +65,14 @@ public class MainActivity extends AppCompatActivity {
          */
     }
 
-    public void clickMessage(View view){
-        Toast.makeText(getApplicationContext(),"Hello There",Toast.LENGTH_SHORT).show();
+    private void goToChangePhoneNumber() {
+        Intent switchActivityIntent = new Intent(this, ChangePhoneNumber.class);
+        startActivity(switchActivityIntent);
+    }
+
+    private void goToUserManual() {
+        Intent switchActivityIntent = new Intent(this, UserManualEnglish.class);
+        startActivity(switchActivityIntent);
     }
 
     private void goToViewLogs() {

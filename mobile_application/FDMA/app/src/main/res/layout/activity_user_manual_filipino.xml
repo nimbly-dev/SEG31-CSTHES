@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1A3B29"
+    tools:context=".usermanual.UserManualEnglish">
+
+    <TextView
+        android:id="@+id/txt_userGuide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Guide"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <TextView
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/pairingFilipinoGuide"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <TextView
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="10dp"
+        android:text="@string/settingFilipinoGuide"
+        android:textColor="#FFFFFF"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.657" />
+
+    <Button
+        android:id="@+id/btn_user_guide_english"
+        android:layout_width="328dp"
+        android:layout_height="54dp"
+        android:clickable="true"
+        android:text="English"
+        android:textColor="#000000"
+        app:backgroundTint="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"/>
+
+    <Button
+        android:id="@+id/btn_user_guide_filipino_back"
+        android:layout_width="328dp"
+        android:layout_height="54dp"
+        android:clickable="true"
+        android:text="Back"
+        android:textColor="#000000"
+        app:backgroundTint="#FAF9F9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
