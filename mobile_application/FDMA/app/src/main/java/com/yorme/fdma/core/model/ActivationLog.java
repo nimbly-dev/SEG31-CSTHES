@@ -1,19 +1,21 @@
-package com.yorme.fdma.model;
+package com.yorme.fdma.core.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ActivationLogs {
+public class ActivationLog {
 
     int logID;
     LocalDate logDate;
     LocalTime logTime;
 
-    public ActivationLogs(){
+    public ActivationLog(){
 
     }
 
-    public ActivationLogs(int logID, LocalDate logDate, LocalTime logTime) {
+
+
+    public ActivationLog(int logID, LocalDate logDate, LocalTime logTime) {
         this.logID = logID;
         this.logDate = logDate;
         this.logTime = logTime;

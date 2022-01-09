@@ -1,4 +1,4 @@
-package com.yorme.fdma.model;
+package com.yorme.fdma.core.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
