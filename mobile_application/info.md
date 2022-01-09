@@ -4,14 +4,19 @@
 GroupId - com.yorme
 ArtifactId - fdma
 
-Folder Structure
+Package Folder Structure
 
-    com.yorme.fdma.GPS
+    com.yorme.fdma
+        * changephonenumber (TODO)
+        * changepin (TODO)
+        * core
+            * arduino (TODO)
+            * dao (IP)
+            * database (DONE)
+            * model (TODO)
+            * service (TODO)
+        * usermanual (TODO)
+        * viewlogs (TODO)
         
-
-    com.yorme.fdma.Logs
-        ViewLogs
-
-    com.yorme.fdma.ChangePin
-        ChangePin.java
+    
 
