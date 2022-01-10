@@ -1,12 +1,11 @@
-package com.yorme.fdma;
+package com.yorme.fdma.core.dao;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import com.yorme.fdma.core.dao.ActivationLogsDao;
 import com.yorme.fdma.core.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
+
+import junit.framework.TestCase;
+
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -15,11 +14,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
-public class DaoMethodsTest {
+public class ChangeKeyPairingsLogDaoTest extends TestCase {
 
     final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-    private ActivationLogsDao activationLogsDao;
+    private ChangeKeyPairingsLogsDao changeKeyPairingsLogsDao;
 
     @Test
     public void testConnectToDb(){
@@ -28,16 +26,16 @@ public class DaoMethodsTest {
     }
 
     @Test
-    public void testCreateInsertAndGetDataOfActivationLogs(){
+    public void testCreateInsertAndGetDataOfChangeKeyPairLogs(){
         try {
-            activationLogsDao = new ActivationLogsDao();
+            changeKeyPairingsLogsDao = new ChangeKeyPairingsLogsDao();
 
-            activationLogsDao.createActivationLogsTable();
+            changeKeyPairingsLogsDao.createChangeKeyPairTable();
 
             LocalTime testInputTime = LocalTime.now();
             LocalDate testInputDate = LocalDate.now();
-            activationLogsDao.insertNewActivationLog(testInputTime,testInputDate);
-            List<ActivationLog> activationLogs = activationLogsDao.getAllActivationLogs();
+            changeKeyPairingsLogsDao.insertNewChangeKeyPairLog(testInputTime,testInputDate);
+            List<ActivationLog> activationLogs = changeKeyPairingsLogsDao.getAllChangeKeyPairsLog();
 
             assertTrue(activationLogs.size() != 0);
             assertEquals(activationLogs.get(0).getLogDate(), testInputDate);
@@ -47,4 +45,5 @@ public class DaoMethodsTest {
             e.printStackTrace();
         }
     }
+
 }

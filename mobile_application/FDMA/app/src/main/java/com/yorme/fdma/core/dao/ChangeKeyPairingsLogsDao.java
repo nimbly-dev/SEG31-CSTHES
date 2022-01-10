@@ -1,5 +1,6 @@
 package com.yorme.fdma.core.dao;
 
+
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -21,34 +22,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class ActivationLogsDao {
+public class ChangeKeyPairingsLogsDao {
 
-//    final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
+    final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
     final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
 
-    public void createActivationLogsTable() throws SQLException {
+    public void createChangeKeyPairTable() throws SQLException {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
-        stmt.execute(DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE);
+        stmt.execute(DBSQL.CREATE_NEW_CHANGE_KEY_PAIRING_LOGS_TABLE);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public void insertNewActivationLog(LocalTime time, LocalDate date) throws SQLException {
+    public void insertNewChangeKeyPairLog(LocalTime time, LocalDate date) throws SQLException {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
-        PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_NEW_ACTIVATION_LOGS);
+        PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_NEW_CHANGE_KEY_PAIRING_LOGS);
         pstmt.setString(1, time.format(formatter)); // 0900
         pstmt.setString(2, date.toString()); // 05/01/2021
 
         pstmt.executeUpdate();
     }
 
-    public List<ActivationLog> getAllActivationLogs() throws SQLException {
+    public List<ActivationLog> getAllChangeKeyPairsLog() throws SQLException {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+        ResultSet rs = stmt.executeQuery(DBSQL.SELECT_ALL_CHANGE_KEY_PAIR_LOGS);
 
         List<ActivationLog> activationLogs = new ArrayList<ActivationLog>();
         while(rs.next()){
@@ -61,5 +61,4 @@ public class ActivationLogsDao {
         }
         return activationLogs;
     }
-
 }
