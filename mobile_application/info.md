@@ -11,7 +11,7 @@ Package Folder Structure
         * changepin (TODO)
         * core
             * arduino (TODO)
-            * dao (IP)
+            * dao (DONE)
             * database (DONE)
             * model (TODO)
             * service (TODO)
