@@ -1,4 +1,4 @@
-package com.yorme.fdma.viewlogs;
+package com.yorme.fdma.app.viewlogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,9 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.yorme.fdma.MainActivity;
+import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
 
 public class ViewLogs extends AppCompatActivity {

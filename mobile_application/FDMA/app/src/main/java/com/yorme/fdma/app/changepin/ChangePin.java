@@ -1,4 +1,4 @@
-package com.yorme.fdma.changepin;
+package com.yorme.fdma.app.changepin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yorme.fdma.MainActivity;
+import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
 
 public class ChangePin extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package com.yorme.fdma.core.database;
+package com.yorme.fdma.utilities.database;
 
 public interface DBSQL {
 
@@ -20,7 +20,7 @@ public interface DBSQL {
     final static String CREATE_NEW_CHANGE_KEY_PAIRING_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS change_key_pair_logs (\n" +
             "id integer PRIMARY KEY,\n" +
             "time time NOT NULL,\n" +
-            "date date NOT NULL," +
+            "date date NOT NULL" +
             "                   );";
 
 }

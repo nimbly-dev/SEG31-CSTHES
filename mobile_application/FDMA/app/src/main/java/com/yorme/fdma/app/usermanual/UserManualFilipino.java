@@ -1,4 +1,4 @@
-package com.yorme.fdma.usermanual;
+package com.yorme.fdma.app.usermanual;
 
 
 import android.content.Intent;
@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.yorme.fdma.MainActivity;
+import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
 
 public class UserManualFilipino extends AppCompatActivity {

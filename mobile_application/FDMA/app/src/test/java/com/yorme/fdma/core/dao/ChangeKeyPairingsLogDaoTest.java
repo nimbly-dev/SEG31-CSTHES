@@ -1,6 +1,6 @@
 package com.yorme.fdma.core.dao;
 
-import com.yorme.fdma.core.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
 
 import junit.framework.TestCase;

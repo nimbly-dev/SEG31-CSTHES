@@ -1,4 +1,4 @@
-package com.yorme.fdma.core.arduino;
+package com.yorme.fdma.utilities.arduino;
 
 //TODO
 //Android to Arduino via bluetooth

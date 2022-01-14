@@ -1,4 +1,4 @@
-package com.yorme.fdma.changephonenumber;
+package com.yorme.fdma.app.changephonenumber;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.yorme.fdma.MainActivity;
+import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
 
 import androidx.appcompat.app.AppCompatActivity;

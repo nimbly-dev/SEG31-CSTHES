@@ -1,4 +1,4 @@
-package com.yorme.fdma;
+package com.yorme.fdma.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.yorme.fdma.changephonenumber.ChangePhoneNumber;
-import com.yorme.fdma.changepin.ChangePin;
-import com.yorme.fdma.usermanual.UserManualEnglish;
-import com.yorme.fdma.viewlogs.ViewLogs;
+import com.yorme.fdma.R;
+import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
+import com.yorme.fdma.app.changepin.ChangePin;
+import com.yorme.fdma.app.usermanual.UserManualEnglish;
+import com.yorme.fdma.app.viewlogs.ViewLogs;
 
 public class MainActivity extends AppCompatActivity {
 

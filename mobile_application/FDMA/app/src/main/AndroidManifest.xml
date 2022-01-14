@@ -10,15 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FDMA">
         <activity
-            android:name=".usermanual.UserManualFilipino"
+            android:name=".app.usermanual.UserManualFilipino"
             android:exported="false" />
-        <activity android:name=".usermanual.UserManualEnglish" />
-        <activity android:name=".changephonenumber.ChangePhoneNumber" />
-        <activity android:name=".changepin.ChangePin" />
+        <activity android:name=".app.usermanual.UserManualEnglish" />
+        <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
+        <activity android:name=".app.changepin.ChangePin" />
         <activity
-            android:name=".viewlogs.ViewLogs"
+            android:name=".app.viewlogs.ViewLogs"
             android:screenOrientation="landscape" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

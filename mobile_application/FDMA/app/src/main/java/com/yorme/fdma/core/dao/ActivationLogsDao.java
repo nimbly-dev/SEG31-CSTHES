@@ -4,8 +4,8 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.yorme.fdma.core.database.DBConnection;
-import com.yorme.fdma.core.database.DBSQL;
+import com.yorme.fdma.utilities.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBSQL;
 import com.yorme.fdma.core.model.ActivationLog;
 
 import java.sql.Connection;
@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

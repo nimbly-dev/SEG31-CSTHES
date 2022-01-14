@@ -3,7 +3,7 @@ package com.yorme.fdma.core.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.yorme.fdma.core.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
 
 import junit.framework.TestCase;
