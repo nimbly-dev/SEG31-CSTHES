@@ -3,6 +3,7 @@ package com.yorme.fdma.core.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.yorme.fdma.utilities.StaticStrings;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
 
@@ -19,7 +20,6 @@ import java.util.List;
 
 public class ActivationLogsDaoTest extends TestCase {
 
-    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
     private ActivationLogsDao activationLogsDao;
 
     @Test
@@ -43,7 +43,7 @@ public class ActivationLogsDaoTest extends TestCase {
             assertTrue(activationLogs.size() != 0);
             assertEquals(activationLogs.get(0).getLogDate(), testInputDate);
             assertEquals(activationLogs.get(0).getLogTime()
-                    .toString(), testInputTime.format(formatter));
+                    .toString(), testInputTime.format(StaticStrings.HOUR_FORMAT));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -13,7 +13,7 @@ public class ActivationLog {
 
     }
 
-    public ActivationLog(int logID, LocalDate logDate, LocalTime logTime) {
+    public ActivationLog(int logID, LocalTime logTime, LocalDate logDate) {
         this.logID = logID;
         this.logDate = logDate;
         this.logTime = logTime;

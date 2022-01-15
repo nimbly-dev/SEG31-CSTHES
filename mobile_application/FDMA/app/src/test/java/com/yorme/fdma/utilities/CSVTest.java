@@ -1,12 +1,16 @@
 package com.yorme.fdma.utilities;
 
 import com.opencsv.CSVReader;
+import com.opencsv.bean.CsvToBeanBuilder;
+import com.yorme.fdma.core.model.ActivationLog;
+import com.yorme.fdma.core.model.ActivationLogCSVDto;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.InputStream;
 import java.io.Reader;
@@ -16,34 +20,19 @@ import java.util.List;
 
 public class CSVTest extends TestCase {
 
-    //Utility for testing
-    public String readAllExample() throws Exception {
-//        Reader reader = Files.newBufferedReader(Paths.get(
-//                ClassLoader.getSystemResource("data/activation-logs-test.csv").toURI()));
-        Reader reader = Files.newBufferedReader(Paths.get("C:\\Users\\nimbl\\Desktop" +
-                        "\\dev-folder\\SEG31-CSTHES\\mobile_application" +
-                        "\\FDMA\\app\\src\\main\\res\\data\\activation-logs-test.csv"));
-        System.out.println(reader);
-        return CSV.oneByOne(reader).toString();
-    }
-
-
     @Test
-    public void testGetCsvData() throws Exception {
-        CSVReader reader = null;
-        reader = new CSVReader(new FileReader("C:\\Users\\nimbl\\Desktop" +
-                "\\dev-folder\\SEG31-CSTHES\\mobile_application" +
-                "\\FDMA\\app\\src\\main\\res\\data\\activation-logs-test.csv"));
-        String [] nextLine;
+    public void testGetCsvData() {
 
-        while ((nextLine = reader.readNext()) != null)
-        {
-            for(String token : nextLine)
-            {
-                System.out.print(token);
-            }
-            System.out.print("\n");
+        CSV csv = new CSV();
+        List<ActivationLog> activationLogList = null;
+        try {
+            activationLogList = csv.getCSVActivationLogToList(StaticStrings.CSV_FILE_PATH);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
+
+        assertTrue(activationLogList != null);
+        assertTrue(activationLogList.size() != 0);
     }
 
 }

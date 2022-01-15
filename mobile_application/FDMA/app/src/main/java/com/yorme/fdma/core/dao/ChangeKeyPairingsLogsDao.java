@@ -54,8 +54,8 @@ public class ChangeKeyPairingsLogsDao {
         while(rs.next()){
             ActivationLog activationLog = new ActivationLog(
                     rs.getInt("id"),
-                    LocalDate.parse(rs.getString("date")),
-                    LocalTime.parse(rs.getString("time"))
+                    LocalTime.parse(rs.getString("time")),
+                    LocalDate.parse(rs.getString("date"))
             );
             activationLogs.add(activationLog);
         }

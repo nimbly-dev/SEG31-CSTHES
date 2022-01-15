@@ -4,6 +4,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.yorme.fdma.utilities.StaticStrings;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBSQL;
 import com.yorme.fdma.core.model.ActivationLog;
@@ -22,9 +23,6 @@ import java.util.List;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogsDao {
 
-//    final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm a");
-    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm");
-
     public void createActivationLogsTable() throws SQLException {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
@@ -38,7 +36,7 @@ public class ActivationLogsDao {
         Statement stmt = conn.createStatement();
 
         PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_NEW_ACTIVATION_LOGS);
-        pstmt.setString(1, time.format(formatter)); // 0900
+        pstmt.setString(1, time.format(StaticStrings.HOUR_FORMAT)); // 0900
         pstmt.setString(2, date.toString()); // 05/01/2021
 
         pstmt.executeUpdate();
@@ -53,8 +51,8 @@ public class ActivationLogsDao {
         while(rs.next()){
             ActivationLog activationLog = new ActivationLog(
                     rs.getInt("id"),
-                    LocalDate.parse(rs.getString("date")),
-                    LocalTime.parse(rs.getString("time"))
+                    LocalTime.parse(rs.getString("time")),
+                    LocalDate.parse(rs.getString("date"))
             );
             activationLogs.add(activationLog);
         }
