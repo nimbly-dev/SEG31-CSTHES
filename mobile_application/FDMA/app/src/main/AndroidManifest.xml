@@ -24,14 +24,7 @@
         <activity android:name=".app.usermanual.UserManualEnglish" />
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
         <activity android:name=".app.changepin.ChangePin" />
-<<<<<<< HEAD
         <activity android:name=".app.viewlogs.ViewLogs" />
-=======
-
-        <activity
-            android:name=".app.viewlogs.ViewLogs"
-            android:screenOrientation="landscape" />
->>>>>>> e029328b5770a038b7ce706d1ba45eceea85aa97
         <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

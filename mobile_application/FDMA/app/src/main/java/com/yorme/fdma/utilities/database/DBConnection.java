@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class DBConnection {
 
 
-    final String URL = "jdbc:sqlite:"+new File("").getAbsolutePath()+"\\src\\main\\res\\data\\fdma.db";
+    final String URL = "jdbc:sqlite:"+new File("").getAbsolutePath()+"\\src\\main\\assets\\fdma.db";
 
     public Connection connect() {
         Connection conn = null;

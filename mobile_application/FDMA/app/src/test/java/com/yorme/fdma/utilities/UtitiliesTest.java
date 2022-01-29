@@ -21,6 +21,7 @@ public class UtitiliesTest extends TestCase {
     {
         TestSuite suite = new TestSuite();
         suite.addTestSuite(CSVTest.class);
+//        suite.addTestSuite(PropertiesTest.class);
         return suite;
     }
 
