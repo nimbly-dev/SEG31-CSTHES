@@ -42,9 +42,10 @@ public class CSV {
                     Integer.parseInt(bean.getId()), LocalTime.parse(bean.getTime()),
                     LocalDate.parse(bean.getDate())
             );
-            //Push the
+            //Push the activationLog obj to the list
             activationLogs.add(activationLog);
         });
+        //Returns complete activation logs list
         return activationLogs;
     }
 
