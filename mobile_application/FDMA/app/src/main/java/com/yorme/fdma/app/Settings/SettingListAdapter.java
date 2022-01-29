@@ -35,7 +35,6 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    
                 Toast.makeText(view.getContext(),"click on item: "+settingsListData.getSettingName(),Toast.LENGTH_SHORT).show();
             }
         });

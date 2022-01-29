@@ -25,6 +25,7 @@
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
         <activity android:name=".app.changepin.ChangePin" />
         <activity android:name=".app.viewlogs.ViewLogs" />
+
         <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
