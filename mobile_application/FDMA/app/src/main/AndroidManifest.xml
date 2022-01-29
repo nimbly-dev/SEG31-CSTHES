@@ -10,13 +10,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FDMA">
+        android:theme="@style/Theme.FDMA"
+        android:name=".utilities.AppContext">
         <activity
             android:name=".app.usermanual.UserManualFilipino"
             android:exported="false" />
         <activity android:name=".app.usermanual.UserManualEnglish" />
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
         <activity android:name=".app.changepin.ChangePin" />
+
         <activity
             android:name=".app.viewlogs.ViewLogs"
             android:screenOrientation="landscape" />

@@ -36,9 +36,9 @@ public class SMS extends Activity{
 //        });
 //    }
 
+
+
     public void sendSMSMessage() {
-//        phoneNo = txtphoneNo.getText().toString();
-//        message = txtMessage.getText().toString();
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.SEND_SMS)
@@ -54,7 +54,8 @@ public class SMS extends Activity{
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(
+            int requestCode,String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
                 if (grantResults.length > 0
@@ -65,7 +66,7 @@ public class SMS extends Activity{
                             Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(),
-                            "SMS faild, please try again.", Toast.LENGTH_LONG).show();
+                            "SMS failed, please try again.", Toast.LENGTH_LONG).show();
                     return;
                 }
             }

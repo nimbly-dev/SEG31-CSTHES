@@ -34,9 +34,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                changePhoneNumber();
-            }
+            public void onClick(View view) { changePhoneNumber(); }
         });
 
         btn_change_phone_number_back.setOnClickListener(new View.OnClickListener() {
