@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.Settings.Settings;
 import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView btn_user_manual = (ImageView) findViewById(R.id.btn_user_manual);
         ImageView btn_change_pin = (ImageView) findViewById(R.id.btn_change_pin);
         ImageView btn_view_logs = (ImageView) findViewById(R.id.btn_view_logs);
+        ImageView btn_settings = (ImageView) findViewById(R.id.btn_settings);
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 goToChangePin();
             }
         });
+
+        btn_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToSettings();
+            }
+        });
         //if not connected in the arduino this code activates below
         /*
         btn_change_pin.setAlpha(0.5f);
@@ -64,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
         btn_gps.setAlpha(0.5f);
         btn_gps.setClickable(false);
          */
+    }
+
+    private void goToSettings() {
+        Intent switchActivityIntent = new Intent(this, Settings.class);
+        startActivity(switchActivityIntent);
     }
 
     private void goToChangePhoneNumber() {

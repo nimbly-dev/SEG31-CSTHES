@@ -12,14 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FDMA">
         <activity
+            android:name=".app.Settings.ChangePassword"
+            android:exported="false" />
+        <activity
+            android:name=".app.Settings.Settings"
+            android:exported="false" />
+        <activity
             android:name=".app.usermanual.UserManualFilipino"
             android:exported="false" />
         <activity android:name=".app.usermanual.UserManualEnglish" />
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
         <activity android:name=".app.changepin.ChangePin" />
-        <activity
-            android:name=".app.viewlogs.ViewLogs"
-            android:screenOrientation="landscape" />
+        <activity android:name=".app.viewlogs.ViewLogs" />
         <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
