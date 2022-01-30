@@ -37,7 +37,6 @@ public class Settings extends AppCompatActivity {
 
         SettingsListData[] myListData = new SettingsListData[] {
                 new SettingsListData("Change Password", android.R.drawable.ic_secure),
-                new SettingsListData("Home", android.R.drawable.ic_secure),
         };
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewSettings);

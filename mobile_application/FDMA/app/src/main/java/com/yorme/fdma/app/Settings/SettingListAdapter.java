@@ -1,5 +1,7 @@
 package com.yorme.fdma.app.Settings;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,15 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.MainActivity;
 
 public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.ViewHolder> {
 
     private SettingsListData[] listdata;
 
+
     public SettingListAdapter(SettingsListData[] listdata) {
+
         this.listdata = listdata;
     }
     @Override
@@ -35,7 +40,10 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+settingsListData.getSettingName(),Toast.LENGTH_SHORT).show();
+                if(settingsListData.getSettingName() == "Change Password"){
+                    Intent switchActivityIntent = new Intent(view.getContext(), ChangePassword.class);
+                    view.getContext().startActivity(switchActivityIntent);
+                }
             }
         });
     }
@@ -52,8 +60,8 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            this.imageView = (ImageView) itemView.findViewById(R.id.imageView);
-            this.textView = (TextView) itemView.findViewById(R.id.textView);
+            this.imageView = (ImageView) itemView.findViewById(R.id.settingsImageView);
+            this.textView = (TextView) itemView.findViewById(R.id.settingsTextView);
             relativeLayout = (RelativeLayout)itemView.findViewById(R.id.settings_relative_layout);
         }
     }
