@@ -44,7 +44,7 @@ public class ChangePassword extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 if (passwordChecker.isValidPassword(enter_password.getText().toString().trim())) {
-                    if(StringUtils.equals(enter_password.toString(),enter_confirm_password.toString()) == true){
+                    if(StringUtils.equals(enter_password.getText().toString(),enter_confirm_password.getText().toString()) == true){
                         Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
                         Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
                         startActivity(switchActivityIntent);
@@ -64,19 +64,6 @@ public class ChangePassword extends AppCompatActivity {
             }
         });
     }
-
-//    public boolean isValidPassword(final String password) {
-//
-//        Pattern pattern;
-//        Matcher matcher;
-//
-//        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
-//
-//        pattern = Pattern.compile(PASSWORD_PATTERN);
-//        matcher = pattern.matcher(password);
-//
-//        return matcher.matches();
-//    }
 
     private void goToBackSettings() {
         Intent switchActivityIntent = new Intent(this, Settings.class);
