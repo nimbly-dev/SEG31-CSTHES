@@ -13,10 +13,10 @@
         android:theme="@style/Theme.FDMA"
         android:name=".utilities.AppContext">
         <activity
-            android:name=".app.Settings.ChangePassword"
+            android:name=".app.settings.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".app.Settings.Settings"
+            android:name=".app.settings.Settings"
             android:exported="false" />
         <activity
             android:name=".app.usermanual.UserManualFilipino"

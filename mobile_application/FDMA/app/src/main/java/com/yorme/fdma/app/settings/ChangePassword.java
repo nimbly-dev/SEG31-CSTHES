@@ -1,4 +1,4 @@
-package com.yorme.fdma.app.Settings;
+package com.yorme.fdma.app.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 

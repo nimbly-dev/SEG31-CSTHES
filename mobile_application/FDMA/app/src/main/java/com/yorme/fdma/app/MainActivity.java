@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.yorme.fdma.R;
-import com.yorme.fdma.app.Settings.Settings;
+import com.yorme.fdma.app.settings.Settings;
 import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
