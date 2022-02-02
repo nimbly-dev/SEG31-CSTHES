@@ -9,6 +9,9 @@ public interface DBSQL {
     final static String INSERT_NEW_CHANGE_KEY_PAIRING_LOGS = "INSERT INTO change_key_pair_logs(time,date) VALUES (?,?)";
     final static String SELECT_ALL_CHANGE_KEY_PAIR_LOGS = "SELECT * from change_key_pair_logs";
 
+    final static String INSERT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
+    final static String GET_PASSWORD = "SELECT * FROM app_password WHERE id = ?";
+    final static String UPDATE_PASSWORD = "UPDATE app_password SET password = ?";
 
     //CREATE NEW TABLE
     final static String CREATE_NEW_ACTIVATION_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS activation_logs (\n" +
@@ -22,5 +25,11 @@ public interface DBSQL {
             "time time NOT NULL,\n" +
             "date date NOT NULL" +
             "                   );";
+
+    final static String CREATE_NEW_PASSWORD_TABLE = "CREATE TABLE IF NOT EXISTS app_password (\n" +
+            "id integer PRIMARY KEY, \n" +
+            "password text NOT NULL" +
+            ");";
+
 
 }

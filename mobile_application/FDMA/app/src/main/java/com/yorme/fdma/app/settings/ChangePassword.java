@@ -13,15 +13,18 @@ import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
+import com.yorme.fdma.core.service.PasswordChecker;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChangePassword extends AppCompatActivity {
 
-    String password, confirmPassword;
     EditText enter_password, enter_confirm_password;
 
+    private PasswordChecker passwordChecker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +38,19 @@ public class ChangePassword extends AppCompatActivity {
         Button btn_change_password = (Button) findViewById(R.id.btn_change_password);
         Button btn_change_password_back = (Button) findViewById(R.id.btn_change_password_back);
 
+        passwordChecker = new PasswordChecker();
+
         btn_change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if (isValidPassword(enter_password.getText().toString().trim())) {
-                    Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
-                    Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
-                    startActivity(switchActivityIntent);
+                if (passwordChecker.isValidPassword(enter_password.getText().toString().trim())) {
+                    if(StringUtils.equals(enter_password.toString(),enter_confirm_password.toString()) == true){
+                        Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                        Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
+                        startActivity(switchActivityIntent);
+                    }else{
+                        Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(ChangePassword.this, "Password must contain atleast 1 upper case letter, 1 lower case letter and 1 number and a minimum of 8 characters.", Toast.LENGTH_SHORT).show();
                 }
@@ -56,18 +65,18 @@ public class ChangePassword extends AppCompatActivity {
         });
     }
 
-    public boolean isValidPassword(final String password) {
-
-        Pattern pattern;
-        Matcher matcher;
-
-        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
-
-        pattern = Pattern.compile(PASSWORD_PATTERN);
-        matcher = pattern.matcher(password);
-
-        return matcher.matches();
-    }
+//    public boolean isValidPassword(final String password) {
+//
+//        Pattern pattern;
+//        Matcher matcher;
+//
+//        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$";
+//
+//        pattern = Pattern.compile(PASSWORD_PATTERN);
+//        matcher = pattern.matcher(password);
+//
+//        return matcher.matches();
+//    }
 
     private void goToBackSettings() {
         Intent switchActivityIntent = new Intent(this, Settings.class);

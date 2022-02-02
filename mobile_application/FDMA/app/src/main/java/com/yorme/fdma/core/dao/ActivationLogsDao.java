@@ -33,7 +33,6 @@ public class ActivationLogsDao {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertNewActivationLog(LocalTime time, LocalDate date) throws SQLException {
         Connection conn = new DBConnection().connect();
-        Statement stmt = conn.createStatement();
 
         PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_NEW_ACTIVATION_LOGS);
         pstmt.setString(1, time.format(StaticStrings.HOUR_FORMAT)); // 0900
