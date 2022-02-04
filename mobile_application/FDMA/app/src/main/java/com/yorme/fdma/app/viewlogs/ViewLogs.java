@@ -23,14 +23,67 @@ public class ViewLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_logs);
 
-        Button btn_back = (Button) findViewById(R.id.btn_view_logs_back);
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        Button btn_view_logs_back = (Button) findViewById(R.id.btn_view_logs_back);
+        Button btn_view_activation_logs = (Button) findViewById(R.id.btn_view_activation_logs);
+        Button btn_view_change_phone_num_logs = (Button) findViewById(R.id.btn_view_change_phone_num_logs);
+        Button btn_view_change_password_logs = (Button) findViewById(R.id.btn_view_change_password_logs);
+        Button btn_view_change_pin_logs = (Button) findViewById(R.id.btn_view_change_pin_logs);
+
+        btn_view_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goBack();
 
             }
         });
+
+        btn_view_activation_logs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToActivationLogs();
+            }
+        });
+
+        btn_view_change_phone_num_logs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToChangePhoneNumLogs();
+            }
+        });
+
+        btn_view_change_password_logs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToChangePasswordLogs();
+            }
+        });
+
+        btn_view_change_pin_logs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToChangePinLogs();
+            }
+        });
+    }
+
+    private void goToActivationLogs() {
+        Intent switchActivityIntent = new Intent(this, ActivationLogs.class);
+        startActivity(switchActivityIntent);
+    }
+
+    private void goToChangePhoneNumLogs() {
+        Intent switchActivityIntent = new Intent(this, ChangePhoneNumberLogs.class);
+        startActivity(switchActivityIntent);
+    }
+
+    private void goToChangePasswordLogs() {
+        Intent switchActivityIntent = new Intent(this, ChangePasswordLogs.class);
+        startActivity(switchActivityIntent);
+    }
+
+    private void goToChangePinLogs() {
+        Intent switchActivityIntent = new Intent(this, ChangePinLogs.class);
+        startActivity(switchActivityIntent);
     }
 
     private void goBack() {

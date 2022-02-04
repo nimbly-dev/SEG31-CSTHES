@@ -5,13 +5,22 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
+        android:name=".utilities.AppContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FDMA"
-        android:name=".utilities.AppContext">
+        android:theme="@style/Theme.FDMA">
+        <activity
+            android:name=".app.viewlogs.ChangePinLogs"
+            android:exported="false" />
+        <activity
+            android:name=".app.viewlogs.ChangePasswordLogs"
+            android:exported="false" />
+        <activity
+            android:name=".app.viewlogs.ActivationLogs"
+            android:exported="false" />
         <activity
             android:name=".app.settings.ChangePassword"
             android:exported="false" />
@@ -25,7 +34,7 @@
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
         <activity android:name=".app.changepin.ChangePin" />
         <activity android:name=".app.viewlogs.ViewLogs" />
-
+        <activity android:name=".app.viewlogs.ChangePhoneNumberLogs" />
         <activity android:name=".app.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

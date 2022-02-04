@@ -22,8 +22,76 @@
         app:layout_constraintVertical_bias="0.05" />
 
     <Button
+        android:id="@+id/btn_view_activation_logs"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round"
+        android:checkable="false"
+        android:clickable="true"
+        android:text="View Activation Logs"
+        android:textColor="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.272" />
+
+    <Button
+        android:id="@+id/btn_view_change_phone_num_logs"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round"
+        android:checkable="false"
+        android:clickable="true"
+        android:text="View Change Phone Number Logs"
+        android:textColor="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392" />
+
+    <Button
+        android:id="@+id/btn_view_change_password_logs"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round"
+        android:checkable="false"
+        android:clickable="true"
+        android:text="View Change Password Logs"
+        android:textColor="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <Button
+        android:id="@+id/btn_view_change_pin_logs"
+        android:layout_width="250dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round"
+        android:checkable="false"
+        android:clickable="true"
+        android:text="View Change Pin Logs"
+        android:textColor="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.634" />
+
+    <Button
         android:id="@+id/btn_view_logs_back"
-        android:layout_width="82dp"
+        android:layout_width="250dp"
         android:layout_height="55dp"
         android:background="@drawable/round"
         android:checkable="false"
@@ -33,20 +101,9 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.041" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/viewLogsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintVertical_bias="0.831" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
