@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.passwordmodal.PasswordModal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
 
     String phoneNumber, confirmPhoneNumber;
     EditText enter_phone_number, enter_confirm_phone_number;
+    PasswordModal passwordModal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +36,18 @@ public class ChangePhoneNumber extends AppCompatActivity {
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { changePhoneNumber(); }
+            public void onClick(View view) {
+                changePhoneNumber(); }
         });
 
         btn_change_phone_number_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 goBackChangePhoneNumber();
             }
         });
+
     }
 
     private void changePhoneNumber() {
@@ -51,7 +56,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
         String message = "Phone Number: " + phoneNumber + "\nConfirm Phone Number:" + confirmPhoneNumber;
         Toast.makeText(getApplicationContext(),message,Toast.LENGTH_SHORT).show();
 
-        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        Intent switchActivityIntent = new Intent(ChangePhoneNumber.this, PasswordModal.class);
         startActivity(switchActivityIntent);
     }
 

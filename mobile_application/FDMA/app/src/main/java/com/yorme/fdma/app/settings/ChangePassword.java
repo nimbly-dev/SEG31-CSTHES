@@ -65,7 +65,6 @@ public class ChangePassword extends AppCompatActivity {
 
                 if (passwordChecker.isValidPassword(enter_password.getText().toString().trim())) {
                     if(StringUtils.equals(enter_password.getText().toString(),enter_confirm_password.getText().toString()) == true){
-
                         try {
                             SecretKey secretKey = generateKey(128);
                             IvParameterSpec ivParameterSpec = generateIv();

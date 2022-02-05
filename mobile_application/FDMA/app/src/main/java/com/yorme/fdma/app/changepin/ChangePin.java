@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.passwordmodal.PasswordModal;
 
 public class ChangePin extends AppCompatActivity {
 
@@ -56,7 +57,7 @@ public class ChangePin extends AppCompatActivity {
 
     private void proceed() {
         showMessage();
-        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        Intent switchActivityIntent = new Intent(this, PasswordModal.class);
         startActivity(switchActivityIntent);
     }
 
