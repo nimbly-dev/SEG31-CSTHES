@@ -28,7 +28,7 @@ public class ChangePasswordDao {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
-        stmt.execute(DBSQL.CREATE_NEW_PASSWORD_TABLE);
+        stmt.execute(DBSQL.CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE);
     }
 
     public void insertNewChangePasswordLog(LocalTime time, LocalDate date) throws SQLException {

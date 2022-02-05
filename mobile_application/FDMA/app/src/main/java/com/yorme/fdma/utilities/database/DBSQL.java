@@ -46,4 +46,6 @@ public interface DBSQL {
     final static String FLUSH_CHANGE_KEY_PAIRING_LOGS_TABLE = "DELETE FROM change_key_pair_logs";
 
     final static String FLUSH_PASSWORD_TABLE = "DELETE FROM app_password";
+
+    final static String FLUSH_CHANGE_PASSWORD_LOG_TABLE = "DELETE FROM change_password_logs";
 }
