@@ -2,7 +2,7 @@ package com.yorme.fdma.utilities.database;
 
 public interface DBSQL {
 
-    //SQL STATEMENTS:
+    //SQL STATEMENTS
     final static String INSERT_NEW_ACTIVATION_LOGS = "INSERT INTO activation_logs(time,date) VALUES(?,?)";
     final static String SELECT_ALL_ACTIVATION_LOGS = "SELECT * from activation_logs";
 
@@ -31,5 +31,10 @@ public interface DBSQL {
             "password text NOT NULL" +
             ");";
 
+    //FLUSH DATA ON TABLES
+    final static String FLUSH_ACTIVATION_LOGS_TABLE = "TRUNCATE TABLE activation_logs";
 
+    final static String FLUSH_CHANGE_KEY_PAIRING_LOGS_TABLE = "TRUNCATE TABLE change_key_pair_logs";
+
+    final static String FLUSH_PASSWORD_TABLE = "TRUNCATE TABLE app_password";
 }

@@ -22,8 +22,6 @@ public class PropertiesReader  {
             // load a properties file
             prop.load(input);
 
-            // get the property value and print it out
-//            System.out.println(prop.getProperty("app.test.csv.path"));
 
             return prop;
         } catch (IOException ex) {
