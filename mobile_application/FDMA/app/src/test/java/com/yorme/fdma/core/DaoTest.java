@@ -3,13 +3,13 @@ package com.yorme.fdma.core;
 
 import com.yorme.fdma.core.dao.ActivationLogsDaoTest;
 import com.yorme.fdma.core.dao.ChangeKeyPairingsLogDaoTest;
+import com.yorme.fdma.core.dao.ChangePasswordLogsDaoTest;
 import com.yorme.fdma.core.dao.PasswordDaoTest;
 
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
 
 
 public class DaoTest extends TestCase {
@@ -33,6 +33,7 @@ public class DaoTest extends TestCase {
         suite.addTestSuite(ActivationLogsDaoTest.class);
         suite.addTestSuite(ChangeKeyPairingsLogDaoTest.class);
         suite.addTestSuite(PasswordDaoTest.class);
+        suite.addTestSuite(ChangePasswordLogsDaoTest.class);
         return suite;
     }
 }

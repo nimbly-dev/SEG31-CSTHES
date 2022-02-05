@@ -3,17 +3,17 @@ package com.yorme.fdma.core.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ChangeKeyPairingLogs {
+public class ChangeKeyPairingLog {
 
     int keyPairingLogsID;
     LocalDate keyPairingLogDate;
     LocalTime keyPairingLogTime;
 
-    public ChangeKeyPairingLogs(){
+    public ChangeKeyPairingLog(){
 
     }
 
-    public ChangeKeyPairingLogs(int keyPairingLogsID, LocalDate keyPairingLogDate, LocalTime keyPairingLogTime) {
+    public ChangeKeyPairingLog(int keyPairingLogsID, LocalDate keyPairingLogDate, LocalTime keyPairingLogTime) {
         this.keyPairingLogsID = keyPairingLogsID;
         this.keyPairingLogDate = keyPairingLogDate;
         this.keyPairingLogTime = keyPairingLogTime;

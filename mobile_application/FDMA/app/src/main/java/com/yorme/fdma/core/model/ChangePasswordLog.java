@@ -3,17 +3,17 @@ package com.yorme.fdma.core.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class PasswordLog{
+public class ChangePasswordLog {
 
     int logID;
     LocalDate logDate;
     LocalTime logTime;
 
-    public PasswordLog(){
+    public ChangePasswordLog(){
 
     }
 
-    public PasswordLog(int logID, LocalTime logTime, LocalDate logDate) {
+    public ChangePasswordLog(int logID, LocalTime logTime, LocalDate logDate) {
         this.logID = logID;
         this.logDate = logDate;
         this.logTime = logTime;
