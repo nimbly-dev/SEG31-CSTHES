@@ -3,6 +3,7 @@ package com.yorme.fdma.core.dao;
 import com.yorme.fdma.utilities.StaticStrings;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
+import com.yorme.fdma.utilities.database.DBSQL;
 
 import junit.framework.TestCase;
 
@@ -18,16 +19,16 @@ import java.util.List;
 public class ChangeKeyPairingsLogDaoTest extends TestCase {
 
     private ChangeKeyPairingsLogsDao changeKeyPairingsLogsDao;
+    private DBConnection conn;
 
-    @Test
-    public void testConnectToDb(){
-        Connection conn = new DBConnection().connect();
-        assertTrue(conn != null);
-    }
 
     @Test
     public void testCreateInsertAndGetDataOfChangeKeyPairLogs(){
         try {
+            //Flush table
+            conn = new DBConnection();
+            conn.flushTable(DBSQL.FLUSH_CHANGE_KEY_PAIRING_LOGS_TABLE);
+
             changeKeyPairingsLogsDao = new ChangeKeyPairingsLogsDao();
 
             changeKeyPairingsLogsDao.createChangeKeyPairTable();

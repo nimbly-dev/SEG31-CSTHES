@@ -4,6 +4,7 @@ package com.yorme.fdma.core.dao;
 import com.yorme.fdma.utilities.StaticStrings;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.core.model.ActivationLog;
+import com.yorme.fdma.utilities.database.DBSQL;
 
 import junit.framework.TestCase;
 
@@ -18,16 +19,15 @@ import java.util.List;
 public class ActivationLogsDaoTest extends TestCase {
 
     private ActivationLogsDao activationLogsDao;
-
-    @Test
-    public void testConnectToDb(){
-        Connection conn = new DBConnection().connect();
-        assertTrue(conn != null);
-    }
+    private DBConnection conn;
 
     @Test
     public void testCreateInsertAndGetDataOfActivationLogs(){
         try {
+            //Flush table
+            conn = new DBConnection();
+            conn.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
+
             activationLogsDao = new ActivationLogsDao();
 
             activationLogsDao.createActivationLogsTable();

@@ -11,15 +11,17 @@ import java.sql.Statement;
 
 public class PasswordDao {
 
-    public void createPasswordDao() throws SQLException {
-        Connection conn = new DBConnection().connect();
+    private Connection conn;
+
+    public void createPasswordTable() throws SQLException {
+        conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
         stmt.execute(DBSQL.CREATE_NEW_PASSWORD_TABLE);
     }
 
     public void insertPassword(String password)throws SQLException{
-        Connection conn = new DBConnection().connect();
+        conn = new DBConnection().connect();
 
         PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_PASSWORD);
         pstmt.setString(1,password);
@@ -28,10 +30,20 @@ public class PasswordDao {
     }
 
     public String getPassword()throws SQLException{
-        Connection conn = new DBConnection().connect();
+        conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(DBSQL.GET_PASSWORD + 1); //Get Password with index of 1
+        ResultSet rs = stmt.executeQuery(DBSQL.GET_PASSWORD); //Get Password with index of 1
 
         return rs.getString("password");
+    }
+
+    public void updatePassword(String appPassword)throws SQLException{
+        conn = new DBConnection().connect();
+
+        PreparedStatement pstmt = conn.prepareStatement(DBSQL.UPDATE_PASSWORD);
+        pstmt.setString(1, appPassword);
+        pstmt.setInt(2, 1);//Default is 1
+
+        pstmt.executeUpdate();
     }
 }

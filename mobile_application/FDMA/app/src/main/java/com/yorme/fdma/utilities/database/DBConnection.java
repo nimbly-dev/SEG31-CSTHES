@@ -3,6 +3,7 @@ package com.yorme.fdma.utilities.database;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -18,5 +19,13 @@ public class DBConnection {
             System.out.println(e.getMessage());
         }
         return conn;
+    }
+
+    //FOR TESTING PURPOSES
+    public void flushTable(String truncateStmt) throws SQLException {
+        Connection conn = connect();
+        PreparedStatement pstmt = conn.prepareStatement(truncateStmt);
+
+        pstmt.executeUpdate();
     }
 }
