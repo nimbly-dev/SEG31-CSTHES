@@ -25,6 +25,7 @@ public class EncryptorTest extends TestCase {
     public void testEncryptStringUsingAES(){
         String input = "AString12"; //9
         String cipherText = "";
+
         propertiesReader = new PropertiesReader();
         try {
             SecretKey secretKey = Encryptor.generateKey(128);
