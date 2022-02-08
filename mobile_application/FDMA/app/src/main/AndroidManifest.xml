@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FDMA">
-        <activity
-            android:name=".app.passwordmodal.PasswordModal"
-            android:exported="false" />
+        <activity android:name=".app.passwordmodal.PasswordModal">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".app.viewlogs.ChangePinLogs"
             android:exported="false" />
@@ -38,13 +42,7 @@
         <activity android:name=".app.changepin.ChangePin" />
         <activity android:name=".app.viewlogs.ViewLogs" />
         <activity android:name=".app.viewlogs.ChangePhoneNumberLogs" />
-        <activity android:name=".app.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".app.MainActivity" />
     </application>
 
 </manifest>
