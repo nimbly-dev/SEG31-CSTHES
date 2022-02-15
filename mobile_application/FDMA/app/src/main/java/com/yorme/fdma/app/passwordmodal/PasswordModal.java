@@ -75,14 +75,14 @@ public class PasswordModal extends AppCompatActivity {
             BadPaddingException, InvalidKeyException {
         Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
         //Initialize decrypt values
-        propertiesReader = new PropertiesReader();
-        passwordDao = new PasswordDao();
-        decryptor = new Decryptor();
-        SecretKey secretKey = Encryptor.generateKey(128);
-        IvParameterSpec ivParameterSpec = Encryptor.generateIv();
-        String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
-
-        String userPassword = Decryptor.decrypt(algorithm,passwordDao.getPassword(),secretKey,ivParameterSpec);
+//        propertiesReader = new PropertiesReader();
+//        passwordDao = new PasswordDao();
+//        decryptor = new Decryptor();
+//        SecretKey secretKey = Encryptor.generateKey(128);
+//        IvParameterSpec ivParameterSpec = Encryptor.generateIv();
+//        String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
+//
+//        String userPassword = Decryptor.decrypt(algorithm,passwordDao.getPassword(),secretKey,ivParameterSpec);
 
 
         startActivity(switchActivityIntent);

@@ -2,13 +2,21 @@ package com.yorme.fdma.app.viewlogs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 
 import com.yorme.fdma.R;
 
 public class ChangePhoneNumberLogs extends AppCompatActivity {
+
+    ListView changePhoneNumberLogsListView;
+    String changePhoneNumberLogs[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,5 +25,22 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_phone_number_logs);
+
+        changePhoneNumberLogsListView = (ListView) findViewById(R.id.changePhoneNumberLogsListView);
+        ArrayAdapter<String> changePhoneNumberLogsAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview_change_phone_number_logs,changePhoneNumberLogs);
+        changePhoneNumberLogsListView.setAdapter(changePhoneNumberLogsAdapter);
+
+        Button btn_change_phone_number_logs_back = (Button) findViewById(R.id.btn_change_phone_number_logs_back);
+        btn_change_phone_number_logs_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goBackToViewLogsChangePhoneNumberLogs();
+            }
+        });
+    }
+
+    private void goBackToViewLogsChangePhoneNumberLogs() {
+        Intent switchActivityIntent = new Intent(ChangePhoneNumberLogs.this, ViewLogs.class);
+        startActivity(switchActivityIntent);
     }
 }

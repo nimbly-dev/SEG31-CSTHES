@@ -13,12 +13,44 @@
         android:layout_height="wrap_content"
         android:text="Change PIN Logs"
         android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.05" />
+
+    <Button
+        android:id="@+id/btn_change_pin_logs_back"
+        android:layout_width="82dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round"
+        android:checkable="false"
+        android:clickable="true"
+        android:text="@string/back"
+        android:textColor="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.951"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+
+    <ListView
+        android:id="@+id/changePinLogsListView"
+        android:layout_width="fill_parent"
+        android:layout_height="650dp"
+        android:background="#FFFFFF"
+        android:divider="@color/material_blue_grey_800"
+        android:dividerHeight="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.975" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
