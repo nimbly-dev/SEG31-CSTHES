@@ -29,10 +29,11 @@ public class ActivationLogAdapter extends ArrayAdapter<ActivationLog> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview_activation_logs, parent, false);
         }
         // Lookup view for data population
-        TextView date = (TextView) convertView.findViewById(R.id.textView4);
+        TextView date = (TextView) convertView.findViewById(R.id.activationLogsTextView1);
+        TextView time = (TextView) convertView.findViewById(R.id.activationLogsTextView2);
         // Populate the data into the template view using the data object
-        tvName.setText(user.name);
-        tvHome.setText(user.hometown);
+        date.setText(activationLog.getLogDate().toString());
+        time.setText(activationLog.getLogTime().toString());
         // Return the completed view to render on screen
         return convertView;
     }
