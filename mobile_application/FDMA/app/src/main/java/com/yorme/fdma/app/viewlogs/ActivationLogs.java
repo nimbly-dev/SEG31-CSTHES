@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -17,21 +16,24 @@ import com.yorme.fdma.R;
 import com.yorme.fdma.core.dao.ActivationLogsDao;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
+import com.yorme.fdma.utilities.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBHelper;
+import com.yorme.fdma.utilities.database.DBSQL;
 
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogs extends AppCompatActivity {
 
     private ActivationLogsDao activationLogsDao;
-    private List<ActivationLog> activationLogs;
+    private ArrayList<ActivationLog> activationLogs;
+
+    private DBHelper dbHelper;
+    private DBConnection conn;
 
     ListView activationLogsListView;
-//    String activationLogs[] = {"Guadalupe", "Pembo", "WestRembo", "EastRembo", "Cembo", "Belair"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,28 +43,18 @@ public class ActivationLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_activation_logs);
 
-        activationLogsDao = new ActivationLogsDao();
+        dbHelper = new DBHelper(this);
+        dbHelper.insertData(
+                LocalTime.now().toString(),
+                LocalDate.now().toString(),
+                "activation_logs");
 
-        try {
-            activationLogsDao.insertNewActivationLog(LocalTime.now(), LocalDate.now());
-            activationLogs = activationLogsDao.getAllActivationLogs();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
 
-        // Construct the data source
-        ArrayList<ActivationLog> activationlog = new ArrayList<ActivationLog>();
-        // Create the adapter to convert the array to views
-        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationlog);
+        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
         // Attach the adapter to a ListView
         ListView activationLogListView = (ListView) findViewById(R.id.activationLogsListView);
         activationLogListView.setAdapter(activationLogAdapter);
-
-//        activationLogsListView = (ListView) findViewById(R.id.activationLogsListView);
-//
-//
-//        ArrayAdapter<List<ActivationLog>> activationLogsAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview_activation_logs,activationLogs);
-//        activationLogsListView.setAdapter(activationLogsAdapter);
 
 
         Button btn_activation_logs_back = (Button) findViewById(R.id.btn_activation_logs_back);

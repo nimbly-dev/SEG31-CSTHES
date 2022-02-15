@@ -1,9 +1,12 @@
 package com.yorme.fdma.core.dao;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.yorme.fdma.app.viewlogs.ActivationLogs;
 import com.yorme.fdma.utilities.StaticStrings;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBSQL;
@@ -20,11 +23,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogsDao {
 
+    public Connection conn;
+
+    public ActivationLogsDao(){
+        conn = new DBConnection().connect();
+    }
+
     public void createActivationLogsTable() throws SQLException {
-        Connection conn = new DBConnection().connect();
+//        Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
         stmt.execute(DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE);
@@ -32,7 +42,7 @@ public class ActivationLogsDao {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void insertNewActivationLog(LocalTime time, LocalDate date) throws SQLException {
-        Connection conn = new DBConnection().connect();
+//        Connection conn = new DBConnection().connect();
 
         PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_NEW_ACTIVATION_LOGS);
         pstmt.setString(1, time.format(StaticStrings.HOUR_FORMAT)); // 0900
@@ -42,7 +52,7 @@ public class ActivationLogsDao {
     }
 
     public List<ActivationLog> getAllActivationLogs() throws SQLException {
-        Connection conn = new DBConnection().connect();
+//        Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
 
@@ -57,5 +67,6 @@ public class ActivationLogsDao {
         }
         return activationLogs;
     }
+
 
 }

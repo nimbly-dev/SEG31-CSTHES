@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class ActivationLogAdapter extends ArrayAdapter<ActivationLog> {
 
-    public ActivationLogAdapter(Context context, ArrayList<ActivationLog> activationlog) {
-        super(context, 0, activationlog);
+    public ActivationLogAdapter(Context context, ArrayList<ActivationLog> activationlogs) {
+        super(context, 0, activationlogs);
     }
 
     @Override

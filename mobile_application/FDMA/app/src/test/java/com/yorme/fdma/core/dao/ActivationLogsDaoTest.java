@@ -9,8 +9,6 @@ import com.yorme.fdma.utilities.database.DBSQL;
 import junit.framework.TestCase;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -31,7 +29,6 @@ public class ActivationLogsDaoTest extends TestCase {
             conn.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
 
             activationLogsDao = new ActivationLogsDao();
-
             activationLogsDao.createActivationLogsTable();
 
             LocalTime testInputTime = LocalTime.now();
