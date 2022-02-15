@@ -51,6 +51,7 @@ dependencies {
     //Utilities
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation 'com.opencsv:opencsv:5.3'
+    implementation 'com.google.firebase:firebase-firestore:23.0.2'
 
     //TESTING
     testImplementation 'junit:junit:4.+'
