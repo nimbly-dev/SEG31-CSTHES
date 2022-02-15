@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
+import com.yorme.fdma.core.dao.ActivationLogsDao;
+import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.utilities.PropertiesReader;
@@ -27,6 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 
 import javax.crypto.BadPaddingException;
@@ -38,6 +41,8 @@ import javax.crypto.spec.IvParameterSpec;
 public class ChangePassword extends AppCompatActivity {
 
     EditText enter_password, enter_confirm_password;
+
+    private PasswordDao passwordDao;
 
     private PasswordChecker passwordChecker;
     @Override
@@ -71,7 +76,10 @@ public class ChangePassword extends AppCompatActivity {
                             String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
 
                             cipherText = Encryptor.encrypt(algorithm, enter_password.toString(), secretKey, ivParameterSpec);
-                        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+
+                            passwordDao.updatePassword(cipherText);
+                        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException
+                                | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | SQLException e) {
                             e.printStackTrace();
                         }
 

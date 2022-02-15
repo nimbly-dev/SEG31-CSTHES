@@ -1,6 +1,7 @@
 package com.yorme.fdma.app.changephonenumber;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,8 +15,10 @@ import com.yorme.fdma.R;
 import com.yorme.fdma.app.passwordmodal.PasswordModal;
 import com.yorme.fdma.core.dao.ChangePhoneNumberLogsDao;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePhoneNumber extends AppCompatActivity {
 
     String phoneNumber, confirmPhoneNumber;
@@ -50,6 +53,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
         });
 
     }
+
 
     private void changePhoneNumber() {
         phoneNumber = enter_phone_number.getText().toString();
