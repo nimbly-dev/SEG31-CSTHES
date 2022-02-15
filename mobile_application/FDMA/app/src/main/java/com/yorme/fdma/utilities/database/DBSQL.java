@@ -12,6 +12,9 @@ public interface DBSQL {
     final static String INSERT_NEW_CHANGE_PASSWORD_LOGS = "INSERT INTO change_key_pair_logs(time,date) VALUES (?,?)";
     final static String SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS = "SELECT * from change_key_pair_logs";
 
+    final static String INSERT_NEW_CHANGE_PHONE_NUMBER_LOGS = "INSERT INTO change_key_pair_logs(time,date) VALUES (?,?)";
+    final static String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_key_pair_logs";
+
     final static String INSERT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
     final static String GET_PASSWORD = "SELECT * FROM app_password WHERE id = 1";
     final static String UPDATE_PASSWORD = "UPDATE app_password SET password = ? WHERE id = ?";
@@ -39,6 +42,13 @@ public interface DBSQL {
             "id integer PRIMARY KEY, \n" +
             "password text NOT NULL" +
             ");";
+
+    final static String CREATE_NEW_CHANGE_PASSWORD_TABLE =  "CREATE TABLE IF NOT EXISTS change_phone_number_logs (\n" +
+            "id integer PRIMARY KEY,\n" +
+            "time time NOT NULL,\n" +
+            "date date NOT NULL" +
+            "                   );";
+
 
     //FLUSH DATA ON TABLES
     final static String FLUSH_ACTIVATION_LOGS_TABLE = "DELETE FROM activation_logs";

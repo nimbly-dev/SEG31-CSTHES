@@ -9,6 +9,8 @@ import com.yorme.fdma.utilities.database.DBSQL;
 import junit.framework.TestCase;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
