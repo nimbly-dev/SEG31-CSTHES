@@ -1,8 +1,10 @@
 package com.yorme.fdma.app;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,8 +17,11 @@ import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
+import com.yorme.fdma.utilities.arduino.Ardcon;
 
 public class MainActivity extends AppCompatActivity {
+
+    Ardcon ardcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
+        ardcon = new Ardcon();
+        ardcon.getBluetoothConnection(this);
+
         ImageView btn_change_phone_number = (ImageView) findViewById(R.id.btn_change_phone_number);
         ImageView btn_user_manual = (ImageView) findViewById(R.id.btn_user_manual);
         ImageView btn_change_pin = (ImageView) findViewById(R.id.btn_change_pin);
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView btn_settings = (ImageView) findViewById(R.id.btn_settings);
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 goToChangePhoneNumber();
@@ -54,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_change_pin.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 goToChangePin();
@@ -80,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void goToChangePhoneNumber() {
         Intent switchActivityIntent = new Intent(this, ChangePhoneNumber.class);
         startActivity(switchActivityIntent);
@@ -95,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void goToChangePin() {
         Intent switchActivityIntent = new Intent(this, ChangePin.class);
         startActivity(switchActivityIntent);

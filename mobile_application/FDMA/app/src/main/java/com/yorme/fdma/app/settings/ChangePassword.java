@@ -83,11 +83,11 @@ public class ChangePassword extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
                         Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
                         startActivity(switchActivityIntent);
                     }else{
-                        Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_LONG).show();
                     }
                 } else {
                     Toast.makeText(ChangePassword.this, "Password must contain atleast 1 upper case letter, 1 lower case letter and 1 number and a minimum of 8 characters.", Toast.LENGTH_SHORT).show();
