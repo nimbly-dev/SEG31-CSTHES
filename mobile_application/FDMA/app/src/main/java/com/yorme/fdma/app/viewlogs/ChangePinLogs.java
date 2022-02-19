@@ -1,8 +1,10 @@
 package com.yorme.fdma.app.viewlogs;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 
 import com.yorme.fdma.R;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePinLogs extends AppCompatActivity {
 
     ListView changePinLogsListView;

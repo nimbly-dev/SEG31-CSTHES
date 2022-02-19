@@ -19,6 +19,7 @@ import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
 import com.yorme.fdma.utilities.arduino.Ardcon;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
     Ardcon ardcon;

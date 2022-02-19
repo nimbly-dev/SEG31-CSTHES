@@ -1,10 +1,12 @@
 package com.yorme.fdma.app.settings;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class Settings extends AppCompatActivity {
 
     @Override

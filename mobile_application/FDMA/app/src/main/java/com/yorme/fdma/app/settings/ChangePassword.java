@@ -38,6 +38,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePassword extends AppCompatActivity {
 
     EditText enter_password, enter_confirm_password;
