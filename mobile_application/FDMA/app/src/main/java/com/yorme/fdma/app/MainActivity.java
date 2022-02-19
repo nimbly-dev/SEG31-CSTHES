@@ -1,8 +1,10 @@
 package com.yorme.fdma.app;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +18,7 @@ import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
     @Override

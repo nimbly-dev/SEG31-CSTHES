@@ -1,6 +1,7 @@
 package com.yorme.fdma.app.settings;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.yorme.fdma.R;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.ViewHolder> {
 
     private SettingsListData[] listdata;
