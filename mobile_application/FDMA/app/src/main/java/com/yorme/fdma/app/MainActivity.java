@@ -20,8 +20,6 @@ import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
-import com.yorme.fdma.utilities.arduino.AcceptThread;
-import com.yorme.fdma.utilities.arduino.ConnectThread;
 
 import io.github.giuseppebrb.ardutooth.Ardutooth;
 
@@ -31,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     public static final String ACTION_REQUEST_ENABLE = "android.bluetooth.adapter.action.REQUEST_ENABLE";
 
-    private ConnectThread connectThread;
-    private AcceptThread acceptThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
         mArdutooth.setConnection();
-
 
 
         ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
