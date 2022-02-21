@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yorme.fdma.R;
@@ -45,7 +46,12 @@ public class MainActivity extends AppCompatActivity {
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
         mArdutooth.setConnection();
 
-
+        TextView txt_connection = findViewById(R.id.txt_connection);
+        if(mArdutooth.isConnected()){
+            txt_connection.setText("Connected");
+        } else {
+            txt_connection.setText("Not Connected");
+        }
 
         ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
         ImageView btn_user_manual = findViewById(R.id.btn_user_manual);
