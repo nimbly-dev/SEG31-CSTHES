@@ -29,8 +29,8 @@ public class ActivationLogAdapter extends ArrayAdapter<ActivationLog> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_listview_activation_logs, parent, false);
         }
         // Lookup view for data population
-        TextView date = (TextView) convertView.findViewById(R.id.activationLogsTextView1);
-        TextView time = (TextView) convertView.findViewById(R.id.activationLogsTextView2);
+        TextView date = convertView.findViewById(R.id.activationLogsTextView1);
+        TextView time = convertView.findViewById(R.id.activationLogsTextView2);
         // Populate the data into the template view using the data object
         date.setText(activationLog.getLogDate().toString());
         time.setText(activationLog.getLogTime().toString());

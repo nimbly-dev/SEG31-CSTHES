@@ -19,7 +19,7 @@ import com.yorme.fdma.R;
 public class ChangePhoneNumberLogs extends AppCompatActivity {
 
     ListView changePhoneNumberLogsListView;
-    String changePhoneNumberLogs[] = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
+    String[] changePhoneNumberLogs = {"India", "China", "australia", "Portugle", "America", "NewZealand"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,11 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_phone_number_logs);
 
-        changePhoneNumberLogsListView = (ListView) findViewById(R.id.changePhoneNumberLogsListView);
+        changePhoneNumberLogsListView = findViewById(R.id.changePhoneNumberLogsListView);
         ArrayAdapter<String> changePhoneNumberLogsAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview_change_phone_number_logs,changePhoneNumberLogs);
         changePhoneNumberLogsListView.setAdapter(changePhoneNumberLogsAdapter);
 
-        Button btn_change_phone_number_logs_back = (Button) findViewById(R.id.btn_change_phone_number_logs_back);
+        Button btn_change_phone_number_logs_back = findViewById(R.id.btn_change_phone_number_logs_back);
         btn_change_phone_number_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

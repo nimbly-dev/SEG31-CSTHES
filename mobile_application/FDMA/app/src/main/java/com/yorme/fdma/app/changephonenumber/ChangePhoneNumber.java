@@ -35,10 +35,10 @@ public class ChangePhoneNumber extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_phone_number);
 
-        enter_phone_number = (EditText) findViewById(R.id.enter_phone_number);
-        enter_confirm_phone_number = (EditText) findViewById(R.id.enter_confirm_phone_number);
-        Button btn_change_phone_number = (Button) findViewById(R.id.btn_change_phone_number);
-        Button btn_change_phone_number_back = (Button) findViewById(R.id.btn_change_phone_number_back);
+        enter_phone_number = findViewById(R.id.enter_phone_number);
+        enter_confirm_phone_number = findViewById(R.id.enter_confirm_phone_number);
+        Button btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
+        Button btn_change_phone_number_back = findViewById(R.id.btn_change_phone_number_back);
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override

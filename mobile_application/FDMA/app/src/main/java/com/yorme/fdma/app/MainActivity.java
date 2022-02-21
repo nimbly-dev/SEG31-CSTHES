@@ -20,12 +20,19 @@ import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
+import com.yorme.fdma.utilities.arduino.AcceptThread;
+import com.yorme.fdma.utilities.arduino.ConnectThread;
+
+import io.github.giuseppebrb.ardutooth.Ardutooth;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_ENABLE_BT = 1;
     public static final String ACTION_REQUEST_ENABLE = "android.bluetooth.adapter.action.REQUEST_ENABLE";
+
+    private ConnectThread connectThread;
+    private AcceptThread acceptThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,16 +42,18 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-        getBluetoothConnection(this);
+        Ardutooth mArdutooth = Ardutooth.getInstance(this);
+        mArdutooth.setConnection();
 
-        ImageView btn_change_phone_number = (ImageView) findViewById(R.id.btn_change_phone_number);
-        ImageView btn_user_manual = (ImageView) findViewById(R.id.btn_user_manual);
-        ImageView btn_change_pin = (ImageView) findViewById(R.id.btn_change_pin);
-        ImageView btn_view_logs = (ImageView) findViewById(R.id.btn_view_logs);
-        ImageView btn_settings = (ImageView) findViewById(R.id.btn_settings);
+
+
+        ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
+        ImageView btn_user_manual = findViewById(R.id.btn_user_manual);
+        ImageView btn_change_pin = findViewById(R.id.btn_change_pin);
+        ImageView btn_view_logs = findViewById(R.id.btn_view_logs);
+        ImageView btn_settings = findViewById(R.id.btn_settings);
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 goToChangePhoneNumber();
@@ -109,13 +118,12 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void goToChangePin() {
         Intent switchActivityIntent = new Intent(this, ChangePin.class);
         startActivity(switchActivityIntent);
     }
 
-    private void getBluetoothConnection(Context context) {
+    private void checkIfBluetoothIsOn(Context context) {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter == null) {
             Toast.makeText(context, "This device does not support Bluetooth.", Toast.LENGTH_SHORT).show();

@@ -46,15 +46,15 @@ dependencies {
 
     //CORE
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-
-
+    
     //Utilities
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation 'com.opencsv:opencsv:5.3'
     implementation 'com.google.firebase:firebase-firestore:23.0.2'
+    implementation files('C:\\Users\\nimbl\\Downloads\\ardutooth-release.aar')
 
     //TESTING
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 

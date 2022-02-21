@@ -31,12 +31,12 @@ public class ChangePin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_pin);
 
-        Button btn_proceed = (Button)findViewById(R.id.btn_change_pin_proceed);
-        Button btn_back = (Button)findViewById(R.id.btn_change_pin_back);
+        Button btn_proceed = findViewById(R.id.btn_change_pin_proceed);
+        Button btn_back = findViewById(R.id.btn_change_pin_back);
 
-        et_oldPin = (EditText)findViewById(R.id.et_old_pin);
-        et_newPin = (EditText)findViewById(R.id.et_new_pin);
-        et_confirmPin = (EditText)findViewById(R.id.et_confirm_pin);
+        et_oldPin = findViewById(R.id.et_old_pin);
+        et_newPin = findViewById(R.id.et_new_pin);
+        et_confirmPin = findViewById(R.id.et_confirm_pin);
 
         btn_proceed.setOnClickListener(new View.OnClickListener() {
             @Override

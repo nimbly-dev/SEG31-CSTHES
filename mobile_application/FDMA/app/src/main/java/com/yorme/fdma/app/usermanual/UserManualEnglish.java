@@ -25,8 +25,8 @@ public class UserManualEnglish extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_user_manual_english);
 
-        Button btn_user_guide_filipino = (Button) findViewById(R.id.btn_user_guide_filipino);
-        Button btn_user_guide_english_back = (Button) findViewById(R.id.btn_user_guide_english_back);
+        Button btn_user_guide_filipino = findViewById(R.id.btn_user_guide_filipino);
+        Button btn_user_guide_english_back = findViewById(R.id.btn_user_guide_english_back);
 
         btn_user_guide_filipino.setOnClickListener(new View.OnClickListener() {
             @Override

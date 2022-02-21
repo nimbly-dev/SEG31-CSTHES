@@ -27,7 +27,7 @@ public class Settings extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_settings);
 
-        Button btn_settings_back = (Button) findViewById(R.id.btn_settings_back);
+        Button btn_settings_back = findViewById(R.id.btn_settings_back);
 
         btn_settings_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +40,7 @@ public class Settings extends AppCompatActivity {
                 new SettingsListData("Change Password", android.R.drawable.ic_secure),
         };
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerViewSettings);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewSettings);
         SettingListAdapter adapter = new SettingListAdapter(myListData);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

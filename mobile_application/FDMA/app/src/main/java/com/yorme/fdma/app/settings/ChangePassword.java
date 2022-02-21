@@ -54,10 +54,10 @@ public class ChangePassword extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password);
 
-        enter_password = (EditText) findViewById(R.id.enter_password);
-        enter_confirm_password = (EditText) findViewById(R.id.enter_confirm_password);
-        Button btn_change_password = (Button) findViewById(R.id.btn_change_password);
-        Button btn_change_password_back = (Button) findViewById(R.id.btn_change_password_back);
+        enter_password = findViewById(R.id.enter_password);
+        enter_confirm_password = findViewById(R.id.enter_confirm_password);
+        Button btn_change_password = findViewById(R.id.btn_change_password);
+        Button btn_change_password_back = findViewById(R.id.btn_change_password_back);
 
         passwordChecker = new PasswordChecker();
 

@@ -12,6 +12,6 @@ import java.time.format.DateTimeFormatter;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public interface StaticStrings {
 
-    final static DateTimeFormatter HOUR_FORMAT = DateTimeFormatter.ofPattern("H:mm");
+    DateTimeFormatter HOUR_FORMAT = DateTimeFormatter.ofPattern("H:mm");
 
 }

@@ -53,7 +53,7 @@ public class PasswordModal extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_modal);
 
-        Button btn_password = (Button) findViewById(R.id.btn_password);
+        Button btn_password = findViewById(R.id.btn_password);
         btn_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

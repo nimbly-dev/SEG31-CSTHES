@@ -55,7 +55,7 @@ public class SMS extends Activity{
 
     @Override
     public void onRequestPermissionsResult(
-            int requestCode,String permissions[], int[] grantResults) {
+            int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_SEND_SMS: {
                 if (grantResults.length > 0

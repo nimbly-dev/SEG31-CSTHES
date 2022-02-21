@@ -26,11 +26,11 @@ public class ViewLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_logs);
 
-        Button btn_view_logs_back = (Button) findViewById(R.id.btn_view_logs_back);
-        Button btn_view_activation_logs = (Button) findViewById(R.id.btn_view_activation_logs);
-        Button btn_view_change_phone_num_logs = (Button) findViewById(R.id.btn_view_change_phone_num_logs);
-        Button btn_view_change_password_logs = (Button) findViewById(R.id.btn_view_change_password_logs);
-        Button btn_view_change_pin_logs = (Button) findViewById(R.id.btn_view_change_pin_logs);
+        Button btn_view_logs_back = findViewById(R.id.btn_view_logs_back);
+        Button btn_view_activation_logs = findViewById(R.id.btn_view_activation_logs);
+        Button btn_view_change_phone_num_logs = findViewById(R.id.btn_view_change_phone_num_logs);
+        Button btn_view_change_password_logs = findViewById(R.id.btn_view_change_password_logs);
+        Button btn_view_change_pin_logs = findViewById(R.id.btn_view_change_pin_logs);
 
         btn_view_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override

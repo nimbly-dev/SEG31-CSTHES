@@ -17,7 +17,7 @@ import com.yorme.fdma.R;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.ViewHolder> {
 
-    private SettingsListData[] listdata;
+    private final SettingsListData[] listdata;
 
 
     public SettingListAdapter(SettingsListData[] listdata) {
@@ -60,9 +60,9 @@ public class SettingListAdapter extends RecyclerView.Adapter<SettingListAdapter.
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
-            this.imageView = (ImageView) itemView.findViewById(R.id.settingsImageView);
-            this.textView = (TextView) itemView.findViewById(R.id.settingsTextView);
-            relativeLayout = (RelativeLayout)itemView.findViewById(R.id.settings_relative_layout);
+            this.imageView = itemView.findViewById(R.id.settingsImageView);
+            this.textView = itemView.findViewById(R.id.settingsTextView);
+            relativeLayout = itemView.findViewById(R.id.settings_relative_layout);
         }
     }
 }

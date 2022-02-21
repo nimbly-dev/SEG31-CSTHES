@@ -19,7 +19,7 @@ import com.yorme.fdma.R;
 public class ChangePinLogs extends AppCompatActivity {
 
     ListView changePinLogsListView;
-    String changePinLogs[] = {"Manila", "Taguig", "Mandaluyong", "Makati", "Quezon", "LasPinas"};
+    String[] changePinLogs = {"Manila", "Taguig", "Mandaluyong", "Makati", "Quezon", "LasPinas"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,11 @@ public class ChangePinLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_pin_logs);
 
-        changePinLogsListView = (ListView) findViewById(R.id.changePinLogsListView);
+        changePinLogsListView = findViewById(R.id.changePinLogsListView);
         ArrayAdapter<String> changePinAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview_change_pin_logs,changePinLogs);
         changePinLogsListView.setAdapter(changePinAdapter);
 
-        Button btn_change_pin_logs_back = (Button) findViewById(R.id.btn_change_pin_logs_back);
+        Button btn_change_pin_logs_back = findViewById(R.id.btn_change_pin_logs_back);
         btn_change_pin_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
