@@ -62,14 +62,13 @@ public class ActivationLogs extends AppCompatActivity {
 //        activationLogListView.setAdapter(activationLogAdapter);
 //
 //
-//        Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
-//        btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                goToViewLogsActivationLogs();
-//            }
-//        });
-//
+        Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
+        btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToViewLogsActivationLogs();
+            }
+        });
     }
 
     private void goToViewLogsActivationLogs() {
