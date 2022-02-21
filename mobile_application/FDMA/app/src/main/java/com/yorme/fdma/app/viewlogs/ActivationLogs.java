@@ -24,6 +24,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import io.github.giuseppebrb.ardutooth.Ardutooth;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogs extends AppCompatActivity {
 
@@ -43,28 +45,31 @@ public class ActivationLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_activation_logs);
 
-        dbHelper = new DBHelper(this);
-        dbHelper.insertData(
-                LocalTime.now().toString(),
-                LocalDate.now().toString(),
-                "activation_logs");
+        Ardutooth mArdutooth = Ardutooth.getInstance(this);
+        mArdutooth.sendInt(1);
 
-        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-
-        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
-        // Attach the adapter to a ListView
-        ListView activationLogListView = findViewById(R.id.activationLogsListView);
-        activationLogListView.setAdapter(activationLogAdapter);
-
-
-        Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
-        btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToViewLogsActivationLogs();
-            }
-        });
-
+//        dbHelper = new DBHelper(this);
+//        dbHelper.insertData(
+//                LocalTime.now().toString(),
+//                LocalDate.now().toString(),
+//                "activation_logs");
+//
+//        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+//
+//        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+//        // Attach the adapter to a ListView
+//        ListView activationLogListView = findViewById(R.id.activationLogsListView);
+//        activationLogListView.setAdapter(activationLogAdapter);
+//
+//
+//        Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
+//        btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                goToViewLogsActivationLogs();
+//            }
+//        });
+//
     }
 
     private void goToViewLogsActivationLogs() {

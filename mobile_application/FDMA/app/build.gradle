@@ -54,10 +54,18 @@ dependencies {
     //Utilities
     implementation 'org.xerial:sqlite-jdbc:3.36.0.3'
     implementation 'com.opencsv:opencsv:5.3'
+<<<<<<< HEAD
     implementation files('C:/Users/nimbl/Downloads/ardutooth-release.aar')
 
     //TESTING
     testImplementation 'junit:junit:4.13.2'
+=======
+    implementation files('C:\\Users\\James Liam\\Desktop\\Acads\\SEG31-CSTHES\\mobile_application\\ardutooth-release.aar')
+
+    //TESTING
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+>>>>>>> f52be4acbebb3d0d65091084b4896317dc44aac1
 
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
