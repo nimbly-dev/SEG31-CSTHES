@@ -49,22 +49,24 @@ public class ActivationLogs extends AppCompatActivity {
 
         if (mArdutooth.isConnected()){
             mArdutooth.sendInt(1);
-            String recieveActivationLogs = mArdutooth.receiveLine();
-            Toast.makeText(this, "Activation Logs:" + recieveActivationLogs, Toast.LENGTH_LONG).show();
+//            String recieveActivationLogs = mArdutooth.receiveLine();
+//            Toast.makeText(this, "Activation Logs: " + recieveActivationLogs, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Not Connected", Toast.LENGTH_LONG).show();
         }
 
-        dbHelper = new DBHelper(this);
-        dbHelper.insertData(
-                LocalTime.now().toString(),
-                LocalDate.now().toString(),
-                "activation_logs");
+//        dbHelper = new DBHelper(this);
+//        dbHelper.insertData(
+//                LocalTime.now().toString(),
+//                LocalDate.now().toString(),
+//                "activation_logs");
 
-        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-
-        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
-        // Attach the adapter to a ListView
-        ListView activationLogListView = findViewById(R.id.activationLogsListView);
-        activationLogListView.setAdapter(activationLogAdapter);
+//        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+//
+//        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+//        // Attach the adapter to a ListView
+//        ListView activationLogListView = findViewById(R.id.activationLogsListView);
+//        activationLogListView.setAdapter(activationLogAdapter);
 
         Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
         btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
