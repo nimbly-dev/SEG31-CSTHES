@@ -46,6 +46,8 @@ public class ChangePasswordLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password_logs);
 
+        dbHelper = new DBHelper(this);
+
         changePasswordLog = dbHelper.selectAllChangePasswordLogs(DBSQL.SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS);
 
         ChangePasswordLogAdapter changePasswordLogAdapter = new ChangePasswordLogAdapter(this, changePasswordLog);

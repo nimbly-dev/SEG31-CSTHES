@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -38,9 +39,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("For Loop Log", "1");
+        String[] statements = new String[]{
+                DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE,
+                DBSQL.CREATE_NEW_CHANGE_KEY_PAIRING_LOGS_TABLE,
+                DBSQL.CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE,
+                DBSQL.CREATE_NEW_PASSWORD_TABLE,
+                DBSQL.CREATE_NEW_CHANGE_PASSWORD_TABLE
+        };
 
-        db.execSQL(DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE);
-        db.execSQL(DBSQL.CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE);
+        for(String sql: statements){
+            db.execSQL(sql);
+            Log.d("For Loop Log", "1");
+        }
     }
 
     @Override
