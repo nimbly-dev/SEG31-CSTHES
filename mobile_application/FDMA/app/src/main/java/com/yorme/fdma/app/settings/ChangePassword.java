@@ -14,15 +14,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.core.dao.ActivationLogsDao;
+import com.yorme.fdma.core.dao.ChangePasswordDao;
 import com.yorme.fdma.core.dao.PasswordDao;
+import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.utilities.PropertiesReader;
+import com.yorme.fdma.utilities.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBHelper;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,6 +35,9 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 
 import javax.crypto.BadPaddingException;
@@ -40,6 +48,11 @@ import javax.crypto.spec.IvParameterSpec;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePassword extends AppCompatActivity {
+
+    private DBHelper dbHelper;
+    private DBConnection conn;
+
+    ListView activationLogsListView;
 
     EditText enter_password, enter_confirm_password;
 
@@ -95,6 +108,12 @@ public class ChangePassword extends AppCompatActivity {
                 }
             }
         });
+
+        dbHelper = new DBHelper(this);
+        dbHelper.insertData(
+                LocalTime.now().toString(),
+                LocalDate.now().toString(),
+                "change_password_logs");
 
         btn_change_password_back.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,12 +14,28 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.settings.ChangePassword;
+import com.yorme.fdma.core.dao.ChangePasswordDao;
+import com.yorme.fdma.core.model.ActivationLog;
+import com.yorme.fdma.core.model.ChangePasswordLog;
+import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
+import com.yorme.fdma.core.model.adapters.ChangePasswordLogAdapter;
+import com.yorme.fdma.utilities.database.DBConnection;
+import com.yorme.fdma.utilities.database.DBHelper;
+import com.yorme.fdma.utilities.database.DBSQL;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePasswordLogs extends AppCompatActivity {
 
-    ListView changePasswordLogsListView;
-    String[] changePasswordLogs = {"Philippines", "Thailand", "HongKong", "Indonesia", "Malaysia", "Singapore"};
+    private ChangePasswordDao changePasswordDao;
+    private ArrayList<ChangePasswordLog> changePasswordLog;
+
+    private DBHelper dbHelper;
+    private DBConnection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +45,12 @@ public class ChangePasswordLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password_logs);
 
-        changePasswordLogsListView = findViewById(R.id.changePasswordLogsListView);
-        ArrayAdapter<String> changePasswordLogsAdapter = new ArrayAdapter<String>(this, R.layout.activity_listview_change_password_logs,changePasswordLogs);
-        changePasswordLogsListView.setAdapter(changePasswordLogsAdapter);
+        changePasswordLog = dbHelper.selectAllChangePasswordLogs(DBSQL.SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS);
+
+        ChangePasswordLogAdapter changePasswordLogAdapter = new ChangePasswordLogAdapter(this, changePasswordLog);
+        // Attach the adapter to a ListView
+        ListView changePasswordLogsListView = findViewById(R.id.changePasswordLogsListView);
+        changePasswordLogsListView.setAdapter(changePasswordLogAdapter);
 
         Button btn_change_password_logs_back = findViewById(R.id.btn_change_password_logs_back);
         btn_change_password_logs_back.setOnClickListener(new View.OnClickListener() {

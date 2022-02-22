@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_ENABLE_BT = 1;
     public static final String ACTION_REQUEST_ENABLE = "android.bluetooth.adapter.action.REQUEST_ENABLE";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         mArdutooth.setConnection();
 
         TextView txt_connection = findViewById(R.id.txt_connection);
-        if(mArdutooth.isConnected()){
+        if (mArdutooth.isConnected()) {
+            super.onRestart();
             txt_connection.setText("Connected");
         } else {
             txt_connection.setText("Not Connected");

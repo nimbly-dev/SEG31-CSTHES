@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.dao.ActivationLogsDao;
@@ -35,8 +36,6 @@ public class ActivationLogs extends AppCompatActivity {
     private DBHelper dbHelper;
     private DBConnection conn;
 
-    ListView activationLogsListView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,22 +45,26 @@ public class ActivationLogs extends AppCompatActivity {
         setContentView(R.layout.activity_activation_logs);
 
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
-        mArdutooth.sendInt(1);
 
-//        dbHelper = new DBHelper(this);
-//        dbHelper.insertData(
-//                LocalTime.now().toString(),
-//                LocalDate.now().toString(),
-//                "activation_logs");
-//
-//        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-//
-//        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
-//        // Attach the adapter to a ListView
-//        ListView activationLogListView = findViewById(R.id.activationLogsListView);
-//        activationLogListView.setAdapter(activationLogAdapter);
-//
-//
+        if (mArdutooth.isConnected()){
+            mArdutooth.sendInt(1);
+            String recieveActivationLogs = mArdutooth.receiveLine();
+            Toast.makeText(this, "Activation Logs:" + recieveActivationLogs, Toast.LENGTH_LONG).show();
+        }
+
+        dbHelper = new DBHelper(this);
+        dbHelper.insertData(
+                LocalTime.now().toString(),
+                LocalDate.now().toString(),
+                "activation_logs");
+
+        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+
+        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+        // Attach the adapter to a ListView
+        ListView activationLogListView = findViewById(R.id.activationLogsListView);
+        activationLogListView.setAdapter(activationLogAdapter);
+
         Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
         btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override

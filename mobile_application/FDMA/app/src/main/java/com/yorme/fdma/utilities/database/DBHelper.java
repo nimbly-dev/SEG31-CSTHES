@@ -10,6 +10,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.yorme.fdma.core.model.ActivationLog;
+import com.yorme.fdma.core.model.ChangePasswordLog;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,7 +38,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE);
+        db.execSQL(DBSQL.CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE);
     }
 
     @Override
@@ -74,6 +77,25 @@ public class DBHelper extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return activationLogs;
+    }
+
+    public ArrayList<ChangePasswordLog> selectAllChangePasswordLogs(String selectAllSqlStmt) {
+        ArrayList<ChangePasswordLog> changePasswordLogs = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(selectAllSqlStmt, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+            ChangePasswordLog changePasswordLog = new ChangePasswordLog(
+                    res.getInt(res.getColumnIndex(LOG_COLUMN_ID)),
+                    LocalTime.parse(res.getString(res.getColumnIndex(TIME_COLUMN))),
+                    LocalDate.parse(res.getString(res.getColumnIndex(DATE_COLUMN)))
+            );
+            changePasswordLogs.add(changePasswordLog);
+            res.moveToNext();
+        }
+        return changePasswordLogs;
     }
 
     public Cursor getPassword(){
