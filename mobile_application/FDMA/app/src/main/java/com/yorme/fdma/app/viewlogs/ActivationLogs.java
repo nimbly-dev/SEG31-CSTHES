@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,8 @@ import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
 import com.yorme.fdma.utilities.database.DBSQL;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -37,6 +40,8 @@ public class ActivationLogs extends AppCompatActivity {
     private DBHelper dbHelper;
     private DBConnection conn;
 
+    private boolean bStop = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,17 +54,27 @@ public class ActivationLogs extends AppCompatActivity {
 
         if (mArdutooth.isConnected()){
             mArdutooth.sendInt(1);
-//            String recieveActivationLogs = mArdutooth.receiveLine();
-//            Toast.makeText(this, "Activation Logs: " + recieveActivationLogs, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Not Connected", Toast.LENGTH_LONG).show();
+            if(mArdutooth.receiveLine().equals(null)) {
+                try {
+                    InputStream inputStream = mArdutooth.getSocket().getInputStream();
+                    int bytes = 0;
+                    while (true) {
+                        byte[] buffer = new byte[1024];
+                        String incomingMessage = new String(buffer, 0, bytes);
+                        Log.d("TAG","Input Stream: "+ incomingMessage);
+                        Toast.makeText(this, "Input Stream: " + incomingMessage, Toast.LENGTH_SHORT).show();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
-//        dbHelper = new DBHelper(this);
-//        dbHelper.insertData(
-//                LocalTime.now().toString(),
-//                LocalDate.now().toString(),
-//                "activation_logs");
+        dbHelper = new DBHelper(this);
+        dbHelper.insertData(
+                LocalTime.now().toString(),
+                LocalDate.now().toString(),
+                "activation_logs");
 
 //        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
 //
