@@ -54,28 +54,32 @@ public class ActivationLogs extends AppCompatActivity {
 
         if (mArdutooth.isConnected()){
             mArdutooth.sendInt(1);
-            if(mArdutooth.receiveLine().equals(null)) {
-                try {
-                    InputStream inputStream = mArdutooth.getSocket().getInputStream();
-                    int bytes = 0;
-                    while (true) {
-                        byte[] buffer = new byte[1024];
-                        String incomingMessage = new String(buffer, 0, bytes);
-                        Log.d("TAG","Input Stream: "+ incomingMessage);
-                        Toast.makeText(this, "Input Stream: " + incomingMessage, Toast.LENGTH_SHORT).show();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            Log.d("TAG","SEND VALUE");
+
+            try {
+                InputStream inputStream = mArdutooth.getSocket().getInputStream();
+                int bytes = 0;
+
+
+                byte[] buffer = new byte[1024];
+                bytes = inputStream.read(buffer);
+                String incomingMessage = new String(buffer, 0, bytes);
+                Log.d("TAG","RECEIVE");
+                Log.d("TAG","Input Stream: "+ incomingMessage);
+                Toast.makeText(this, "Input Stream: " + incomingMessage, Toast.LENGTH_SHORT).show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
         }
 
-        dbHelper = new DBHelper(this);
-        dbHelper.insertData(
-                LocalTime.now().toString(),
-                LocalDate.now().toString(),
-                "activation_logs");
-
+//        dbHelper = new DBHelper(this);
+//        dbHelper.insertData(
+//                LocalTime.now().toString(),
+//                LocalDate.now().toString(),
+//                "activation_logs");
+//
 //        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
 //
 //        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
