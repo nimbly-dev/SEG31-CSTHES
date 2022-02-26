@@ -42,10 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("For Loop Log", "1");
         String[] statements = new String[]{
                 DBSQL.CREATE_NEW_ACTIVATION_LOGS_TABLE,
-                DBSQL.CREATE_NEW_CHANGE_KEY_PAIRING_LOGS_TABLE,
                 DBSQL.CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE,
                 DBSQL.CREATE_NEW_PASSWORD_TABLE,
-                DBSQL.CREATE_NEW_CHANGE_PASSWORD_TABLE
+                DBSQL.CREATE_NEW_CHANGE_PHONE_NUMBER_TABLE
         };
 
         for(String sql: statements){
@@ -122,6 +121,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.update("password", contentValues,"id = 1", new String[] { Integer.toString(1) });
         return true;
+    }
+
+    public void dropLamesaActivationLog(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
+    }
+
+    public void dropLamesaPhoneLog(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
     }
 
 }

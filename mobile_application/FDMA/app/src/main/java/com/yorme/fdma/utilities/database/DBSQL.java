@@ -22,14 +22,14 @@ public interface DBSQL {
     //CREATE NEW TABLE
     String CREATE_NEW_ACTIVATION_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS activation_logs (\n" +
             "   id integer PRIMARY KEY,\n" +
-            "   time time NOT NULL,\n" +
-            "   date date NOT NULL\n" +
+            "   time text NOT NULL,\n" +
+            "   date text NOT NULL\n" +
             "                       );";
 
     String CREATE_NEW_CHANGE_KEY_PAIRING_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS change_key_pair_logs (\n" +
             "id integer PRIMARY KEY,\n" +
-            "time time NOT NULL,\n" +
-            "date date NOT NULL" +
+            "time text NOT NULL,\n" +
+            "date text NOT NULL" +
             "                   );";
 
     String CREATE_NEW_CHANGE_PASSWORD_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS change_password_logs (\n" +
@@ -43,19 +43,16 @@ public interface DBSQL {
             "password text NOT NULL" +
             ");";
 
-    String CREATE_NEW_CHANGE_PASSWORD_TABLE =  "CREATE TABLE IF NOT EXISTS change_phone_number_logs (\n" +
+    String CREATE_NEW_CHANGE_PHONE_NUMBER_TABLE =  "CREATE TABLE IF NOT EXISTS change_phone_number_logs (\n" +
             "id integer PRIMARY KEY,\n" +
             "time time NOT NULL,\n" +
             "date date NOT NULL" +
             "                   );";
 
-
     //FLUSH DATA ON TABLES
     String FLUSH_ACTIVATION_LOGS_TABLE = "DELETE FROM activation_logs";
 
-    String FLUSH_CHANGE_KEY_PAIRING_LOGS_TABLE = "DELETE FROM change_key_pair_logs";
-
     String FLUSH_PASSWORD_TABLE = "DELETE FROM app_password";
 
-    String FLUSH_CHANGE_PASSWORD_LOG_TABLE = "DELETE FROM change_password_logs";
+    String FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE = "DELETE FROM change_phone_number_logs";
 }

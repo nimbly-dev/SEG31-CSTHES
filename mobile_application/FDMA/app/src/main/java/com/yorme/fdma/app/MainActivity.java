@@ -27,9 +27,6 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_ENABLE_BT = 1;
-    public static final String ACTION_REQUEST_ENABLE = "android.bluetooth.adapter.action.REQUEST_ENABLE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +36,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
-        mArdutooth.setConnection();
 
         TextView txt_connection = findViewById(R.id.txt_connection);
         if (mArdutooth.isConnected()) {
-            super.onRestart();
             txt_connection.setText("Connected");
         } else {
             txt_connection.setText("Not Connected");
@@ -123,19 +118,5 @@ public class MainActivity extends AppCompatActivity {
     private void goToChangePin() {
         Intent switchActivityIntent = new Intent(this, ChangePin.class);
         startActivity(switchActivityIntent);
-    }
-
-    private void checkIfBluetoothIsOn(Context context) {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            Toast.makeText(context, "This device does not support Bluetooth.", Toast.LENGTH_SHORT).show();
-        } else {
-            if (!bluetoothAdapter.isEnabled()) {
-                Toast.makeText(context, "Bluetooth is not Enabled", Toast.LENGTH_SHORT).show();
-
-                Intent enableBtIntent = new Intent(ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
-        }
     }
 }

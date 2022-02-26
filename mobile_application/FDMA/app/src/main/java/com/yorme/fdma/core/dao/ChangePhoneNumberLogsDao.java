@@ -29,7 +29,7 @@ public class ChangePhoneNumberLogsDao {
         Connection conn = new DBConnection().connect();
         Statement stmt = conn.createStatement();
 
-        stmt.execute(DBSQL.CREATE_NEW_CHANGE_PASSWORD_TABLE);
+        stmt.execute(DBSQL.CREATE_NEW_CHANGE_PHONE_NUMBER_TABLE);
     }
 
     public void insertNewChangePhoneNumberLog(LocalTime time, LocalDate date) throws SQLException {

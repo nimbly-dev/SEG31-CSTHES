@@ -36,11 +36,10 @@ public class ActivationLogs extends AppCompatActivity {
 
     private ActivationLogsDao activationLogsDao;
     private ArrayList<ActivationLog> activationLogs;
-
-    private DBHelper dbHelper;
     private DBConnection conn;
-
+    private DBHelper dbHelper = new DBHelper(this);
     private boolean bStop = false;
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +49,39 @@ public class ActivationLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_activation_logs);
 
-        Ardutooth mArdutooth = Ardutooth.getInstance(this);
+
 
         if (mArdutooth.isConnected()){
+
+            dbHelper.dropLamesaActivationLog();
             mArdutooth.sendInt(1);
+
             Log.d("TAG","SEND VALUE");
 
             try {
                 InputStream inputStream = mArdutooth.getSocket().getInputStream();
                 int bytes = 0;
-
-
                 byte[] buffer = new byte[1024];
+                Log.d("TAG","BEFORE RECEIVE");
                 bytes = inputStream.read(buffer);
-                String incomingMessage = new String(buffer, 0, bytes);
+                Log.d("TAG","BEFORE STRING PARSING");
+                String arduinoData = new String(buffer, 0, bytes);
                 Log.d("TAG","RECEIVE");
-                Log.d("TAG","Input Stream: "+ incomingMessage);
-                Toast.makeText(this, "Input Stream: " + incomingMessage, Toast.LENGTH_SHORT).show();
+                Log.d("TAG","Number of loops: "+ arduinoData);
+                Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
+
+                /**
+                 *  Loop
+                 **/
+
+                String[] dataArray = {};
+                dataArray = processBlessingFromArduino(arduinoData);
+                for (int i = 0; i< dataArray.length; i++){
+                    Log.d("Array Data", "Array Data["+i+"]: " + dataArray[i]);
+                    String temp = dataArray[i];
+                    processStorageBlessing(temp);
+                }
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -74,18 +89,11 @@ public class ActivationLogs extends AppCompatActivity {
 
         }
 
-//        dbHelper = new DBHelper(this);
-//        dbHelper.insertData(
-//                LocalTime.now().toString(),
-//                LocalDate.now().toString(),
-//                "activation_logs");
-//
-//        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-//
-//        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
-//        // Attach the adapter to a ListView
-//        ListView activationLogListView = findViewById(R.id.activationLogsListView);
-//        activationLogListView.setAdapter(activationLogAdapter);
+        activationLogs = dbHelper.selectAll(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+        // Attach the adapter to a ListView
+        ListView activationLogListView = findViewById(R.id.activationLogsListView);
+        activationLogListView.setAdapter(activationLogAdapter);
 
         Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
         btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
@@ -99,5 +107,24 @@ public class ActivationLogs extends AppCompatActivity {
     private void goToViewLogsActivationLogs() {
         Intent switchActivityIntent = new Intent(ActivationLogs.this, ViewLogs.class);
         startActivity(switchActivityIntent);
+    }
+
+    //Function processing data from Arduino - Rename
+    private String[] processBlessingFromArduino(String data) {
+        String[] dataArray = {};
+        dataArray = data.split("\n");
+        return dataArray;
+    }
+
+    //insert db
+    private void processStorageBlessing(String data){
+        String[] dataArray = new String[2];
+        dataArray = data.split(",");
+        Log.d("TAG", "processStorageBlessing: " + dataArray[0]);
+        Log.d("TAG", "processStorageBlessing: " + dataArray[1]);
+        dbHelper.insertData(
+                dataArray[0],
+                dataArray[1],
+                "activation_logs");
     }
 }
