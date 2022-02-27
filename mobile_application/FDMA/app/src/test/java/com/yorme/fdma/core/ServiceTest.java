@@ -1,8 +1,5 @@
 package com.yorme.fdma.core;
 
-import com.yorme.fdma.core.dao.ActivationLogsDaoTest;
-import com.yorme.fdma.core.dao.ChangeKeyPairingsLogDaoTest;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

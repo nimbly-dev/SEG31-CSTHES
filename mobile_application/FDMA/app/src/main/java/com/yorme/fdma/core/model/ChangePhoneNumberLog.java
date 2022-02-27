@@ -12,7 +12,7 @@ public class ChangePhoneNumberLog {
 
     }
 
-    public ChangePhoneNumberLog(int id, LocalDate logDate, LocalTime logTime) {
+    public ChangePhoneNumberLog(int id, LocalTime logTime,LocalDate logDate) {
         this.id = id;
         this.logDate = logDate;
         this.logTime = logTime;

@@ -1,9 +1,6 @@
 package com.yorme.fdma.core;
 
 
-import com.yorme.fdma.core.dao.ActivationLogsDaoTest;
-import com.yorme.fdma.core.dao.ChangeKeyPairingsLogDaoTest;
-import com.yorme.fdma.core.dao.ChangePasswordLogsDaoTest;
 import com.yorme.fdma.core.dao.PasswordDaoTest;
 
 
@@ -30,10 +27,7 @@ public class DaoTest extends TestCase {
     public static Test suite()
     {
         TestSuite suite = new TestSuite();
-        suite.addTestSuite(ActivationLogsDaoTest.class);
-        suite.addTestSuite(ChangeKeyPairingsLogDaoTest.class);
         suite.addTestSuite(PasswordDaoTest.class);
-        suite.addTestSuite(ChangePasswordLogsDaoTest.class);
         return suite;
     }
 }

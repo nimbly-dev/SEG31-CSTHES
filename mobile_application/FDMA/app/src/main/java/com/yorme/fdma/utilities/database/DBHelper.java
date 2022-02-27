@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi;
 
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
+import com.yorme.fdma.core.model.ChangePhoneNumberLog;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -55,9 +56,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS contacts");
-        onCreate(db);
+
     }
+
 
     public boolean insertData(String time, String date, String tableName){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -70,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public ArrayList<ActivationLog> selectAll(String selectAllSqlStmt){
+    public ArrayList<ActivationLog> selectAllActivationLogs(String selectAllSqlStmt){
         ArrayList<ActivationLog> activationLogs = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -108,6 +109,25 @@ public class DBHelper extends SQLiteOpenHelper {
         return changePasswordLogs;
     }
 
+    public ArrayList<ChangePhoneNumberLog> selectAllChangePhoneNumberLogs(String selectAllSqlStmt) {
+        ArrayList<ChangePhoneNumberLog> changePasswordLogs = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(selectAllSqlStmt, null);
+        res.moveToFirst();
+
+        while (res.isAfterLast() == false) {
+            ChangePhoneNumberLog changePhoneNumberLog = new ChangePhoneNumberLog(
+                    res.getInt(res.getColumnIndex(LOG_COLUMN_ID)),
+                    LocalTime.parse(res.getString(res.getColumnIndex(TIME_COLUMN))),
+                    LocalDate.parse(res.getString(res.getColumnIndex(DATE_COLUMN)))
+            );
+            changePasswordLogs.add(changePhoneNumberLog);
+            res.moveToNext();
+        }
+        return changePasswordLogs;
+    }
+
     public Cursor getPassword(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
@@ -123,14 +143,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public void dropLamesaActivationLog(){
+
+    public void flushActivationLogTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
     }
 
-    public void dropLamesaPhoneLog(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
-    }
 
 }

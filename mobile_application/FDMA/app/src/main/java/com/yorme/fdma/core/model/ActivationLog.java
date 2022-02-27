@@ -3,7 +3,7 @@ package com.yorme.fdma.core.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class ActivationLog {
+public class ActivationLog{
 
     int logID;
     LocalDate logDate;
