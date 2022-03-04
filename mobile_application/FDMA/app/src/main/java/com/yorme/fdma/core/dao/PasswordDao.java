@@ -24,7 +24,7 @@ public class PasswordDao {
     public void insertPassword(String password)throws SQLException{
         conn = new DBConnection().connect();
 
-        PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_PASSWORD);
+        PreparedStatement pstmt = conn.prepareStatement(DBSQL.INSERT_DEFAULT_PASSWORD);
         pstmt.setString(1,password);
 
         pstmt.executeUpdate();

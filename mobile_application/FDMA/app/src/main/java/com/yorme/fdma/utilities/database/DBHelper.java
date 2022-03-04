@@ -10,14 +10,31 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
+import com.yorme.fdma.core.model.exceptions.SQLDataNotFound;
+import com.yorme.fdma.core.service.Decryptor;
+import com.yorme.fdma.core.service.Encryptor;
+import com.yorme.fdma.core.service.TokenEncrytor;
+import com.yorme.fdma.utilities.PropertiesReader;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class DBHelper extends SQLiteOpenHelper {
@@ -30,9 +47,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DATE_COLUMN = "date";
 
     //FOR PASSWORD
-
     private HashMap hp;
     private DBHelper dbHelper;
+
+    private PropertiesReader propertiesReader;
+    private Decryptor decryptor;
+    private TokenEncrytor tokenEncrytor;
 
     public DBHelper(Context context){
         super(context,DATABASE_NAME,null,1);
@@ -128,11 +148,34 @@ public class DBHelper extends SQLiteOpenHelper {
         return changePasswordLogs;
     }
 
-    public Cursor getPassword(){
+    public boolean isDefaultPasswordExists(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
-        return res;
+        if(res.getCount() <= 0){
+            res.close();
+            return false;
+        }else{
+            res.close();
+            return true;
+        }
     }
+
+    public String getPassword() throws InvalidAlgorithmParameterException,
+            NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException,
+            NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, SQLDataNotFound {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
+        if(res.getCount() <= 0){
+            String passwordToBeReturned = TokenEncrytor
+                    .encrypt( res.getString(res.getColumnIndex("password")));
+            res.close();
+            return passwordToBeReturned;
+        }else{
+            res.close();
+            throw new SQLDataNotFound("Failure to retrieve password on database table");
+        }
+    }
+
 
     public boolean updatePassword(String newPassword){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -149,28 +192,33 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
     }
 
-    public void insertDefaultPassword(){
+    public void insertDefaultPassword() throws NoSuchAlgorithmException, SQLException,
+            InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException,
+            BadPaddingException, InvalidKeyException, UnsupportedEncodingException {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("password", "Admin123");
+        Log.d("LOG","SETTING CIPHER TEXT FOR DEFAULT PASSWORD");
+        String cipherText = TokenEncrytor.encrypt("Admin123");
+
+        contentValues.put("password", cipherText);
         db.insert("app_password",null,contentValues);
     }
 
-    public boolean checkIfPasswordDefaultIsInDB(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM app_password",null);
-        Log.d("dbhelperbeforeif", "DB HELPER BEFORE IF");
-        if (cursor != null) {
-            cursor.moveToFirst();                       // Always one row returned.
-            Log.d("dbhelperafterfirstif", "DB HELPER FIRST IF");
-            if (cursor.getInt (0) == 0) {               // Zero count means empty table.
-                Log.d("dbhelperaftersecondif", "DB HELPER SECOND IF");
-                cursor.close();
-                return false;
-            }
-        }
-        cursor.close();
-        return true;
-    }
+//    public boolean isDefaultPasswordExist(){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM app_password",null);
+////        Log.d("dbhelperbeforeif", "DB HELPER BEFORE IF");
+//        if (cursor != null) {
+//            cursor.moveToFirst();                       // Always one row returned.
+////            Log.d("dbhelperafterfirstif", "DB HELPER FIRST IF");
+//            if (cursor.getInt (0) == 0) {               // Zero count means empty table.
+////                Log.d("dbhelperaftersecondif", "DB HELPER SECOND IF");
+//                cursor.close();
+//                return false;
+//            }
+//        }
+//        cursor.close();
+//        return true;
+//    }
 }

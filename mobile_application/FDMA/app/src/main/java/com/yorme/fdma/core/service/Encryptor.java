@@ -18,6 +18,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+@Deprecated
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class Encryptor {
 

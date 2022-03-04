@@ -48,7 +48,6 @@ public class PasswordModal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        passwordDao = new PasswordDao();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_modal);
@@ -58,6 +57,7 @@ public class PasswordModal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
+
                     validPassword();
                 } catch (SQLException | NoSuchAlgorithmException |
                         InvalidAlgorithmParameterException | NoSuchPaddingException |
