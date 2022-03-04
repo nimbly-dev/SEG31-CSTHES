@@ -23,26 +23,19 @@
         </activity>
         <activity android:name=".app.passwordmodal.PasswordModal" />
         <activity
-            android:name=".app.viewlogs.ChangePinLogs"
-            android:exported="false" />
-        <activity
             android:name=".app.viewlogs.ChangePasswordLogs"
             android:exported="false" />
         <activity
             android:name=".app.viewlogs.ActivationLogs"
             android:exported="false" />
         <activity
-            android:name=".app.settings.ChangePassword"
-            android:exported="false" />
-        <activity
-            android:name=".app.settings.Settings"
+            android:name=".app.changepassword.ChangePassword"
             android:exported="false" />
         <activity
             android:name=".app.usermanual.UserManualFilipino"
             android:exported="false" />
         <activity android:name=".app.usermanual.UserManualEnglish" />
         <activity android:name=".app.changephonenumber.ChangePhoneNumber" />
-        <activity android:name=".app.changepin.ChangePin" />
         <activity android:name=".app.viewlogs.ViewLogs" />
         <activity android:name=".app.viewlogs.ChangePhoneNumberLogs" />
         <activity android:name=".app.MainActivity" />

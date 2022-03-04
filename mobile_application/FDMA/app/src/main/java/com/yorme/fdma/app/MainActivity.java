@@ -3,8 +3,6 @@ package com.yorme.fdma.app;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothAdapter;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,12 +11,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yorme.fdma.R;
-import com.yorme.fdma.app.settings.Settings;
+import com.yorme.fdma.app.changepassword.ChangePassword;
 import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
-import com.yorme.fdma.app.changepin.ChangePin;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
 
@@ -46,9 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
         ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
         ImageView btn_user_manual = findViewById(R.id.btn_user_manual);
-        ImageView btn_change_pin = findViewById(R.id.btn_change_pin);
+        ImageView btn_change_password = findViewById(R.id.btn_change_password);
         ImageView btn_view_logs = findViewById(R.id.btn_view_logs);
-        ImageView btn_settings = findViewById(R.id.btn_settings);
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,20 +66,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btn_change_pin.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
+        btn_change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToChangePin();
+                goToChangePassword();
             }
         });
 
-        btn_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToSettings();
-            }
-        });
         //if not connected in the arduino this code activates below
         /*
         btn_change_pin.setAlpha(0.5f);
@@ -92,11 +80,6 @@ public class MainActivity extends AppCompatActivity {
         btn_gps.setAlpha(0.5f);
         btn_gps.setClickable(false);
          */
-    }
-
-    private void goToSettings() {
-        Intent switchActivityIntent = new Intent(this, Settings.class);
-        startActivity(switchActivityIntent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -115,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    private void goToChangePin() {
-        Intent switchActivityIntent = new Intent(this, ChangePin.class);
+    private void goToChangePassword() {
+        Intent switchActivityIntent = new Intent(this, ChangePassword.class);
         startActivity(switchActivityIntent);
     }
 }

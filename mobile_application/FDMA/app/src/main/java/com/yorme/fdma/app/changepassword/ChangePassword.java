@@ -1,4 +1,4 @@
-package com.yorme.fdma.app.settings;
+package com.yorme.fdma.app.changepassword;
 
 import static com.yorme.fdma.core.service.Encryptor.generateIv;
 import static com.yorme.fdma.core.service.Encryptor.generateKey;
@@ -20,10 +20,7 @@ import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
-import com.yorme.fdma.core.dao.ActivationLogsDao;
-import com.yorme.fdma.core.dao.ChangePasswordDao;
 import com.yorme.fdma.core.dao.PasswordDao;
-import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.utilities.PropertiesReader;
@@ -38,7 +35,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 
 import javax.crypto.BadPaddingException;
@@ -88,7 +84,8 @@ public class ChangePassword extends AppCompatActivity {
                         try {
                             SecretKey secretKey = generateKey(128);
                             IvParameterSpec ivParameterSpec = generateIv();
-                            String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
+                            String algorithm = "AES/CBC/PKCS5Padding";
+                            Log.d("LOG", "Password: " + enter_password);
 
                             cipherText = Encryptor.encrypt(algorithm, enter_password.toString(), secretKey, ivParameterSpec);
 
@@ -125,7 +122,7 @@ public class ChangePassword extends AppCompatActivity {
     }
 
     private void goToBackSettings() {
-        Intent switchActivityIntent = new Intent(this, Settings.class);
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
 }

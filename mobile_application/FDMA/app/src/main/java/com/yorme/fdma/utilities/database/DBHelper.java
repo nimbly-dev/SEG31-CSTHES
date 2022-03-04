@@ -149,5 +149,28 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
     }
 
+    public void insertDefaultPassword(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
 
+        contentValues.put("password", "Admin123");
+        db.insert("app_password",null,contentValues);
+    }
+
+    public boolean checkIfPasswordDefaultIsInDB(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM app_password",null);
+        Log.d("dbhelperbeforeif", "DB HELPER BEFORE IF");
+        if (cursor != null) {
+            cursor.moveToFirst();                       // Always one row returned.
+            Log.d("dbhelperafterfirstif", "DB HELPER FIRST IF");
+            if (cursor.getInt (0) == 0) {               // Zero count means empty table.
+                Log.d("dbhelperaftersecondif", "DB HELPER SECOND IF");
+                cursor.close();
+                return false;
+            }
+        }
+        cursor.close();
+        return true;
+    }
 }

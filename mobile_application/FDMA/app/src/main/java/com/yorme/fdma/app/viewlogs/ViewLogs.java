@@ -30,7 +30,6 @@ public class ViewLogs extends AppCompatActivity {
         Button btn_view_activation_logs = findViewById(R.id.btn_view_activation_logs);
         Button btn_view_change_phone_num_logs = findViewById(R.id.btn_view_change_phone_num_logs);
         Button btn_view_change_password_logs = findViewById(R.id.btn_view_change_password_logs);
-        Button btn_view_change_pin_logs = findViewById(R.id.btn_view_change_pin_logs);
 
         btn_view_logs_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +59,6 @@ public class ViewLogs extends AppCompatActivity {
                 goToChangePasswordLogs();
             }
         });
-
-        btn_view_change_pin_logs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                goToChangePinLogs();
-            }
-        });
     }
 
     private void goToActivationLogs() {
@@ -81,11 +73,6 @@ public class ViewLogs extends AppCompatActivity {
 
     private void goToChangePasswordLogs() {
         Intent switchActivityIntent = new Intent(this, ChangePasswordLogs.class);
-        startActivity(switchActivityIntent);
-    }
-
-    private void goToChangePinLogs() {
-        Intent switchActivityIntent = new Intent(this, ChangePinLogs.class);
         startActivity(switchActivityIntent);
     }
 

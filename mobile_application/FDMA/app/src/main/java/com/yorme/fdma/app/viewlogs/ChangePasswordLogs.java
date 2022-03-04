@@ -9,24 +9,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.yorme.fdma.R;
-import com.yorme.fdma.app.settings.ChangePassword;
 import com.yorme.fdma.core.dao.ChangePasswordDao;
-import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
-import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
 import com.yorme.fdma.core.model.adapters.ChangePasswordLogAdapter;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
 import com.yorme.fdma.utilities.database.DBSQL;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
