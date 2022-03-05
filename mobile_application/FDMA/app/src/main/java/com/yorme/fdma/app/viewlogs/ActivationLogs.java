@@ -1,8 +1,5 @@
 package com.yorme.fdma.app.viewlogs;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,6 +10,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.dao.ActivationLogsDao;
@@ -31,12 +31,11 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogs extends AppCompatActivity {
 
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
     private ActivationLogsDao activationLogsDao;
     private ArrayList<ActivationLog> activationLogs;
     private DBConnection conn;
-    private DBHelper dbHelper = new DBHelper(this);
-
-    Ardutooth mArdutooth = Ardutooth.getInstance(this);
+    private final DBHelper dbHelper = new DBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,30 +46,25 @@ public class ActivationLogs extends AppCompatActivity {
         setContentView(R.layout.activity_activation_logs);
 
 
-        if (mArdutooth.isConnected()){
+        if (mArdutooth.isConnected()) {
 
             dbHelper.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
             mArdutooth.sendInt(1);
 
-            Log.d("TAG","SEND VALUE");
+            Log.d("TAG", "SEND VALUE");
 
             try {
                 InputStream inputStream = mArdutooth.getSocket().getInputStream();
                 int bytes = 0;
                 byte[] buffer = new byte[1024];
-//                Log.d("TAG","BEFORE RECEIVE");
-//                bytes = inputStream.read(buffer);
-//                Log.d("TAG","BEFORE STRING PARSING");
                 String arduinoData = new String(buffer, 0, bytes);
-//                Log.d("TAG","RECEIVE");
-//                Log.d("TAG","Number of loops: "+ arduinoData);
                 Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
 
 
                 String[] dataArray = {};
                 dataArray = proccessArduinoData(arduinoData);
-                for (int i = 0; i< dataArray.length; i++){
-                    Log.d("Array Data", "Array Data["+i+"]: " + dataArray[i]);
+                for (int i = 0; i < dataArray.length; i++) {
+                    Log.d("Array Data", "Array Data[" + i + "]: " + dataArray[i]);
                     String temp = dataArray[i];
                     insertArduinoDataToDb(temp);
                 }
@@ -109,7 +103,7 @@ public class ActivationLogs extends AppCompatActivity {
     }
 
     //insert db
-    private void insertArduinoDataToDb(String data){
+    private void insertArduinoDataToDb(String data) {
         String[] dataArray = new String[2];
         dataArray = data.split(",");
         Log.d("TAG", "processStorageBlessing: " + dataArray[0]);

@@ -64,7 +64,6 @@ public class LandingActivity extends AppCompatActivity {
 
         String passwordDB = dbHelper.getPassword();
 
-        Log.d("PAAAASWOOORD HAKDOG", "THIS YOUR PASSWORD HOTDOG: " + passwordDB);
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
         mArdutooth.setConnection();
 
@@ -72,21 +71,16 @@ public class LandingActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                try {
-                    Log.d("Before validator", "HOTDOG BEFORE VALIDATOR");
-                    if(inputPassword.getText().toString().trim().equals(passwordDB)){
-                        goToMainActivity();
-                        Log.d("before Flush", "before Flush");
-                    } else if(inputPassword.getText().toString().trim().equals(RESET_KEY)){
-                        hardResetIfTextIsEntered(inputPassword.getText().toString());
-                        Log.d("before Flush", "after Flush");
-                        recreate();
-                    } else {
-                        Toast.makeText(LandingActivity.this, "INCORRECT PASSWORD HOTDOG", Toast.LENGTH_LONG).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+//                    if(inputPassword.getText().toString().trim().equals(passwordDB)){
+//                        goToMainActivity();
+//                    } else if(inputPassword.getText().toString().trim().equals(RESET_KEY)){
+//                        hardResetIfTextIsEntered(inputPassword.getText().toString());
+//                        recreate();
+//                    } else {
+//                        Toast.makeText(LandingActivity.this, "Incorret Password", Toast.LENGTH_LONG).show();
+//                    }
+                validatePassword(inputPassword.getText().toString().trim(),dbHelper);
             }
         });
 
@@ -97,10 +91,20 @@ public class LandingActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
+    private void validatePassword(String inputPassword, DBHelper dbHelper){
+        if(StringUtils.equals(inputPassword,dbHelper.getPassword())){
+            goToMainActivity();
+        } else if(StringUtils.equals(inputPassword,RESET_KEY)){
+            hardResetIfTextIsEntered(inputPassword);
+            recreate();
+        } else {
+            Toast.makeText(LandingActivity.this, "Incorrect Password", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void hardResetIfTextIsEntered(String enteredText){
         if(StringUtils.equals(enteredText,RESET_KEY)){
             dbHelper = new DBHelper(this);
-
             dbHelper.flushTable(DBSQL.FLUSH_PASSWORD_TABLE);
             dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PASSWORD_LOG_TABLE);
             dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);

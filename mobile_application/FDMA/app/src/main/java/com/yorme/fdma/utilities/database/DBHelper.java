@@ -10,13 +10,10 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
-import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
-import com.yorme.fdma.core.model.exceptions.SQLDataNotFound;
 import com.yorme.fdma.core.service.Decryptor;
-import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
 
@@ -24,7 +21,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -33,8 +29,6 @@ import java.util.HashMap;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class DBHelper extends SQLiteOpenHelper {
@@ -54,8 +48,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private Decryptor decryptor;
     private TokenEncrytor tokenEncrytor;
 
-    public DBHelper(Context context){
-        super(context,DATABASE_NAME,null,1);
+    public DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
@@ -68,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 DBSQL.CREATE_NEW_CHANGE_PHONE_NUMBER_TABLE
         };
 
-        for(String sql: statements){
+        for (String sql : statements) {
             db.execSQL(sql);
             Log.d("For Loop Log", "1");
         }
@@ -79,26 +73,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-
-    public boolean insertData(String time, String date, String tableName){
+    public boolean insertData(String time, String date, String tableName) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("time", time);
         contentValues.put("date", date);
 
-        db.insert(tableName,null,contentValues);
+        db.insert(tableName, null, contentValues);
         return true;
     }
 
-    public ArrayList<ActivationLog> selectAllActivationLogs(String selectAllSqlStmt){
+    public ArrayList<ActivationLog> selectAllActivationLogs(String selectAllSqlStmt) {
         ArrayList<ActivationLog> activationLogs = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery(selectAllSqlStmt, null );
+        Cursor res = db.rawQuery(selectAllSqlStmt, null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while (res.isAfterLast() == false) {
             ActivationLog activationLog = new ActivationLog(
                     res.getInt(res.getColumnIndex(LOG_COLUMN_ID)),
                     LocalTime.parse(res.getString(res.getColumnIndex(TIME_COLUMN))),
@@ -148,105 +141,71 @@ public class DBHelper extends SQLiteOpenHelper {
         return changePasswordLogs;
     }
 
-    public boolean isDefaultPasswordExists(){
+    public boolean isDefaultPasswordExists() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
-        if(res.getCount() <= 0){
+        Cursor res = db.rawQuery(DBSQL.GET_PASSWORD, null);
+        if (res.getCount() <= 0) {
             res.close();
             return false;
-        }else{
+        } else {
             res.close();
             return true;
         }
     }
 
-    public String getPassword(){
-        try{
+    public String getPassword() {
+        try {
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
-            String column1 = "";
-            if (res.moveToFirst()){
+            Cursor res = db.rawQuery(DBSQL.GET_PASSWORD, null);
+            String passwordToReturn = "";
+            if (res.moveToFirst()) {
                 do {
                     // Passing values
-                    column1 = res.getString(0);
+                    passwordToReturn = res.getString(0);
                     // Do something Here with values
-                } while(res.moveToNext());
+                } while (res.moveToNext());
             }
-            column1 = TokenEncrytor.decrypt(column1);
+            passwordToReturn = TokenEncrytor.decrypt(passwordToReturn);
             res.close();
             db.close();
-            return column1;
-//            res.moveToFirst();
-//            res.getString(res.getColumnIndex("password"));
-//            Log.d("Password Hotdog", "This is your hotdog: " + res.getString(res.getColumnIndex("password")));
-//            if(res.getCount() <= 0){
-//                String passwordToBeReturned = TokenEncrytor
-//                        .decrypt( res.getString(res.getColumnIndex("password")));
-//                res.close();
-//                return passwordToBeReturned;
-//            }else{
-//                res.close();
-//                throw new SQLDataNotFound("Failure to retrieve password on database table");
-//            }
-        } catch (Exception e){
+            return passwordToReturn;
+        } catch (InvalidAlgorithmParameterException
+                | NoSuchPaddingException | NoSuchAlgorithmException
+                | UnsupportedEncodingException | IllegalBlockSizeException
+                | BadPaddingException | InvalidKeyException e) {
             e.printStackTrace();
         }
         return null;
     }
 
 
-    public boolean updatePassword(String newPassword){
+    public boolean updatePassword(String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", newPassword);
-        db.update("app_password", contentValues, "id = 1" , null);
+        db.update("app_password", contentValues, "id = 1", null);
         return true;
     }
 
 
-    public void flushTable(String tableToFlush){
+    public void flushTable(String tableToFlush) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(tableToFlush);
     }
 
-    public void insertDefaultPassword(){
-        try{
+    public void insertDefaultPassword() {
+        try {
             SQLiteDatabase db = this.getReadableDatabase();
             ContentValues contentValues = new ContentValues();
 
-            Log.d("LOG","SETTING CIPHER TEXT FOR DEFAULT PASSWORD");
+            Log.d("LOG", "SETTING CIPHER TEXT FOR DEFAULT PASSWORD");
             String cipherText = TokenEncrytor.encrypt("Admin123");
 
             contentValues.put("password", cipherText);
-            db.insert("app_password",null,contentValues);
-        } catch (Exception e){
+            db.insert("app_password", null, contentValues);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//    public Boolean passwordValidator(String password){
-//        String dbPassword = getPassword();
-//        if(password.equals(dbPassword)){
-//            return true;
-//        }
-//        return false;
-//    }
-
-
-//    public boolean isDefaultPasswordExist(){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM app_password",null);
-////        Log.d("dbhelperbeforeif", "DB HELPER BEFORE IF");
-//        if (cursor != null) {
-//            cursor.moveToFirst();                       // Always one row returned.
-////            Log.d("dbhelperafterfirstif", "DB HELPER FIRST IF");
-//            if (cursor.getInt (0) == 0) {               // Zero count means empty table.
-////                Log.d("dbhelperaftersecondif", "DB HELPER SECOND IF");
-//                cursor.close();
-//                return false;
-//            }
-//        }
-//        cursor.close();
-//        return true;
-//    }
 }

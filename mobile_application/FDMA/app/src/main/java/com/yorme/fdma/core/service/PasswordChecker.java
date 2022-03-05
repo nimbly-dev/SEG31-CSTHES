@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class PasswordChecker {
 
-    public boolean isValidPassword(final String password) {
+    public static boolean isValidPassword(final String password) {
 
         Pattern pattern;
         Matcher matcher;
