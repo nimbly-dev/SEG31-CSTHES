@@ -167,7 +167,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
         if(res.getCount() <= 0){
             String passwordToBeReturned = TokenEncrytor
-                    .decrypt( res.getString(res.getColumnIndex("password")));
+                    .encrypt( res.getString(res.getColumnIndex("password")));
             res.close();
             return passwordToBeReturned;
         }else{
