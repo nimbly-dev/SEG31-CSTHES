@@ -53,33 +53,33 @@ public class ActivationLogs extends AppCompatActivity {
 
             Log.d("TAG", "SEND VALUE");
 
-//            try {
-//                InputStream inputStream = mArdutooth.getSocket().getInputStream();
-//                int bytes = 0;
-//                byte[] buffer = new byte[1024];
-//                String arduinoData = new String(buffer, 0, bytes);
-//                Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
-//
-//
-//                String[] dataArray = {};
-//                dataArray = proccessArduinoData(arduinoData);
-//                for (int i = 0; i < dataArray.length; i++) {
-//                    Log.d("Array Data", "Array Data[" + i + "]: " + dataArray[i]);
-//                    String temp = dataArray[i];
-//                    insertArduinoDataToDb(temp);
-//                }
-//
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                InputStream inputStream = mArdutooth.getSocket().getInputStream();
+                int bytes = 0;
+                byte[] buffer = new byte[1024];
+                String arduinoData = new String(buffer, 0, bytes);
+                Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
+
+
+                String[] dataArray = {};
+                dataArray = proccessArduinoData(arduinoData);
+                for (int i = 0; i < dataArray.length; i++) {
+                    Log.d("Array Data", "Array Data[" + i + "]: " + dataArray[i]);
+                    String temp = dataArray[i];
+                    insertArduinoDataToDb(temp);
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-//        activationLogs = dbHelper.selectAllActivationLogs(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-//        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
-//        // Attach the adapter to a ListView
-//        ListView activationLogListView = findViewById(R.id.activationLogsListView);
-//        activationLogListView.setAdapter(activationLogAdapter);
+        activationLogs = dbHelper.selectAllActivationLogs(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
+        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+        // Attach the adapter to a ListView
+        ListView activationLogListView = findViewById(R.id.activationLogsListView);
+        activationLogListView.setAdapter(activationLogAdapter);
 
         Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
         btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
@@ -95,22 +95,22 @@ public class ActivationLogs extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-//    //Function processing data from Arduino - Rename
-//    private String[] proccessArduinoData(String data) {
-//        String[] dataArray = {};
-//        dataArray = data.split("\n");
-//        return dataArray;
-//    }
-//
-//    //insert db
-//    private void insertArduinoDataToDb(String data) {
-//        String[] dataArray = new String[2];
-//        dataArray = data.split(",");
-//        Log.d("TAG", "processStorageBlessing: " + dataArray[0]);
-//        Log.d("TAG", "processStorageBlessing: " + dataArray[1]);
-//        dbHelper.insertData(
-//                dataArray[0],
-//                dataArray[1],
-//                "activation_logs");
-//    }
+    //Function processing data from Arduino - Rename
+    private String[] proccessArduinoData(String data) {
+        String[] dataArray = {};
+        dataArray = data.split("\n");
+        return dataArray;
+    }
+
+    //insert db
+    private void insertArduinoDataToDb(String data) {
+        String[] dataArray = new String[2];
+        dataArray = data.split(",");
+        Log.d("TAG", "processStorageBlessing: " + dataArray[0]);
+        Log.d("TAG", "processStorageBlessing: " + dataArray[1]);
+        dbHelper.insertData(
+                dataArray[0],
+                dataArray[1],
+                "activation_logs");
+    }
 }
