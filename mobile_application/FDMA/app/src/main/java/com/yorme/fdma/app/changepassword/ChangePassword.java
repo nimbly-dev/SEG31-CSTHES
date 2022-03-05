@@ -137,7 +137,7 @@ public class ChangePassword extends AppCompatActivity {
     }
 
     private boolean isOldPasswordAndNewPasswordEqual(String oldPassword, String newPassword) {
-        if (!StringUtils.equals(oldPassword, newPassword)) {
+        if (StringUtils.equals(oldPassword, newPassword)) {
             Toast.makeText(ChangePassword.this, "Old password entered", Toast.LENGTH_LONG).show();
             return false;
         }
