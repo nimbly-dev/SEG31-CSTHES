@@ -9,8 +9,9 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+
+@Deprecated
 //TODO
-//Notify user of patient falling in wheelchair
 public class SMS extends Activity{
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;

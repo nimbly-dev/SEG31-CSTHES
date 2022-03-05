@@ -23,6 +23,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class CSV {
 

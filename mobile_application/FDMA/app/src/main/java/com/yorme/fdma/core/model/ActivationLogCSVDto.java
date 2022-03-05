@@ -2,6 +2,7 @@ package com.yorme.fdma.core.model;
 
 import com.opencsv.bean.CsvBindByName;
 
+@Deprecated
 public class ActivationLogCSVDto {
 
     @CsvBindByName(column = "id")

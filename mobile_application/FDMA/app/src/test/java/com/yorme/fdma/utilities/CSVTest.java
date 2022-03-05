@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
+@Deprecated
 public class CSVTest extends TestCase {
 
     private Properties properties;

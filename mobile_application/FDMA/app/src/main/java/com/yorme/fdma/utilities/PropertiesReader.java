@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.util.Properties;
 
+@Deprecated
 public class PropertiesReader  {
 
     public Properties getApplicationProperty(){

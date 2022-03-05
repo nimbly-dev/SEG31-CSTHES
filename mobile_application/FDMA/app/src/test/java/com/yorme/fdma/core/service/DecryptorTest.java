@@ -17,6 +17,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+@Deprecated
 public class DecryptorTest extends TestCase {
     private PropertiesReader propertiesReader;
 
