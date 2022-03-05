@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
-import com.yorme.fdma.core.dao.ChangePasswordDao;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.adapters.ChangePasswordLogAdapter;
 import com.yorme.fdma.utilities.database.DBConnection;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePasswordLogs extends AppCompatActivity {
 
-    private ChangePasswordDao changePasswordDao;
     private ArrayList<ChangePasswordLog> changePasswordLog;
 
     private DBHelper dbHelper;

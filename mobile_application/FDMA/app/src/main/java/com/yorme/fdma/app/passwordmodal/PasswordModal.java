@@ -15,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
-import com.yorme.fdma.core.dao.ChangePhoneNumberLogsDao;
-import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.service.Decryptor;
 import com.yorme.fdma.utilities.PropertiesReader;
 import com.yorme.fdma.utilities.database.DBHelper;

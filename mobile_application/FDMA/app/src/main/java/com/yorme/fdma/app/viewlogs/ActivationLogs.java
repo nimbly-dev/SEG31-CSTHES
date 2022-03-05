@@ -15,7 +15,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
-import com.yorme.fdma.core.dao.ActivationLogsDao;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
 import com.yorme.fdma.utilities.database.DBConnection;
@@ -32,7 +31,7 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 public class ActivationLogs extends AppCompatActivity {
 
     Ardutooth mArdutooth = Ardutooth.getInstance(this);
-    private ActivationLogsDao activationLogsDao;
+
     private ArrayList<ActivationLog> activationLogs;
     private DBConnection conn;
     private final DBHelper dbHelper = new DBHelper(this);

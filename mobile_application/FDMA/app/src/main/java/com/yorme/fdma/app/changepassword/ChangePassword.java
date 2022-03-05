@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
-import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
@@ -42,10 +41,8 @@ public class ChangePassword extends AppCompatActivity {
 
     ListView activationLogsListView;
     EditText enter_password, enter_confirm_password;
-    private DBHelper dbHelper;
     private DBConnection conn;
-    private PasswordDao passwordDao;
-
+    DBHelper dbHelper = new DBHelper(this);
     private PasswordChecker passwordChecker;
 
     @Override
@@ -108,6 +105,10 @@ public class ChangePassword extends AppCompatActivity {
                         Log.d("LOG", "Password: " + enter_password);
                         cipherText = TokenEncrytor.encrypt(enter_password.getText().toString());
                         dbHelper.updatePassword(cipherText);
+                        dbHelper.insertData(
+                                LocalTime.now().toString(),
+                                LocalDate.now().toString(),
+                                "change_password_logs");
                     } catch (InvalidAlgorithmParameterException
                             | NoSuchPaddingException | NoSuchAlgorithmException
                             | UnsupportedEncodingException | IllegalBlockSizeException
@@ -122,11 +123,6 @@ public class ChangePassword extends AppCompatActivity {
             }
         });
 
-        dbHelper = new DBHelper(this);
-        dbHelper.insertData(
-                LocalTime.now().toString(),
-                LocalDate.now().toString(),
-                "change_password_logs");
 
         btn_change_password_back.setOnClickListener(new View.OnClickListener() {
             @Override

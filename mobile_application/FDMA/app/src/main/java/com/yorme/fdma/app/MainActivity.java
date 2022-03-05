@@ -44,11 +44,11 @@ public class MainActivity extends AppCompatActivity {
             txt_connection.setText("Connected");
         } else {
             txt_connection.setText("Not Connected");
-            btn_change_password.setEnabled(false);
-            btn_change_password.setAlpha(0.5f);
-
-            btn_change_phone_number.setEnabled(false);
-            btn_change_phone_number.setAlpha(0.5f);
+//            btn_change_password.setEnabled(false);
+//            btn_change_password.setAlpha(0.5f);
+//
+//            btn_change_phone_number.setEnabled(false);
+//            btn_change_phone_number.setAlpha(0.5f);
 
         }
 
