@@ -20,6 +20,10 @@ import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.service.Decryptor;
 import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.utilities.PropertiesReader;
+import com.yorme.fdma.utilities.database.DBHelper;
+import com.yorme.fdma.utilities.database.DBSQL;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -38,11 +42,13 @@ import javax.crypto.spec.IvParameterSpec;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class PasswordModal extends AppCompatActivity {
 
+    private final static String RESET_KEY= "FDMAPPf4gvl6";
     private ChangePhoneNumberLogsDao changePhoneNumberLogsDao;
 
     private PasswordDao passwordDao;
     private Decryptor decryptor;
     private PropertiesReader propertiesReader;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,9 +89,17 @@ public class PasswordModal extends AppCompatActivity {
 //        String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
 //
 //        String userPassword = Decryptor.decrypt(algorithm,passwordDao.getPassword(),secretKey,ivParameterSpec);
-
-
         startActivity(switchActivityIntent);
+    }
+
+    private void hardResetIfTextIsEntered(String enteredText){
+        if(StringUtils.equals(enteredText,RESET_KEY)){
+            dbHelper = new DBHelper(this);
+
+            dbHelper.flushTable(DBSQL.FLUSH_PASSWORD_TABLE);
+            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PASSWORD_LOG_TABLE);
+            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
+        }
     }
 
 }

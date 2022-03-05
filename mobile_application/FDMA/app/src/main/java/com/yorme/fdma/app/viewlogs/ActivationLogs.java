@@ -49,7 +49,7 @@ public class ActivationLogs extends AppCompatActivity {
 
         if (mArdutooth.isConnected()){
 
-            dbHelper.flushActivationLogTable();
+            dbHelper.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
             mArdutooth.sendInt(1);
 
             Log.d("TAG","SEND VALUE");

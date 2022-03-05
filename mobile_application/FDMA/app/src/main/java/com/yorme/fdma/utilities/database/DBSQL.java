@@ -47,4 +47,6 @@ public interface DBSQL {
     String FLUSH_PASSWORD_TABLE = "DELETE FROM app_password";
 
     String FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE = "DELETE FROM change_phone_number_logs";
+
+    String FLUSH_CHANGE_PASSWORD_LOG_TABLE = "DELETE FROM change_password_logs";
 }

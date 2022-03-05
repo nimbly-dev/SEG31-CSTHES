@@ -187,9 +187,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void flushActivationLogTable(){
+    public void flushTable(String tableToFlush){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
+        db.execSQL(tableToFlush);
     }
 
     public void insertDefaultPassword() throws NoSuchAlgorithmException, SQLException,
@@ -204,6 +204,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("password", cipherText);
         db.insert("app_password",null,contentValues);
     }
+
 
 //    public boolean isDefaultPasswordExist(){
 //        SQLiteDatabase db = this.getWritableDatabase();
