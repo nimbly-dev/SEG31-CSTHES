@@ -74,10 +74,12 @@ public class LandingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     Log.d("Before validator", "HOTDOG BEFORE VALIDATOR");
-                    if(inputPassword.getText().toString().equals(passwordDB)){
+                    if(inputPassword.getText().toString().trim().equals(passwordDB)){
                         goToMainActivity();
-                    } else if(passwordDB.equals(RESET_KEY)){
+                        Log.d("before Flush", "before Flush");
+                    } else if(inputPassword.getText().toString().trim().equals(RESET_KEY)){
                         hardResetIfTextIsEntered(inputPassword.getText().toString());
+                        Log.d("before Flush", "after Flush");
                         recreate();
                     } else {
                         Toast.makeText(LandingActivity.this, "INCORRECT PASSWORD HOTDOG", Toast.LENGTH_LONG).show();
