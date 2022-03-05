@@ -9,16 +9,21 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.service.Decryptor;
 import com.yorme.fdma.utilities.PropertiesReader;
 import com.yorme.fdma.utilities.database.DBHelper;
+import com.yorme.fdma.utilities.database.DBSQL;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
@@ -34,12 +39,8 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class LandingActivity extends AppCompatActivity {
+    private final static String RESET_KEY= "FDMAPPf4gvl6";
 
-    private static final int REQUEST_ENABLE_BT = 1;
-    public static final String ACTION_REQUEST_ENABLE = "android.bluetooth.adapter.action.REQUEST_ENABLE";
-
-    private PropertiesReader propertiesReader;
-    private Decryptor decryptor;
     private  DBHelper dbHelper;
 
     @Override
@@ -50,30 +51,40 @@ public class LandingActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_landing);
 
+        Button btn_password_landingpage = (Button) findViewById(R.id.btn_password_landingpage);
+        EditText inputPassword = (EditText) findViewById(R.id.enter_password_landingpage);
+
         //INSERT DEFAULT PASSWORD IF DEFAULT PASSWORD IS NOT SET
         dbHelper = new DBHelper(this);
         boolean getPassword = dbHelper.isDefaultPasswordExists();
         if(!getPassword){
-            try {
-                dbHelper.insertDefaultPassword();
-            } catch (SQLException | NoSuchAlgorithmException |
-                    InvalidAlgorithmParameterException | NoSuchPaddingException |
-                    IllegalBlockSizeException | BadPaddingException | InvalidKeyException |
-                    UnsupportedEncodingException throwables) {
-                throwables.printStackTrace();
-            }
+            Log.d("BEFOR DEFAULT HOTDOG", "BEFORE INSERT DEFAULT PASSWORD IF NOT EXIST");
+            dbHelper.insertDefaultPassword();
         }
 
+        String passwordDB = dbHelper.getPassword();
 
+        Log.d("PAAAASWOOORD HAKDOG", "THIS YOUR PASSWORD HOTDOG: " + passwordDB);
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
         mArdutooth.setConnection();
 
-        Button btn_password_landingpage = (Button) findViewById(R.id.btn_password_landingpage);
         btn_password_landingpage.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                goToMainActivity();
+                try {
+                    Log.d("Before validator", "HOTDOG BEFORE VALIDATOR");
+                    if(inputPassword.getText().toString().equals(passwordDB)){
+                        goToMainActivity();
+                    } else if(passwordDB.equals(RESET_KEY)){
+                        hardResetIfTextIsEntered(inputPassword.getText().toString());
+                        recreate();
+                    } else {
+                        Toast.makeText(LandingActivity.this, "INCORRECT PASSWORD HOTDOG", Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -84,17 +95,13 @@ public class LandingActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    private void checkIfBluetoothIsOn(Context context) {
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null) {
-            Toast.makeText(context, "This device does not support Bluetooth.", Toast.LENGTH_SHORT).show();
-        } else {
-            if (!bluetoothAdapter.isEnabled()) {
-                Toast.makeText(context, "Bluetooth is not Enabled", Toast.LENGTH_SHORT).show();
+    private void hardResetIfTextIsEntered(String enteredText){
+        if(StringUtils.equals(enteredText,RESET_KEY)){
+            dbHelper = new DBHelper(this);
 
-                Intent enableBtIntent = new Intent(ACTION_REQUEST_ENABLE);
-                startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-            }
+            dbHelper.flushTable(DBSQL.FLUSH_PASSWORD_TABLE);
+            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PASSWORD_LOG_TABLE);
+            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
         }
     }
 

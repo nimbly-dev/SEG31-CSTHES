@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -34,16 +35,22 @@ public class MainActivity extends AppCompatActivity {
         Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
         TextView txt_connection = findViewById(R.id.txt_connection);
-        if (mArdutooth.isConnected()) {
-            txt_connection.setText("Connected");
-        } else {
-            txt_connection.setText("Not Connected");
-        }
-
         ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
         ImageView btn_user_manual = findViewById(R.id.btn_user_manual);
         ImageView btn_change_password = findViewById(R.id.btn_change_password);
         ImageView btn_view_logs = findViewById(R.id.btn_view_logs);
+
+        if (mArdutooth.isConnected()) {
+            txt_connection.setText("Connected");
+        } else {
+            txt_connection.setText("Not Connected");
+            btn_change_password.setEnabled(false);
+            btn_change_password.setAlpha(0.5f);
+
+            btn_change_phone_number.setEnabled(false);
+            btn_change_phone_number.setAlpha(0.5f);
+
+        }
 
         btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,14 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 goToChangePassword();
             }
         });
-
-        //if not connected in the arduino this code activates below
-        /*
-        btn_change_pin.setAlpha(0.5f);
-        btn_change_pin.setClickable(false);
-        btn_gps.setAlpha(0.5f);
-        btn_gps.setClickable(false);
-         */
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

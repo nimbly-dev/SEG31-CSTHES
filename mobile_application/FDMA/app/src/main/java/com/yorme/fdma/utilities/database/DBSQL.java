@@ -13,7 +13,7 @@ public interface DBSQL {
     String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_key_pair_logs";
 
     String INSERT_DEFAULT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
-    String GET_PASSWORD = "SELECT * FROM app_password WHERE id = 1";
+    String GET_PASSWORD = "SELECT password FROM app_password WHERE id = 1";
     String UPDATE_PASSWORD = "UPDATE app_password SET password = ? WHERE id = ?";
 //    String CHECK_IF_DEFAULT_PASSWORD_EXIST = "SELECT * FROM activation_logs WHERE";
 

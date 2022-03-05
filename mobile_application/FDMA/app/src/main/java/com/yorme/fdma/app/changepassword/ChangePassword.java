@@ -23,6 +23,7 @@ import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.core.dao.PasswordDao;
 import com.yorme.fdma.core.service.Encryptor;
 import com.yorme.fdma.core.service.PasswordChecker;
+import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
 import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
@@ -64,7 +65,7 @@ public class ChangePassword extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password);
 
-        enter_password = findViewById(R.id.enter_password);
+        enter_password = findViewById(R.id.enter_passwordChange);
         enter_confirm_password = findViewById(R.id.enter_confirm_password);
         Button btn_change_password = findViewById(R.id.btn_change_password);
         Button btn_change_password_back = findViewById(R.id.btn_change_password_back);
@@ -78,26 +79,25 @@ public class ChangePassword extends AppCompatActivity {
 
                 PropertiesReader propertiesReader = new PropertiesReader();
                 String cipherText;
+                String passwordDB = dbHelper.getPassword();
 
                 if (passwordChecker.isValidPassword(enter_password.getText().toString().trim())) {
                     if(StringUtils.equals(enter_password.getText().toString(),enter_confirm_password.getText().toString()) == true){
-                        try {
-                            SecretKey secretKey = generateKey(128);
-                            IvParameterSpec ivParameterSpec = generateIv();
-                            String algorithm = "AES/CBC/PKCS5Padding";
-                            Log.d("LOG", "Password: " + enter_password);
+                        if(enter_password.getText().toString().trim().equals(passwordDB)){
+                            Toast.makeText(ChangePassword.this, "Old password entered", Toast.LENGTH_LONG).show();
+                        } else {
+                            try {
+                                Log.d("LOG", "Password: " + enter_password);
+                                cipherText = TokenEncrytor.encrypt(enter_password.getText().toString());
+                                dbHelper.updatePassword(cipherText);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
 
-                            cipherText = Encryptor.encrypt(algorithm, enter_password.toString(), secretKey, ivParameterSpec);
-
-                            passwordDao.updatePassword(cipherText);
-                        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidAlgorithmParameterException
-                                | InvalidKeyException | BadPaddingException | IllegalBlockSizeException | SQLException e) {
-                            e.printStackTrace();
+                            Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
+                            Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
+                            startActivity(switchActivityIntent);
                         }
-
-                        Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
-                        Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
-                        startActivity(switchActivityIntent);
                     }else{
                         Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_LONG).show();
                     }

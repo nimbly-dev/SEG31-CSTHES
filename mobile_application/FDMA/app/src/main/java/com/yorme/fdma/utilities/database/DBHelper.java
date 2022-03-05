@@ -160,20 +160,38 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public String getPassword() throws InvalidAlgorithmParameterException,
-            NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException,
-            NoSuchAlgorithmException, BadPaddingException, InvalidKeyException, SQLDataNotFound {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
-        if(res.getCount() <= 0){
-            String passwordToBeReturned = TokenEncrytor
-                    .decrypt( res.getString(res.getColumnIndex("password")));
+    public String getPassword(){
+        try{
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor res = db.rawQuery(DBSQL.GET_PASSWORD,null);
+            String column1 = "";
+            if (res.moveToFirst()){
+                do {
+                    // Passing values
+                    column1 = res.getString(0);
+                    // Do something Here with values
+                } while(res.moveToNext());
+            }
+            column1 = TokenEncrytor.decrypt(column1);
             res.close();
-            return passwordToBeReturned;
-        }else{
-            res.close();
-            throw new SQLDataNotFound("Failure to retrieve password on database table");
+            db.close();
+            return column1;
+//            res.moveToFirst();
+//            res.getString(res.getColumnIndex("password"));
+//            Log.d("Password Hotdog", "This is your hotdog: " + res.getString(res.getColumnIndex("password")));
+//            if(res.getCount() <= 0){
+//                String passwordToBeReturned = TokenEncrytor
+//                        .decrypt( res.getString(res.getColumnIndex("password")));
+//                res.close();
+//                return passwordToBeReturned;
+//            }else{
+//                res.close();
+//                throw new SQLDataNotFound("Failure to retrieve password on database table");
+//            }
+        } catch (Exception e){
+            e.printStackTrace();
         }
+        return null;
     }
 
 
@@ -181,8 +199,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("password", newPassword);
-
-        db.update("password", contentValues,"id = 1", new String[] { Integer.toString(1) });
+        db.update("app_password", contentValues, "id = 1" , null);
         return true;
     }
 
@@ -192,18 +209,28 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(tableToFlush);
     }
 
-    public void insertDefaultPassword() throws NoSuchAlgorithmException, SQLException,
-            InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException,
-            BadPaddingException, InvalidKeyException, UnsupportedEncodingException {
-        SQLiteDatabase db = this.getReadableDatabase();
-        ContentValues contentValues = new ContentValues();
+    public void insertDefaultPassword(){
+        try{
+            SQLiteDatabase db = this.getReadableDatabase();
+            ContentValues contentValues = new ContentValues();
 
-        Log.d("LOG","SETTING CIPHER TEXT FOR DEFAULT PASSWORD");
-        String cipherText = TokenEncrytor.encrypt("Admin123");
+            Log.d("LOG","SETTING CIPHER TEXT FOR DEFAULT PASSWORD");
+            String cipherText = TokenEncrytor.encrypt("Admin123");
 
-        contentValues.put("password", cipherText);
-        db.insert("app_password",null,contentValues);
+            contentValues.put("password", cipherText);
+            db.insert("app_password",null,contentValues);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+//    public Boolean passwordValidator(String password){
+//        String dbPassword = getPassword();
+//        if(password.equals(dbPassword)){
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 //    public boolean isDefaultPasswordExist(){

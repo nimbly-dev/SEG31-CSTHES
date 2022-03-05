@@ -7,12 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.LandingActivity;
 import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.core.dao.ChangePhoneNumberLogsDao;
@@ -42,7 +46,7 @@ import javax.crypto.spec.IvParameterSpec;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class PasswordModal extends AppCompatActivity {
 
-    private final static String RESET_KEY= "FDMAPPf4gvl6";
+
     private ChangePhoneNumberLogsDao changePhoneNumberLogsDao;
 
     private PasswordDao passwordDao;
@@ -58,48 +62,37 @@ public class PasswordModal extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_modal);
 
+        dbHelper = new DBHelper(this);
+
+        EditText inputString = (EditText) findViewById(R.id.enter_passwordModal);
+        Log.d("BEFORE HAKDOG2", "etits");
+        String passwordDB = dbHelper.getPassword();
+        Log.d("PAAAASWOOORD HAKDOG2", "THIS YOUR PASSWORD HOTDOG: " + passwordDB);
+
         Button btn_password = findViewById(R.id.btn_password);
+
         btn_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
+                try{
+                    if(inputString.getText().toString().equals(passwordDB)){
+                        Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
+                        startActivity(switchActivityIntent);
+                    } else if(passwordDB == null){
+                        Toast.makeText(PasswordModal.this, "NULL PASSWORD HOTDOG", Toast.LENGTH_LONG).show();
+                    }else{
+                        Toast.makeText(PasswordModal.this, "INCORRECT PASSWORD HOTDOG", Toast.LENGTH_LONG).show();
+                    }
 
-                    validPassword();
-                } catch (SQLException | NoSuchAlgorithmException |
-                        InvalidAlgorithmParameterException | NoSuchPaddingException |
-                        IllegalBlockSizeException | BadPaddingException |
-                        InvalidKeyException throwables) {
-                    throwables.printStackTrace();
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         });
 
     }
 
-    public void validPassword() throws SQLException, NoSuchAlgorithmException,
-            InvalidAlgorithmParameterException, NoSuchPaddingException, IllegalBlockSizeException,
-            BadPaddingException, InvalidKeyException {
-        Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
-        //Initialize decrypt values
-//        propertiesReader = new PropertiesReader();
-//        passwordDao = new PasswordDao();
-//        decryptor = new Decryptor();
-//        SecretKey secretKey = Encryptor.generateKey(128);
-//        IvParameterSpec ivParameterSpec = Encryptor.generateIv();
-//        String algorithm = propertiesReader.getApplicationProperty().getProperty("encrypt.algorithm");
-//
-//        String userPassword = Decryptor.decrypt(algorithm,passwordDao.getPassword(),secretKey,ivParameterSpec);
-        startActivity(switchActivityIntent);
+    public void validPassword(String passwordInput){
+
     }
-
-    private void hardResetIfTextIsEntered(String enteredText){
-        if(StringUtils.equals(enteredText,RESET_KEY)){
-            dbHelper = new DBHelper(this);
-
-            dbHelper.flushTable(DBSQL.FLUSH_PASSWORD_TABLE);
-            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PASSWORD_LOG_TABLE);
-            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
-        }
-    }
-
 }

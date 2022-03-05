@@ -38,7 +38,7 @@
             app:layout_constraintHorizontal_bias="0.17"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
+            app:layout_constraintVertical_bias="0.477" />
 
         <TextView
             android:id="@+id/txt_change"
@@ -52,7 +52,7 @@
             app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.612" />
+            app:layout_constraintVertical_bias="0.586" />
 
         <TextView
             android:id="@+id/txt_phoneNumber"
@@ -63,10 +63,10 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.111"
+            app:layout_constraintHorizontal_bias="0.107"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.658" />
+            app:layout_constraintVertical_bias="0.632" />
 
         <ImageButton
             android:id="@+id/btn_user_manual"
@@ -80,7 +80,7 @@
             app:layout_constraintHorizontal_bias="0.819"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
+            app:layout_constraintVertical_bias="0.477" />
 
         <TextView
             android:id="@+id/txt_userManual"
@@ -91,10 +91,10 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.884"
+            app:layout_constraintHorizontal_bias="0.877"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.612" />
+            app:layout_constraintVertical_bias="0.586" />
 
         <ImageButton
             android:id="@+id/btn_change_password"
@@ -122,7 +122,7 @@
             app:layout_constraintHorizontal_bias="0.181"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.918" />
+            app:layout_constraintVertical_bias="0.901" />
 
         <TextView
             android:id="@+id/txt_change_password_1"
@@ -133,10 +133,10 @@
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.151"
+            app:layout_constraintHorizontal_bias="0.174"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.964" />
+            app:layout_constraintVertical_bias="0.947" />
 
         <ImageButton
             android:id="@+id/btn_view_logs"
@@ -164,7 +164,7 @@
             app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.918" />
+            app:layout_constraintVertical_bias="0.901" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

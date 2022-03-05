@@ -35,7 +35,7 @@ public class ActivationLogs extends AppCompatActivity {
     private ArrayList<ActivationLog> activationLogs;
     private DBConnection conn;
     private DBHelper dbHelper = new DBHelper(this);
-    private boolean bStop = false;
+
     Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
     @Override
