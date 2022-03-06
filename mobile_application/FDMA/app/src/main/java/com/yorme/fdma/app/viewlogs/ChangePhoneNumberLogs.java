@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
+import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
 import com.yorme.fdma.core.model.adapters.ChangePhoneNumberLogAdapter;
 import com.yorme.fdma.utilities.database.DBHelper;
 import com.yorme.fdma.utilities.database.DBSQL;
@@ -29,10 +30,15 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePhoneNumberLogs extends AppCompatActivity {
 
-    ListView changePhoneNumberLogsListView;
+    ListView changePhoneNumberListView;
+    Button btnChangePhoneNumberLogsBack;
+
     Ardutooth mArdutooth = Ardutooth.getInstance(this);
+
     private ArrayList<ChangePhoneNumberLog> changePhoneNumberLogs;
     private final DBHelper dbHelper = new DBHelper(this);
+
+    ChangePhoneNumberLogAdapter changePhoneNumberLogAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,25 +48,25 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_phone_number_logs);
 
-        Ardutooth mArdutooth = Ardutooth.getInstance(this);
+        changePhoneNumberListView = findViewById(R.id.changePhoneNumberLogsListView);
+        btnChangePhoneNumberLogsBack = findViewById(R.id.btn_change_phone_number_logs_back);
 
         if (mArdutooth.isConnected()) {
-            dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
-
             mArdutooth.sendInt(2);
             Log.d("TAG", "SEND VALUE");
-
             try {
                 InputStream inputStream = mArdutooth.getSocket().getInputStream();
                 int bytes = 0;
                 byte[] buffer = new byte[1024];
+                bytes = inputStream.read(buffer);
                 String arduinoData = new String(buffer, 0, bytes);
-                Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Phone Number Logs Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
 
                 String[] dataArray = {};
                 dataArray = proccessArduinoData(arduinoData);
+                dbHelper.flushTable(DBSQL.FLUSH_CHANGE_PHONE_NUMBER_LOG_TABLE);
                 for (int i = 0; i < dataArray.length; i++) {
-                    Log.d("Array Data", "Array Data[" + i + "]: " + dataArray[i]);
+                    Log.d("Array Data", "Phone Number Logs Array Data[" + i + "]: " + dataArray[i]);
                     String temp = dataArray[i];
                     insertArduinoDataToDb(temp);
                 }
@@ -68,18 +74,17 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "No Data recieved", Toast.LENGTH_LONG).show();
             }
 
         }
 
         changePhoneNumberLogs = dbHelper.selectAllChangePhoneNumberLogs(DBSQL.SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS);
-        ChangePhoneNumberLogAdapter changePhoneNumberLogAdapter = new ChangePhoneNumberLogAdapter(this, changePhoneNumberLogs);
+        changePhoneNumberLogAdapter = new ChangePhoneNumberLogAdapter(this, changePhoneNumberLogs);
         // Attach the adapter to a ListView
-        ListView activationLogListView = findViewById(R.id.changePhoneNumberLogsListView);
-        activationLogListView.setAdapter(changePhoneNumberLogAdapter);
+        changePhoneNumberListView.setAdapter(changePhoneNumberLogAdapter);
 
-        Button btn_change_phone_number_logs_back = findViewById(R.id.btn_change_phone_number_logs_back);
-        btn_change_phone_number_logs_back.setOnClickListener(new View.OnClickListener() {
+        btnChangePhoneNumberLogsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goBackToViewLogsChangePhoneNumberLogs();
@@ -92,7 +97,7 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 
-    //Function processing data from Arduino - Rename
+    //Function processing data from Arduino
     private String[] proccessArduinoData(String data) {
         String[] dataArray = {};
         dataArray = data.split("\n");
@@ -103,11 +108,9 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
     private void insertArduinoDataToDb(String data) {
         String[] dataArray = new String[2];
         dataArray = data.split(",");
-        Log.d("TAG", "processStorageBlessing: " + dataArray[0]);
-        Log.d("TAG", "processStorageBlessing: " + dataArray[1]);
         dbHelper.insertData(
                 dataArray[0],
                 dataArray[1],
-                "activation_logs");
+                "change_phone_number_logs");
     }
 }

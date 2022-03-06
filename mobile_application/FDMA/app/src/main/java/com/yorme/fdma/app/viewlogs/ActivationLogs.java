@@ -30,11 +30,16 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ActivationLogs extends AppCompatActivity {
 
-    Ardutooth mArdutooth = Ardutooth.getInstance(this);
+    Button btnActivationLogsBack;
+    ListView activationLogListView;
 
     private ArrayList<ActivationLog> activationLogs;
     private DBConnection conn;
     private final DBHelper dbHelper = new DBHelper(this);
+
+    ActivationLogAdapter activationLogAdapter;
+
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +49,10 @@ public class ActivationLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_activation_logs);
 
+        btnActivationLogsBack = findViewById(R.id.btn_activation_logs_back);
+        activationLogListView = findViewById(R.id.activationLogsListView);
 
         if (mArdutooth.isConnected()) {
-
-            dbHelper.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
             mArdutooth.sendInt(1);
 
             Log.d("TAG", "SEND VALUE");
@@ -56,12 +61,12 @@ public class ActivationLogs extends AppCompatActivity {
                 InputStream inputStream = mArdutooth.getSocket().getInputStream();
                 int bytes = 0;
                 byte[] buffer = new byte[1024];
+                bytes = inputStream.read(buffer);
                 String arduinoData = new String(buffer, 0, bytes);
                 Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
-
-
                 String[] dataArray = {};
-                dataArray = proccessArduinoData(arduinoData);
+                dataArray = proccessArduinoData(arduinoData.trim());
+                dbHelper.flushTable(DBSQL.FLUSH_ACTIVATION_LOGS_TABLE);
                 for (int i = 0; i < dataArray.length; i++) {
                     Log.d("Array Data", "Array Data[" + i + "]: " + dataArray[i]);
                     String temp = dataArray[i];
@@ -71,17 +76,16 @@ public class ActivationLogs extends AppCompatActivity {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "No Data recieved", Toast.LENGTH_LONG).show();
             }
         }
 
         activationLogs = dbHelper.selectAllActivationLogs(DBSQL.SELECT_ALL_ACTIVATION_LOGS);
-        ActivationLogAdapter activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
+        activationLogAdapter = new ActivationLogAdapter(this, activationLogs);
         // Attach the adapter to a ListView
-        ListView activationLogListView = findViewById(R.id.activationLogsListView);
         activationLogListView.setAdapter(activationLogAdapter);
 
-        Button btn_activation_logs_back = findViewById(R.id.btn_activation_logs_back);
-        btn_activation_logs_back.setOnClickListener(new View.OnClickListener() {
+        btnActivationLogsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToViewLogsActivationLogs();
@@ -105,8 +109,6 @@ public class ActivationLogs extends AppCompatActivity {
     private void insertArduinoDataToDb(String data) {
         String[] dataArray = new String[2];
         dataArray = data.split(",");
-        Log.d("TAG", "processStorageBlessing: " + dataArray[0]);
-        Log.d("TAG", "processStorageBlessing: " + dataArray[1]);
         dbHelper.insertData(
                 dataArray[0],
                 dataArray[1],

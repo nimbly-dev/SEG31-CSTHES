@@ -9,8 +9,8 @@ public interface DBSQL {
     String INSERT_NEW_CHANGE_PASSWORD_LOGS = "INSERT INTO change_password_logs(time,date) VALUES (?,?)";
     String SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS = "SELECT * from change_password_logs";
 
-    String INSERT_NEW_CHANGE_PHONE_NUMBER_LOGS = "INSERT INTO change_key_pair_logs(time,date) VALUES (?,?)";
-    String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_key_pair_logs";
+    String INSERT_NEW_CHANGE_PHONE_NUMBER_LOGS = "INSERT INTO change_phone_number_logs(time,date) VALUES (?,?)";
+    String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_phone_number_logs";
 
     String INSERT_DEFAULT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
     String GET_PASSWORD = "SELECT password FROM app_password WHERE id = 1";

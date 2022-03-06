@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -15,8 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
-import com.yorme.fdma.core.service.Decryptor;
-import com.yorme.fdma.utilities.PropertiesReader;
 import com.yorme.fdma.utilities.database.DBHelper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +23,10 @@ import org.apache.commons.lang3.StringUtils;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class PasswordModal extends AppCompatActivity {
+
+    EditText passwordInput;
+    Button btnPassword;
+    TextView passwordModalErrorMessage;
 
     private DBHelper dbHelper;
 
@@ -35,22 +38,16 @@ public class PasswordModal extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_password_modal);
 
-        EditText passwordInput = findViewById(R.id.enter_passwordModal);
-        Button btn_password = findViewById(R.id.btn_password);
+        passwordInput = findViewById(R.id.enter_passwordModal);
+        btnPassword = findViewById(R.id.btn_password);
+        passwordModalErrorMessage = findViewById(R.id.password_modal_error_message);
 
-        btn_password.setOnClickListener(new View.OnClickListener() {
+        btnPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (StringUtils.equals(inputString.getText().toString(),passwordDB)) {
-//                    Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
-//                    startActivity(switchActivityIntent);
-//                } else {
-//                    Toast.makeText(PasswordModal.this, "Incorrect Password ", Toast.LENGTH_LONG).show();
-//                }
                 validatePassword(passwordInput.getText().toString());
             }
         });
-
     }
 
     public void validatePassword(String passwordInput) {
@@ -61,7 +58,7 @@ public class PasswordModal extends AppCompatActivity {
             Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
             startActivity(switchActivityIntent);
         } else {
-            Toast.makeText(PasswordModal.this, "Incorrect Password ", Toast.LENGTH_LONG).show();
+            passwordModalErrorMessage.setText("Incorrect Password.\nPlease Try Again");
         }
     }
 }

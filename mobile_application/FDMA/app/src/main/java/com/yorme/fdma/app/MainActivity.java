@@ -24,6 +24,11 @@ import io.github.giuseppebrb.ardutooth.Ardutooth;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class MainActivity extends AppCompatActivity {
 
+    TextView txtConnectionMainActivity;
+    ImageView btnChangePhoneNumber, btnUserManual, btnChangePassword, btnViewLogs;
+
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,48 +37,46 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
-        Ardutooth mArdutooth = Ardutooth.getInstance(this);
-
-        TextView txt_connection = findViewById(R.id.txt_connection);
-        ImageView btn_change_phone_number = findViewById(R.id.btn_change_phone_number);
-        ImageView btn_user_manual = findViewById(R.id.btn_user_manual);
-        ImageView btn_change_password = findViewById(R.id.btn_change_password);
-        ImageView btn_view_logs = findViewById(R.id.btn_view_logs);
+        txtConnectionMainActivity = findViewById(R.id.txt_connection_main_activity);
+        btnChangePhoneNumber = findViewById(R.id.btn_change_phone_number);
+        btnUserManual = findViewById(R.id.btn_user_manual);
+        btnChangePassword = findViewById(R.id.btn_change_password);
+        btnViewLogs = findViewById(R.id.btn_view_logs);
 
         if (mArdutooth.isConnected()) {
-            txt_connection.setText("Connected");
+            txtConnectionMainActivity.setText("Connected");
         } else {
-            txt_connection.setText("Not Connected");
-//            btn_change_password.setEnabled(false);
-//            btn_change_password.setAlpha(0.5f);
-//
-//            btn_change_phone_number.setEnabled(false);
-//            btn_change_phone_number.setAlpha(0.5f);
+            txtConnectionMainActivity.setText("Not Connected");
+            btnChangePassword.setEnabled(false);
+            btnChangePassword.setAlpha(0.5f);
+
+            btnChangePhoneNumber.setEnabled(false);
+            btnChangePhoneNumber.setAlpha(0.5f);
 
         }
 
-        btn_change_phone_number.setOnClickListener(new View.OnClickListener() {
+        btnChangePhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToChangePhoneNumber();
             }
         });
 
-        btn_user_manual.setOnClickListener(new View.OnClickListener() {
+        btnUserManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToUserManual();
             }
         });
 
-        btn_view_logs.setOnClickListener(new View.OnClickListener() {
+        btnViewLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToViewLogs();
             }
         });
 
-        btn_change_password.setOnClickListener(new View.OnClickListener() {
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToChangePassword();

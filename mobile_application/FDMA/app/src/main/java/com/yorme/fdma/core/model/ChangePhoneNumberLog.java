@@ -1,18 +1,15 @@
 package com.yorme.fdma.core.model;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class ChangePhoneNumberLog {
     int id;
-    LocalDate logDate;
-    LocalTime logTime;
+    String logDate;
+    String logTime;
 
     public ChangePhoneNumberLog(){
 
     }
 
-    public ChangePhoneNumberLog(int id, LocalTime logTime,LocalDate logDate) {
+    public ChangePhoneNumberLog(int id, String logTime,String logDate) {
         this.id = id;
         this.logDate = logDate;
         this.logTime = logTime;
@@ -26,19 +23,19 @@ public class ChangePhoneNumberLog {
         this.id = id;
     }
 
-    public LocalDate getLogDate() {
+    public String getLogDate() {
         return logDate;
     }
 
-    public void setLogDate(LocalDate logDate) {
+    public void setLogDate(String logDate) {
         this.logDate = logDate;
     }
 
-    public LocalTime getLogTime() {
+    public String getLogTime() {
         return logTime;
     }
 
-    public void setLogTime(LocalTime logTime) {
+    public void setLogTime(String logTime) {
         this.logTime = logTime;
     }
 }

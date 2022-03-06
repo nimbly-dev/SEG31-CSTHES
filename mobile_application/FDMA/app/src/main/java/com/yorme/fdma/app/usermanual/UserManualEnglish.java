@@ -17,6 +17,8 @@ import com.yorme.fdma.R;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class UserManualEnglish extends AppCompatActivity {
 
+    Button btnUserGuideFilipino, btnUserGuideEnglishBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +27,17 @@ public class UserManualEnglish extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_user_manual_english);
 
-        Button btn_user_guide_filipino = findViewById(R.id.btn_user_guide_filipino);
-        Button btn_user_guide_english_back = findViewById(R.id.btn_user_guide_english_back);
+        btnUserGuideFilipino = findViewById(R.id.btn_user_guide_filipino);
+        btnUserGuideEnglishBack = findViewById(R.id.btn_user_guide_english_back);
 
-        btn_user_guide_filipino.setOnClickListener(new View.OnClickListener() {
+        btnUserGuideFilipino.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToFilipinoUserGuide();
             }
         });
 
-        btn_user_guide_english_back.setOnClickListener(new View.OnClickListener() {
+        btnUserGuideEnglishBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goBackUserManualEnglish();

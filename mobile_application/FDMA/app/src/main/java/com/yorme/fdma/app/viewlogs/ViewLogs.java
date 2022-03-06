@@ -17,6 +17,8 @@ import com.yorme.fdma.R;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ViewLogs extends AppCompatActivity {
 
+    Button btnViewLogsBack, btnViewActivationLogs, btnViewChangePhoneNumLogs, btnViewPasswordLogs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,12 +28,12 @@ public class ViewLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_view_logs);
 
-        Button btn_view_logs_back = findViewById(R.id.btn_view_logs_back);
-        Button btn_view_activation_logs = findViewById(R.id.btn_view_activation_logs);
-        Button btn_view_change_phone_num_logs = findViewById(R.id.btn_view_change_phone_num_logs);
-        Button btn_view_change_password_logs = findViewById(R.id.btn_view_change_password_logs);
+        btnViewLogsBack = findViewById(R.id.btn_view_logs_back);
+        btnViewActivationLogs = findViewById(R.id.btn_view_activation_logs);
+        btnViewChangePhoneNumLogs = findViewById(R.id.btn_view_change_phone_num_logs);
+        btnViewPasswordLogs = findViewById(R.id.btn_view_change_password_logs);
 
-        btn_view_logs_back.setOnClickListener(new View.OnClickListener() {
+        btnViewLogsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goBack();
@@ -39,21 +41,21 @@ public class ViewLogs extends AppCompatActivity {
             }
         });
 
-        btn_view_activation_logs.setOnClickListener(new View.OnClickListener() {
+        btnViewActivationLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToActivationLogs();
             }
         });
 
-        btn_view_change_phone_num_logs.setOnClickListener(new View.OnClickListener() {
+        btnViewChangePhoneNumLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToChangePhoneNumLogs();
             }
         });
 
-        btn_view_change_password_logs.setOnClickListener(new View.OnClickListener() {
+        btnViewPasswordLogs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToChangePasswordLogs();

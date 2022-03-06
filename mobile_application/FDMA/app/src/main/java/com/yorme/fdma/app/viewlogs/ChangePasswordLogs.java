@@ -24,9 +24,13 @@ import java.util.ArrayList;
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePasswordLogs extends AppCompatActivity {
 
-    private ArrayList<ChangePasswordLog> changePasswordLog;
+    ListView changePasswordLogsListView;
+    Button btnChangePasswordLogsBack;
 
-    private DBHelper dbHelper;
+    private ArrayList<ChangePasswordLog> changePasswordLog;
+    ChangePasswordLogAdapter changePasswordLogAdapter;
+
+    private DBHelper dbHelper = new DBHelper(this);
     private DBConnection conn;
 
     @Override
@@ -37,17 +41,16 @@ public class ChangePasswordLogs extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password_logs);
 
-        dbHelper = new DBHelper(this);
+        changePasswordLogsListView = findViewById(R.id.changePasswordLogsListView);
+        btnChangePasswordLogsBack = findViewById(R.id.btn_change_password_logs_back);
 
         changePasswordLog = dbHelper.selectAllChangePasswordLogs(DBSQL.SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS);
 
-        ChangePasswordLogAdapter changePasswordLogAdapter = new ChangePasswordLogAdapter(this, changePasswordLog);
+        changePasswordLogAdapter = new ChangePasswordLogAdapter(this, changePasswordLog);
         // Attach the adapter to a ListView
-        ListView changePasswordLogsListView = findViewById(R.id.changePasswordLogsListView);
         changePasswordLogsListView.setAdapter(changePasswordLogAdapter);
 
-        Button btn_change_password_logs_back = findViewById(R.id.btn_change_password_logs_back);
-        btn_change_password_logs_back.setOnClickListener(new View.OnClickListener() {
+        btnChangePasswordLogsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToViewLogsChangePasswordLogs();

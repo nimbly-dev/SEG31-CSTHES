@@ -32,7 +32,7 @@ public class ChangePhoneNumberLogAdapter extends ArrayAdapter<ChangePhoneNumberL
         }
         // Lookup view for data population
         TextView date = convertView.findViewById(R.id.changePhoneNumberLogsTextView1);
-        TextView time = convertView.findViewById(R.id.changePhoneNumberLogsTextView1);
+        TextView time = convertView.findViewById(R.id.changePhoneNumberLogsTextView2);
         // Populate the data into the template view using the data object
         date.setText(changePhoneNumberLog.getLogDate().toString());
         time.setText(changePhoneNumberLog.getLogTime().toString());

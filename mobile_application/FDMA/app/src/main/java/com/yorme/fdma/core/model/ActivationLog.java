@@ -6,14 +6,14 @@ import java.time.LocalTime;
 public class ActivationLog{
 
     int logID;
-    LocalDate logDate;
-    LocalTime logTime;
+    String logDate;
+    String logTime;
 
     public ActivationLog(){
 
     }
 
-    public ActivationLog(int logID, LocalTime logTime, LocalDate logDate) {
+    public ActivationLog(int logID, String logTime, String logDate) {
         this.logID = logID;
         this.logDate = logDate;
         this.logTime = logTime;
@@ -27,19 +27,19 @@ public class ActivationLog{
         this.logID = logID;
     }
 
-    public LocalDate getLogDate() {
+    public String getLogDate() {
         return logDate;
     }
 
-    public void setLogDate(LocalDate logDate) {
+    public void setLogDate(String logDate) {
         this.logDate = logDate;
     }
 
-    public LocalTime getLogTime() {
+    public String getLogTime() {
         return logTime;
     }
 
-    public void setLogTime(LocalTime logTime) {
+    public void setLogTime(String logTime) {
         this.logTime = logTime;
     }
 }

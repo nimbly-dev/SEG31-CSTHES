@@ -94,8 +94,8 @@ public class DBHelper extends SQLiteOpenHelper {
         while (res.isAfterLast() == false) {
             ActivationLog activationLog = new ActivationLog(
                     res.getInt(res.getColumnIndex(LOG_COLUMN_ID)),
-                    LocalTime.parse(res.getString(res.getColumnIndex(TIME_COLUMN))),
-                    LocalDate.parse(res.getString(res.getColumnIndex(DATE_COLUMN)))
+                    res.getString(res.getColumnIndex(TIME_COLUMN)),
+                    res.getString(res.getColumnIndex(DATE_COLUMN))
             );
             activationLogs.add(activationLog);
             res.moveToNext();
@@ -132,9 +132,10 @@ public class DBHelper extends SQLiteOpenHelper {
         while (res.isAfterLast() == false) {
             ChangePhoneNumberLog changePhoneNumberLog = new ChangePhoneNumberLog(
                     res.getInt(res.getColumnIndex(LOG_COLUMN_ID)),
-                    LocalTime.parse(res.getString(res.getColumnIndex(TIME_COLUMN))),
-                    LocalDate.parse(res.getString(res.getColumnIndex(DATE_COLUMN)))
+                    res.getString(res.getColumnIndex(TIME_COLUMN)),
+                    res.getString(res.getColumnIndex(DATE_COLUMN))
             );
+            Log.d("DB data", "Phone number logs: " + res.getString(res.getColumnIndex(TIME_COLUMN)) + " " + res.getString(res.getColumnIndex(DATE_COLUMN)));
             changePasswordLogs.add(changePhoneNumberLog);
             res.moveToNext();
         }

@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
+import com.yorme.fdma.app.passwordmodal.PasswordModal;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
@@ -36,14 +38,21 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
+import io.github.giuseppebrb.ardutooth.Ardutooth;
+
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class ChangePassword extends AppCompatActivity {
 
-    ListView activationLogsListView;
-    EditText enter_password, enter_confirm_password;
+    EditText enterPassword, enterConfirmPassword;
+    TextView changePasswordErrorMessage, txtConnectionChangePassword;
+    Button btnChangePassword, btnChangePasswordBack;
+
     private DBConnection conn;
     DBHelper dbHelper = new DBHelper(this);
+
     private PasswordChecker passwordChecker;
+
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,57 +62,35 @@ public class ChangePassword extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_password);
 
-        enter_password = findViewById(R.id.enter_passwordChange);
-        enter_confirm_password = findViewById(R.id.enter_confirm_password);
-        Button btn_change_password = findViewById(R.id.btn_change_password);
-        Button btn_change_password_back = findViewById(R.id.btn_change_password_back);
+        txtConnectionChangePassword = findViewById(R.id.txt_connection_change_password);
+        changePasswordErrorMessage = findViewById(R.id.change_password_error_message);
+        enterPassword = findViewById(R.id.enter_passwordChange);
+        enterConfirmPassword = findViewById(R.id.enter_confirm_password);
+        btnChangePassword = findViewById(R.id.btn_change_password);
+        btnChangePasswordBack = findViewById(R.id.btn_change_password_back);
 
         passwordChecker = new PasswordChecker();
 
-        btn_change_password.setOnClickListener(new View.OnClickListener() {
+        if (mArdutooth.isConnected()) {
+            txtConnectionChangePassword.setText("Connected");
+        } else {
+            txtConnectionChangePassword.setText("Not Connected");
+        }
+
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View arg0) {
-
                 PropertiesReader propertiesReader = new PropertiesReader();
                 String cipherText;
-                String passwordDB = dbHelper.getPassword();
-                String inputPassword = enter_password.getText().toString().trim();
-                String confirmPassword = enter_confirm_password.getText().toString().trim();
-
-//                if (passwordChecker.isValidPassword(enter_password.getText().toString().trim())) {
-//                    if(StringUtils.equals(enter_password.getText().toString(), enter_confirm_password.getText().toString())){
-//                        if(enter_password.getText().toString().trim().equals(passwordDB)){
-//                            Toast.makeText(ChangePassword.this, "Old password entered", Toast.LENGTH_LONG).show();
-//                        } else {
-//                            try {
-//                                Log.d("LOG", "Password: " + enter_password);
-//                                cipherText = TokenEncrytor.encrypt(enter_password.getText().toString());
-//                                dbHelper.updatePassword(cipherText);
-//                            } catch (InvalidAlgorithmParameterException
-//                                    | NoSuchPaddingException | NoSuchAlgorithmException
-//                                    | UnsupportedEncodingException | IllegalBlockSizeException
-//                                    | BadPaddingException | InvalidKeyException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
-//                            Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
-//                            startActivity(switchActivityIntent);
-//                        }
-//                    }else{
-//                        Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_LONG).show();
-//                    }
-//                } else {
-//                    Toast.makeText(ChangePassword.this, "Password must contain atleast 1 upper case letter, 1 lower case letter and 1 number and a minimum of 8 characters.", Toast.LENGTH_SHORT).show();
-//                }
+                String inputPassword = enterPassword.getText().toString().trim();
+                String confirmPassword = enterConfirmPassword.getText().toString().trim();
 
                 if (isEnteredPasswordValid(inputPassword)
                         && isPasswordAndConfirmPasswordEqual(inputPassword, confirmPassword)
                         && isOldPasswordAndNewPasswordEqual(dbHelper.getPassword(), inputPassword)) {
                     try {
-                        Log.d("LOG", "Password: " + enter_password);
-                        cipherText = TokenEncrytor.encrypt(enter_password.getText().toString());
+                        cipherText = TokenEncrytor.encrypt(enterPassword.getText().toString());
                         dbHelper.updatePassword(cipherText);
                         dbHelper.insertData(
                                 LocalTime.now().toString(),
@@ -116,7 +103,7 @@ public class ChangePassword extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Toast.makeText(ChangePassword.this, "Password Changed Successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChangePassword.this, "Password was changed successfully.", Toast.LENGTH_LONG).show();
                     Intent switchActivityIntent = new Intent(ChangePassword.this, MainActivity.class);
                     startActivity(switchActivityIntent);
                 }
@@ -124,7 +111,7 @@ public class ChangePassword extends AppCompatActivity {
         });
 
 
-        btn_change_password_back.setOnClickListener(new View.OnClickListener() {
+        btnChangePasswordBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToBackSettings();
@@ -134,7 +121,8 @@ public class ChangePassword extends AppCompatActivity {
 
     private boolean isOldPasswordAndNewPasswordEqual(String oldPassword, String newPassword) {
         if (StringUtils.equals(oldPassword, newPassword)) {
-            Toast.makeText(ChangePassword.this, "Old password entered", Toast.LENGTH_LONG).show();
+
+            changePasswordErrorMessage.setText("Old Password was Entered.");
             return false;
         }
         return true;
@@ -142,7 +130,7 @@ public class ChangePassword extends AppCompatActivity {
 
     private boolean isPasswordAndConfirmPasswordEqual(String password, String confirmPassword) {
         if (!StringUtils.equals(password, confirmPassword)) {
-            Toast.makeText(ChangePassword.this, "Password and Confirm Password do not match", Toast.LENGTH_LONG).show();
+            changePasswordErrorMessage.setText("Password and Confirm Password do not match.");
             return false;
         }
         return true;
@@ -150,9 +138,7 @@ public class ChangePassword extends AppCompatActivity {
 
     private boolean isEnteredPasswordValid(String inputPassword) {
         if (!PasswordChecker.isValidPassword(inputPassword)) {
-            Toast.makeText(ChangePassword.this,
-                    "Password must contain atleast 1 upper case letter, 1 lower case letter and 1 number and a minimum of 8 characters.",
-                    Toast.LENGTH_SHORT).show();
+            changePasswordErrorMessage.setText("Password must contain atleast 1 upper case, \n1 lowercase letter, 1 number \nand a minimum of 8 characters.");
             return false;
         }
         return true;
