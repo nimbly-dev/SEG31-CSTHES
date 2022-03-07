@@ -3,13 +3,11 @@ package com.yorme.fdma.app.changepassword;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
-import com.yorme.fdma.app.passwordmodal.PasswordModal;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
-import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -47,7 +43,6 @@ public class ChangePassword extends AppCompatActivity {
     TextView changePasswordErrorMessage, txtConnectionChangePassword;
     Button btnChangePassword, btnChangePasswordBack;
 
-    private DBConnection conn;
     DBHelper dbHelper = new DBHelper(this);
 
     private PasswordChecker passwordChecker;

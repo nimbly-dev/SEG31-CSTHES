@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
-import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
 import com.yorme.fdma.utilities.database.DBSQL;
 
@@ -34,7 +33,6 @@ public class ActivationLogs extends AppCompatActivity {
     ListView activationLogListView;
 
     private ArrayList<ActivationLog> activationLogs;
-    private DBConnection conn;
     private final DBHelper dbHelper = new DBHelper(this);
 
     ActivationLogAdapter activationLogAdapter;

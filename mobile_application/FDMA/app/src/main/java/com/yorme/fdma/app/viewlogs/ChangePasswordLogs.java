@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.yorme.fdma.R;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.adapters.ChangePasswordLogAdapter;
-import com.yorme.fdma.utilities.database.DBConnection;
 import com.yorme.fdma.utilities.database.DBHelper;
 import com.yorme.fdma.utilities.database.DBSQL;
 
@@ -31,7 +30,6 @@ public class ChangePasswordLogs extends AppCompatActivity {
     ChangePasswordLogAdapter changePasswordLogAdapter;
 
     private DBHelper dbHelper = new DBHelper(this);
-    private DBConnection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

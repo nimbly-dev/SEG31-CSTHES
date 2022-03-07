@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.changepassword.ChangePassword;
@@ -55,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
             btnChangePhoneNumber.setEnabled(false);
             btnChangePhoneNumber.setAlpha(0.5f);
-
         }
 
         btnChangePhoneNumber.setOnClickListener(new View.OnClickListener() {

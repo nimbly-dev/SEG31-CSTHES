@@ -13,7 +13,6 @@ import androidx.annotation.RequiresApi;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
-import com.yorme.fdma.core.service.Decryptor;
 import com.yorme.fdma.core.service.TokenEncrytor;
 import com.yorme.fdma.utilities.PropertiesReader;
 
@@ -44,8 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
     private HashMap hp;
     private DBHelper dbHelper;
 
-    private PropertiesReader propertiesReader;
-    private Decryptor decryptor;
     private TokenEncrytor tokenEncrytor;
 
     public DBHelper(Context context) {
