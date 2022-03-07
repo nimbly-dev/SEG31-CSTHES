@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
+import com.yorme.fdma.app.changepassword.ChangePassword;
+import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
 import com.yorme.fdma.utilities.database.DBHelper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,9 +56,20 @@ public class PasswordModal extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         String passwordDB = dbHelper.getPassword();
 
+        Bundle extras = getIntent().getExtras();
+
         if (StringUtils.equals(passwordInput, passwordDB)) {
-            Intent switchActivityIntent = new Intent(PasswordModal.this, MainActivity.class);
-            startActivity(switchActivityIntent);
+            if (extras != null){
+                int value =extras.getInt("intentFlag");
+                if(value == 1){
+                    Intent switchActivityIntent = new Intent(PasswordModal.this, ChangePhoneNumber.class);
+                    startActivity(switchActivityIntent);
+                } else if(value == 2){
+                    Intent switchActivityIntent = new Intent(PasswordModal.this, ChangePassword.class);
+                    startActivity(switchActivityIntent);
+                }
+            }
+
         } else {
             passwordModalErrorMessage.setText("Incorrect Password.\nPlease Try Again");
         }

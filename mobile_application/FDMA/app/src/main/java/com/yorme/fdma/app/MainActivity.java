@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.yorme.fdma.R;
 import com.yorme.fdma.app.changepassword.ChangePassword;
 import com.yorme.fdma.app.changephonenumber.ChangePhoneNumber;
+import com.yorme.fdma.app.passwordmodal.PasswordModal;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
 
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txtConnectionMainActivity;
     ImageView btnChangePhoneNumber, btnUserManual, btnChangePassword, btnViewLogs;
+
+    int intentFlag = 0;
 
     Ardutooth mArdutooth = Ardutooth.getInstance(this);
 
@@ -86,7 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void goToChangePhoneNumber() {
-        Intent switchActivityIntent = new Intent(this, ChangePhoneNumber.class);
+        Intent switchActivityIntent = new Intent(this, PasswordModal.class);
+        intentFlag = 1;
+        switchActivityIntent.putExtra("intentFlag", intentFlag);
         startActivity(switchActivityIntent);
     }
 
@@ -101,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToChangePassword() {
-        Intent switchActivityIntent = new Intent(this, ChangePassword.class);
+        Intent switchActivityIntent = new Intent(this, PasswordModal.class);
+        intentFlag = 2;
+        switchActivityIntent.putExtra("intentFlag", intentFlag);
         startActivity(switchActivityIntent);
     }
 }

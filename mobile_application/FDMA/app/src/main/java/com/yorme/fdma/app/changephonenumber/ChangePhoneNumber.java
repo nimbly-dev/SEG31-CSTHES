@@ -25,7 +25,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
 
     String phoneNumber, confirmPhoneNumber;
     EditText enterPhoneNumber, enterConfirmPhoneNumber;
-    TextView changePhoneNumberErrorMessage, txtConnectionChangePhoneNumber;
+    TextView changePhoneNumberErrorMessage, txtConnectionChangePhoneNumber, displayPhoneNumber;
     Button btnChangePhoneNumber, btnChangePhoneNumberBack;
 
     Ardutooth mArdutooth = Ardutooth.getInstance(this);
@@ -38,6 +38,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_change_phone_number);
 
+        displayPhoneNumber = findViewById(R.id.display_phone_number);
         txtConnectionChangePhoneNumber = findViewById(R.id.txt_connection_change_phone_number);
         enterPhoneNumber = findViewById(R.id.enter_phone_number);
         enterConfirmPhoneNumber = findViewById(R.id.enter_confirm_phone_number);
@@ -101,7 +102,7 @@ public class ChangePhoneNumber extends AppCompatActivity {
     private void validatePhoneNumber() {
         if (phoneNumber.length() == 10){
             if (phoneNumber.equals(confirmPhoneNumber)){
-                Intent switchActivityIntent = new Intent(ChangePhoneNumber.this, PasswordModal.class);
+                Intent switchActivityIntent = new Intent(ChangePhoneNumber.this, MainActivity.class);
                 startActivity(switchActivityIntent);
             } else {
                 changePhoneNumberErrorMessage.setText("Phone Number and Confirm Phone Number do not match.");
