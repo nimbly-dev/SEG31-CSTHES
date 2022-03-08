@@ -25,29 +25,29 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="10dp"
-        android:text="Pagpapares sa smartphone:\nsa Arduino:\n1."
+        android:text="Pagkonekta ng Smartphone sa Arduino:\n  1.Siguraduhin na ang Arduino Chipset ay\n  nakabukas.\n  2.Hanapin at ikonekta ang FDMA sa mga \n  maaring Bluetooth sa settings.\n  3.Ikonekta ang Arduino Chipset gamit ang 4 digit\n  pin.\n  4.Buksan ang FDMA na application at piliin\n  ang FDMA sa pop-up menu para matapos ang \n  proseso sa pagkonekta."
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195" />
+        app:layout_constraintVertical_bias="0.227" />
 
     <TextView
-        android:layout_width="360dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="10dp"
-        android:text=""
+        android:text="Pag-ayos ng FDMA:\n  1.Siguraduhin na ang gagamit ng wheelchair ay\n  nakaupo sa wheelchair.\n  2.Buksan ang Arduino Chipset sa pamamagitan\n  ng pagpindot ng button sa Arduino System."
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <Button
         android:id="@+id/btn_user_guide_english"

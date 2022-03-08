@@ -14,7 +14,6 @@ import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.ChangePasswordLog;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
 import com.yorme.fdma.core.service.TokenEncrytor;
-import com.yorme.fdma.utilities.PropertiesReader;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;

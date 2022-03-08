@@ -25,42 +25,29 @@
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="10dp"
-        android:text="Pairing the smartphone to the Arduino:\n1.Make sure the Arduino chipset is powered on.\n2.Find and pair the FDMA in the Bluetooth available in the settings. \n3.Connect with Arduino chipset by entering the 4 digit pin.\n4.Open the FDMA Application and select FDMA in the pop-up menu to finalize the connection."
+        android:text="Pairing the smartphone to the Arduino:\n  1.Make sure the Arduino chipset is powered on.\n  2.Find and pair the FDMA in the Bluetooth\n  available in the settings.\n  3.Connect with Arduino chipset by entering the 4\n  digit pin.\n  4.Open the FDMA Application and select FDMA\n  in the pop-up menu to finalize the connection."
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        app:layout_constraintVertical_bias="0.227" />
 
     <TextView
         android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="10dp"
-        android:text="Setting the FDMA:\n1.Make sure the wheelchair user is seated.\n2.Power on the Arduino chipset from the button on the Arduino System."
+        android:text="Setting the FDMA:\n  1.Make sure the wheelchair user is seated.\n  2.Power on the Arduino chipset from the button \n  on the Arduino System."
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="330dp"
-        android:layout_height="wrap_content"
-        android:lineSpacingExtra="10dp"
-        android:text="IMPORTANT NOTE: To be able to use the features: Change Phone Number and Change Password,\n the Arduino and Mobile Phone will be connected."
-        android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.671" />
+        app:layout_constraintVertical_bias="0.61" />
 
     <Button
         android:id="@+id/btn_user_guide_filipino"

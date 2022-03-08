@@ -18,7 +18,6 @@ import com.yorme.fdma.R;
 import com.yorme.fdma.app.MainActivity;
 import com.yorme.fdma.core.service.PasswordChecker;
 import com.yorme.fdma.core.service.TokenEncrytor;
-import com.yorme.fdma.utilities.PropertiesReader;
 import com.yorme.fdma.utilities.database.DBHelper;
 
 import org.apache.commons.lang3.StringUtils;
@@ -76,7 +75,6 @@ public class ChangePassword extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View arg0) {
-                PropertiesReader propertiesReader = new PropertiesReader();
                 String cipherText;
                 String inputPassword = enterPassword.getText().toString().trim();
                 String confirmPassword = enterConfirmPassword.getText().toString().trim();
