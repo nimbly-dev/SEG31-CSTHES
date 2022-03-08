@@ -52,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
             txtConnectionMainActivity.setText("Connected");
         } else {
             txtConnectionMainActivity.setText("Not Connected");
-//            btnChangePassword.setEnabled(false);
-//            btnChangePassword.setAlpha(0.5f);
-//
-//            btnChangePhoneNumber.setEnabled(false);
-//            btnChangePhoneNumber.setAlpha(0.5f);
+            btnChangePassword.setEnabled(false);
+            btnChangePassword.setAlpha(0.5f);
+
+            btnChangePhoneNumber.setEnabled(false);
+            btnChangePhoneNumber.setAlpha(0.5f);
         }
 
         btnChangePhoneNumber.setOnClickListener(new View.OnClickListener() {
