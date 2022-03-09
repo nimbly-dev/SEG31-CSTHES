@@ -15,7 +15,6 @@ public interface DBSQL {
     String INSERT_DEFAULT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
     String GET_PASSWORD = "SELECT password FROM app_password WHERE id = 1";
     String UPDATE_PASSWORD = "UPDATE app_password SET password = ? WHERE id = ?";
-//    String CHECK_IF_DEFAULT_PASSWORD_EXIST = "SELECT * FROM activation_logs WHERE";
 
     //CREATE NEW TABLE
     String CREATE_NEW_ACTIVATION_LOGS_TABLE = "CREATE TABLE IF NOT EXISTS activation_logs (\n" +
