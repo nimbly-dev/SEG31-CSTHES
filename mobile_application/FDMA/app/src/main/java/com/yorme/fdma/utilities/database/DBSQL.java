@@ -4,13 +4,13 @@ public interface DBSQL {
 
     //SQL STATEMENTS
     String INSERT_NEW_ACTIVATION_LOGS = "INSERT INTO activation_logs(time,date) VALUES(?,?)";
-    String SELECT_ALL_ACTIVATION_LOGS = "SELECT * from activation_logs";
+    String SELECT_ALL_ACTIVATION_LOGS = "SELECT * from activation_logs ORDER BY id DESC";
 
     String INSERT_NEW_CHANGE_PASSWORD_LOGS = "INSERT INTO change_password_logs(time,date) VALUES (?,?)";
-    String SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS = "SELECT * from change_password_logs";
+    String SELECT_ALL_CHANGE_PASSWORD_PAIR_LOGS = "SELECT * from change_password_logs ORDER BY id DESC";
 
     String INSERT_NEW_CHANGE_PHONE_NUMBER_LOGS = "INSERT INTO change_phone_number_logs(time,date) VALUES (?,?)";
-    String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_phone_number_logs";
+    String SELECT_ALL_CHANGE_PHONE_NUMBER_LOGS = "SELECT * from change_phone_number_logs ORDER BY id DESC";
 
     String INSERT_DEFAULT_PASSWORD = "INSERT INTO app_password(password) VALUES (?)";
     String GET_PASSWORD = "SELECT password FROM app_password WHERE id = 1";
