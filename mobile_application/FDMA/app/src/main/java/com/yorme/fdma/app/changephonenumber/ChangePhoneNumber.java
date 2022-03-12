@@ -46,6 +46,10 @@ public class ChangePhoneNumber extends AppCompatActivity {
         btnChangePhoneNumberBack = findViewById(R.id.btn_change_phone_number_back);
         changePhoneNumberErrorMessage = findViewById(R.id.change_phone_number_error_message);
 
+        Bundle extras = getIntent().getExtras();
+        String phoneNum = extras.getString("PhoneNumber");
+        displayPhoneNumber.setText(phoneNum);
+
         if (mArdutooth.isConnected()) {
             txtConnectionChangePhoneNumber.setText("Connected");
         } else {

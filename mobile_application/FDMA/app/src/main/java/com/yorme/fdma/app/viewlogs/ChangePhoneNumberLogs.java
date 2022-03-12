@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.LandingActivity;
 import com.yorme.fdma.core.model.ChangePhoneNumberLog;
 import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
 import com.yorme.fdma.core.model.adapters.ChangePhoneNumberLogAdapter;
@@ -53,6 +54,8 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
         changePhoneNumberListView = findViewById(R.id.changePhoneNumberLogsListView);
         btnChangePhoneNumberLogsBack = findViewById(R.id.btn_change_phone_number_logs_back);
 
+
+
         if (mArdutooth.isConnected()) {
             mArdutooth.sendInt(2);
             Log.d("TAG", "SEND VALUE");
@@ -76,6 +79,7 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                goToLandingPage();
                 Toast.makeText(this, "No Data recieved", Toast.LENGTH_LONG).show();
             }
 
@@ -114,5 +118,10 @@ public class ChangePhoneNumberLogs extends AppCompatActivity {
                 dataArray[0],
                 dataArray[1],
                 "change_phone_number_logs");
+    }
+
+    private void goToLandingPage() {
+        Intent switchActivityIntent = new Intent(this, LandingActivity.class);
+        startActivity(switchActivityIntent);
     }
 }

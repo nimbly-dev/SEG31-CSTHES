@@ -62,7 +62,9 @@ public class PasswordModal extends AppCompatActivity {
             if (extras != null){
                 int value =extras.getInt("intentFlag");
                 if(value == 1){
+                    String phoneNum = extras.getString("phoneNumber");
                     Intent switchActivityIntent = new Intent(PasswordModal.this, ChangePhoneNumber.class);
+                    switchActivityIntent.putExtra("PhoneNumber", phoneNum);
                     startActivity(switchActivityIntent);
                 } else if(value == 2){
                     Intent switchActivityIntent = new Intent(PasswordModal.this, ChangePassword.class);

@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.yorme.fdma.R;
+import com.yorme.fdma.app.LandingActivity;
 import com.yorme.fdma.core.model.ActivationLog;
 import com.yorme.fdma.core.model.adapters.ActivationLogAdapter;
 import com.yorme.fdma.utilities.database.DBHelper;
@@ -33,16 +34,17 @@ public class ActivationLogs extends AppCompatActivity {
 
     Button btnActivationLogsBack;
     ListView activationLogListView;
-
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
     private ArrayList<ActivationLog> activationLogs;
     private final DBHelper dbHelper = new DBHelper(this);
 
     ActivationLogAdapter activationLogAdapter;
 
-    Ardutooth mArdutooth = Ardutooth.getInstance(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -58,11 +60,13 @@ public class ActivationLogs extends AppCompatActivity {
             Log.d("TAG", "SEND VALUE");
 
             try {
+                mArdutooth.receiveLine();
                 InputStream inputStream = mArdutooth.getSocket().getInputStream();
                 int bytes = 0;
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[10240];
                 bytes = inputStream.read(buffer);
                 String arduinoData = new String(buffer, 0, bytes);
+
                 Toast.makeText(this, "Input Stream: " + arduinoData, Toast.LENGTH_LONG).show();
                 String[] dataArray = {};
                 dataArray = proccessArduinoData(arduinoData.trim());
@@ -77,6 +81,8 @@ public class ActivationLogs extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "No Data recieved", Toast.LENGTH_LONG).show();
+                goToLandingPage();
+
             }
         }
 
@@ -107,11 +113,16 @@ public class ActivationLogs extends AppCompatActivity {
 
     //insert db
     private void insertArduinoDataToDb(String data) {
-        String[] dataArray = new String[2];
+        String[] dataArray;
         dataArray = data.split(",");
         dbHelper.insertData(
                 dataArray[0],
                 dataArray[1],
                 "activation_logs");
+    }
+
+    private void goToLandingPage() {
+        Intent switchActivityIntent = new Intent(this, LandingActivity.class);
+        startActivity(switchActivityIntent);
     }
 }

@@ -22,6 +22,8 @@ import com.yorme.fdma.app.passwordmodal.PasswordModal;
 import com.yorme.fdma.app.usermanual.UserManualEnglish;
 import com.yorme.fdma.app.viewlogs.ViewLogs;
 
+import java.io.InputStream;
+
 import io.github.giuseppebrb.ardutooth.Ardutooth;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -29,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txtConnectionMainActivity;
     ImageView btnChangePhoneNumber, btnUserManual, btnChangePassword, btnViewLogs;
-
+    Ardutooth mArdutooth = Ardutooth.getInstance(this);
     int intentFlag = 0;
 
-    Ardutooth mArdutooth = Ardutooth.getInstance(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (mArdutooth.isConnected()) {
             txtConnectionMainActivity.setText("Connected");
+//            mArdutooth.sendInt(4);
+
+
         } else {
             txtConnectionMainActivity.setText("Not Connected");
             btnChangePassword.setEnabled(false);
@@ -90,9 +95,29 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void goToChangePhoneNumber() {
-        Intent switchActivityIntent = new Intent(this, PasswordModal.class);
-        intentFlag = 1;
-        switchActivityIntent.putExtra("intentFlag", intentFlag);
+        try{
+//            InputStream inputStream = mArdutooth.getSocket().getInputStream();
+//            int bytes = 0;
+//            byte[] buffer = new byte[1024];
+//            bytes = inputStream.read(buffer);
+//            String arduinoData = new String(buffer, 0, bytes);
+//            Log.d("Phone Number: ","Phone Number: " + arduinoData);
+//            String phoneNum = "0" + arduinoData;
+            Intent switchActivityIntent = new Intent(this, PasswordModal.class);
+            intentFlag = 1;
+            switchActivityIntent.putExtra("intentFlag", intentFlag);
+//            switchActivityIntent.putExtra("phoneNumber", phoneNum);
+            startActivity(switchActivityIntent);
+        } catch (Exception e){
+            e.printStackTrace();
+            goToLandingPage();
+
+        }
+    }
+
+
+    private void goToLandingPage() {
+        Intent switchActivityIntent = new Intent(this, LandingActivity.class);
         startActivity(switchActivityIntent);
     }
 
